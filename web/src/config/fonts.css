@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Circular Std Black';
+  src: url('/fonts/CircularStd-Black.otf');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Circular Std Bold';
+  src: url('/fonts/CircularStd-Bold.otf');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Circular Std Bold Italic';
+  src: url('/fonts/CircularStd-BoldItalic.otf');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Circular Std Book';
+  src: url('/fonts/CircularStd-Book.otf');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Circular Std Book Italic';
+  src: url('/fonts/CircularStd-BookItalic.otf');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Circular Std Medium';
+  src: url('/fonts/CircularStd-Medium.otf');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Circular Std Medium Italic';
+  src: url('/fonts/CircularStd-MediumItalic.otf');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Circular Std Book';
+  src: url('/fonts/CircularStd-Book.otf');
+  font-display: block;
+}
