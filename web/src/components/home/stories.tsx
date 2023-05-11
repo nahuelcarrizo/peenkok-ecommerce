@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 
-import { Container } from '../shared/sharedstyles'
 import RemoteResponsiveVideo from '../shared/image-types/remote-responsive-video'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -27,10 +26,10 @@ const Stories = ({ heroVideo: video }: any) => {
       videoRef.current.play()
     }
   }, []) */
-
+  console.log(`video asset: ${video.asset.url}`)
   return (
     <StyledContainer>
-      <Styledvideo url={video.asset.url} alt="stories video"></Styledvideo>
+      <Styledvideo url={video.asset.url} alt="stories video" />
     </StyledContainer>
   )
 }

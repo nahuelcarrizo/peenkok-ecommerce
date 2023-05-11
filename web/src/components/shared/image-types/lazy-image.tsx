@@ -56,9 +56,8 @@ const LazyImage = ({
         },
         { rootMargin: '45px' },
       )
-      if (container.current) {
-        observer.observe(container.current)
-      }
+      // @ts-ignore
+      observer.observe(container.current)
     }
 
     return () => observer?.disconnect()
@@ -69,6 +68,7 @@ const LazyImage = ({
       draggable="false"
       placeholder="lazy-loaded-image"
       className={className}
+      // @ts-ignore
       ref={container}
       srcSet={usableSrcSet}
       sizes={sizes || ''}

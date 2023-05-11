@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components'
 import { useEffect, useRef, useState } from 'react'
 
+import Link from 'next/link'
 import tw from 'twin.macro'
 
 const LetterWrapper = tw.div`flex flex-row`
@@ -39,7 +40,7 @@ const Letter = styled.div<LetterProps>`
     `}
 `
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   ${tw`relative`}
   opacity: 0.9;
 `
@@ -76,7 +77,7 @@ const SectionHeader = ({ title }) => {
     }
   }, [])
   return (
-    <StyledLink href="/">
+    <StyledLink href="/" passHref>
       <StyledH1 ref={ref}>
         <LetterWrapper>
           {title.split('').map((letter, index) => (

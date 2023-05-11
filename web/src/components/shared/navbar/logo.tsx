@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 
+import Link from 'next/link'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-const LogoContainer = styled.a`
+const LogoContainer = styled(Link)`
   ${tw`
     flex
     items-center
@@ -25,7 +26,7 @@ const LogoSVG = styled.img`
 
 const Logo = () => {
   return (
-    <LogoContainer href="/">
+    <LogoContainer href="/" passHref>
       <LogoSVG src="/assets/peenkokLogo.svg" alt="Logo" />
     </LogoContainer>
   )

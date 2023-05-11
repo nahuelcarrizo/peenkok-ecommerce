@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Banner from './banner'
 import { BiUser } from 'react-icons/bi'
 import { FiSearch } from 'react-icons/fi'
+import Link from 'next/link'
 import Logo from './logo'
 import Marquee from 'react-fast-marquee'
 import { slide as Menu } from 'react-burger-menu'
@@ -56,7 +57,7 @@ const StyledList = styled.ul`
   }
 `
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   text-decoration: none;
   color: #1f1f1f;
   &:hover {

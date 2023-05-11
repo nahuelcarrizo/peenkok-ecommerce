@@ -3,6 +3,7 @@ import 'react-horizontal-scrolling-menu/dist/styles.css'
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
 
 import { Container } from '../../shared/sharedstyles'
+import Link from 'next/link'
 import React from 'react'
 import RemoteFixedSizeImage from '../image-types/remote-fixed-size-image'
 import SectionHeader from './header'
@@ -131,7 +132,9 @@ function Slider(props) {
       />
       {!heroImages && (
         <ProdCardTitle>
-          <a href="/">NSW CLUB T-SHIRT</a>
+          <Link passHref href={'/'}>
+            <p>NSW CLUB T-SHIRT</p>
+          </Link>
           <Price>€ 10.00</Price>
         </ProdCardTitle>
       )}
@@ -140,8 +143,9 @@ function Slider(props) {
 
   return (
     <ScrollContainer>
-      {!heroImages && <SectionHeader title={title} />}
+      {!heroImages && latestIncomes && <SectionHeader title={title} />}
       <ScrollMenu transitionBehavior="smooth">{commonContent}</ScrollMenu>
+      {!heroImages && collection && <SectionHeader title={title} />}
     </ScrollContainer>
   )
 }
@@ -168,7 +172,7 @@ function Card({ onClick, selected, title, itemId, imageUrl, asset, image }) {
   return (
     <ImageLink onClick={() => onClick(visibility)} tabIndex={0}>
       <div className="card" style={{ height: '100%' }}>
-        <StyledImg asset={asset} image={image} src={imageUrl} alt={title} />
+        <StyledImg asset={asset} image={image} alt={title} />
       </div>
     </ImageLink>
   )
