@@ -42,6 +42,7 @@ const Letter = styled.div<LetterProps>`
 
 const StyledLink = styled(Link)`
   ${tw`relative`}
+  border-bottom: 2px solid black;
   opacity: 0.9;
 `
 

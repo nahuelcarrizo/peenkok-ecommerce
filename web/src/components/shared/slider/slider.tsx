@@ -119,7 +119,7 @@ function Slider(props) {
     }
 
   const commonContent = items.map(({ id, url, asset, image }) => (
-    <ProdCard hasHeroImages={heroImages} style={{ touchAction: 'pan-y' }}>
+    <ProdCard hasHeroImages={heroImages}>
       <Card
         itemId={id}
         imageUrl={url}
