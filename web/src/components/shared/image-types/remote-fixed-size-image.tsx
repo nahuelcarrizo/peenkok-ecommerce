@@ -7,10 +7,6 @@ import { RemoteImageProps } from './remote-image-props'
 const remoteFixed = ({ className, asset, alt, image }: RemoteImageProps) => {
   const metadata = getImageMetadata(asset)
 
-  if (getDefaultImage(image) === undefined) {
-    console.log('indefinido')
-  }
-
   return (
     <>
       {image ? (

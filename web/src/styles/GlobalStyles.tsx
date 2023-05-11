@@ -19,6 +19,9 @@ const GlobalStyles = createGlobalStyle({
     minWidth: '100vw',
     overflowX: 'hidden',
   },
+  video: {
+    objectFit: 'cover',
+  },
 })
 
 export default GlobalStyles

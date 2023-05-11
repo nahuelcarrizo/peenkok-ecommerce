@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player'
 
 const RemoteResponsiveVideo = (props: any) => {
-  const { url, alt } = props
+  const { url, alt, className } = props
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
@@ -17,8 +17,9 @@ const RemoteResponsiveVideo = (props: any) => {
           url={url}
           muted={true}
           playing={true}
-          height="50%"
+          height="100%"
           width="100%"
+          className={className}
         />
       )}
     </>
