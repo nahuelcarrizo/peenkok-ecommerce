@@ -4,6 +4,7 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
 
 import { Container } from '../../shared/sharedstyles'
 import React from 'react'
+import RemoteFixedSizeImage from '../image-types/remote-fixed-size-image'
 import SectionHeader from './header'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -55,7 +56,6 @@ function Slider(props) {
   const { heroImages, latestIncomes, collection } = props
   const [items, setItems] = React.useState([])
   const [title, setTitle] = React.useState('')
-
   React.useEffect(() => {
     let imagesData
     let titleData
@@ -64,11 +64,15 @@ function Slider(props) {
       imagesData = heroImages.map(image => ({
         id: image.asset._id,
         url: image.asset.url,
+        asset: image.asset,
+        image: image,
       }))
     } else if (latestIncomes) {
       imagesData = latestIncomes.latestIncomesMedia.map(image => ({
         id: image.asset._id,
         url: image.asset.url,
+        asset: image.asset,
+        image: image,
       }))
       titleData = latestIncomes.latestIncomesText
     } else if (collection) {
@@ -87,6 +91,8 @@ function Slider(props) {
       imagesData = collectionMedia.map(image => ({
         id: image.asset._id,
         url: image.asset.url,
+        asset: image.asset,
+        image: image,
       }))
       titleData = collectionText // Actualizar titleData aquí
     }
@@ -111,11 +117,13 @@ function Slider(props) {
       )
     }
 
-  const commonContent = items.map(({ id, url }) => (
-    <ProdCard hasHeroImages={heroImages} style={{ touchAction: 'pan-x' }}>
+  const commonContent = items.map(({ id, url, asset, image }) => (
+    <ProdCard hasHeroImages={heroImages} style={{ touchAction: 'pan-y' }}>
       <Card
         itemId={id}
         imageUrl={url}
+        asset={asset}
+        image={image}
         title={id}
         key={id}
         onClick={handleClick(id)}
@@ -147,7 +155,7 @@ const ImageLink = styled.a`
   width: 16.9rem;
   border: 1px solid black;
 `
-const StyledImg = styled.img`
+const StyledImg = styled(RemoteFixedSizeImage)`
   ${tw`
       h-full
       w-full
@@ -155,12 +163,12 @@ const StyledImg = styled.img`
   `};
 `
 
-function Card({ onClick, selected, title, itemId, imageUrl }) {
+function Card({ onClick, selected, title, itemId, imageUrl, asset, image }) {
   const visibility = React.useContext(VisibilityContext)
   return (
     <ImageLink onClick={() => onClick(visibility)} tabIndex={0}>
       <div className="card" style={{ height: '100%' }}>
-        <StyledImg src={imageUrl} alt={title} />
+        <StyledImg asset={asset} image={image} src={imageUrl} alt={title} />
       </div>
     </ImageLink>
   )
