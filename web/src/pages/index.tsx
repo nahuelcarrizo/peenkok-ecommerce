@@ -1,4 +1,3 @@
-import Collection from '../components/home/collection'
 import Hero from '../components/home/hero'
 import Layout from '../components/shared/layout'
 import Navbar from '../components/shared/navbar/navbar'
@@ -9,6 +8,7 @@ import Suscribe from '../components/shared/suscribe'
 import { sanity } from '../../lib/sanity'
 import styled from 'styled-components'
 import tw from 'twin.macro'
+
 const AppContainer = tw.div`
   flex
   flex-col

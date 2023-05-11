@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 
-import Navbar from './navbar/navbar'
-import Scrollbar from 'smooth-scrollbar'
-import { device } from '../../config/device'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { useMediaQuery } from 'react-responsive'
 
 const LogoContainer = styled.a`
   ${tw`

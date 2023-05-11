@@ -28,8 +28,11 @@ const ProdCardTitle = styled.div`
 const Price = styled.span`
   font-family: 'Circular Std Book Italic';
 `
+interface ProdCardProps {
+  hasHeroImages?: boolean
+}
 
-const ProdCard = styled.li`
+const ProdCard = styled.li<ProdCardProps>`
   ${tw`
       flex
       flex-col
@@ -39,7 +42,7 @@ const ProdCard = styled.li`
       w-full
       h-full
   `};
-  touchaction: 'pan-x';
+
   background: #fdfbf5;
   border: ${props => (props.hasHeroImages ? 'none' : '1px solid black')};
   padding-right: ${props => (props.hasHeroImages ? '0' : '1rem')};
@@ -109,7 +112,7 @@ function Slider(props) {
     }
 
   const commonContent = items.map(({ id, url }) => (
-    <ProdCard hasHeroImages={heroImages}>
+    <ProdCard hasHeroImages={heroImages} style={{ touchAction: 'pan-x' }}>
       <Card
         itemId={id}
         imageUrl={url}

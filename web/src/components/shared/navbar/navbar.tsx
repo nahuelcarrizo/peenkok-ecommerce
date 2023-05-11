@@ -51,7 +51,7 @@ const StyledList = styled.ul`
   font-family: 'Circular Std Black';
   font-size: 1.3rem;
 
-  @media ${device.dekstop} {
+  @media ${device.desktop} {
     font-size: 0.8rem;
   }
 `
@@ -151,7 +151,7 @@ const continuousTransform = offset => {
 }
 
 const BarcelonaClock = () => {
-  const [now, setNow] = useState(null)
+  const [now, setNow] = useState<null | string>(null)
   const BarcelonaClockRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -166,18 +166,18 @@ const BarcelonaClock = () => {
       )
     }, 1000)
 
-    const scrollbar = () => {
+    /*     const scrollbar = () => {
       Scrollbar.init(document.body, options).addListener(function (status) {
         const offset = status.offset
 
         clock.style.opacity = continuousTransform(offset.y)
       })
     }
-    scrollbar()
-    const elements = document.getElementsByClassName('scrollbar-track show')
+    scrollbar() */
+    /*     const elements = document.getElementsByClassName('scrollbar-track show')
     if (elements.length > 0) {
       elements[0].style.opacity = '0'
-    }
+    } */
     return () => clearInterval(interval)
   }, [])
   return (
@@ -214,7 +214,7 @@ const Navbar = ({ navbarItems }) => {
           <StyledMenu>
             {isDesktop ? (
               <>
-                <BarcelonaClock />
+                {/*                 <BarcelonaClock /> */}
                 <StyledNav>
                   <StyledList>renderNavbarItems()</StyledList>
                 </StyledNav>

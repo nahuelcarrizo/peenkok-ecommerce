@@ -21,7 +21,13 @@ const StyledH1 = styled.h1`
   top: 8.5rem;
 `
 
-const Letter = styled.div`
+interface LetterProps {
+  animate?: boolean
+  duration: number
+  delay: number
+}
+
+const Letter = styled.div<LetterProps>`
   margin-right: -4px;
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
@@ -40,7 +46,7 @@ const StyledLink = styled.a`
 
 const SectionHeader = ({ title }) => {
   const [animate, setAnimate] = useState(false)
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const contentLength = title.length
 
   useEffect(() => {
@@ -57,12 +63,12 @@ const SectionHeader = ({ title }) => {
         },
         {
           threshold: 0.5,
-          delay: 0,
           rootMargin: '0px 0px 0px 0px',
         },
       )
-
-      observer.observe(ref.current)
+      if (ref.current) {
+        observer.observe(ref.current)
+      }
 
       return () => observer.disconnect()
     } else {
@@ -70,7 +76,7 @@ const SectionHeader = ({ title }) => {
     }
   }, [])
   return (
-    <StyledLink href="/" passHref>
+    <StyledLink href="/">
       <StyledH1 ref={ref}>
         <LetterWrapper>
           {title.split('').map((letter, index) => (
