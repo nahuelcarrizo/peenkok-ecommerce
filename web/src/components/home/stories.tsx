@@ -8,14 +8,15 @@ const StyledContainer = styled.div`
       h-full
       border-b
       border-black
+
     `}
-  height: 30vh;
+  height: 50vh;
 `
 const Styledvideo = styled(RemoteResponsiveVideo)`
   ${tw`
       mb-4
       `};
-  object-fit: cover;
+  border: 1px solid black;
 `
 
 const Stories = ({ heroVideo: video }: any) => {

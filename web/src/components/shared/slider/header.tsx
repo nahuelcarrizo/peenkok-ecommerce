@@ -52,30 +52,23 @@ const SectionHeader = ({ title }) => {
   const contentLength = title.length
 
   useEffect(() => {
-    const isVisited = sessionStorage.getItem('headerVisited')
-
-    if (!isVisited) {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setAnimate(true)
-            sessionStorage.setItem('headerVisited', 'true')
-            observer.unobserve(entry.target)
-          }
-        },
-        {
-          threshold: 1,
-          rootMargin: '0px 0px 50px 0px',
-        },
-      )
-      if (ref.current) {
-        observer.observe(ref.current)
-      }
-
-      return () => observer.disconnect()
-    } else {
-      setAnimate(true)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          setAnimate(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px 30px 0px',
+      },
+    )
+    if (ref.current) {
+      observer.observe(ref.current)
     }
+
+    return () => observer.disconnect()
   }, [])
   return (
     <StyledLink href="/" passHref>

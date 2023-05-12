@@ -16,10 +16,12 @@ const RemoteResponsiveVideo = (props: any) => {
           alt={alt}
           url={url}
           muted={true}
-          playing={true}
           height="100%"
           width="100%"
           className={className}
+          controls={false}
+          playing={true}
+          loop={true}
         />
       )}
     </>

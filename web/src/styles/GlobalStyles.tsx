@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle({
   },
   video: {
     objectFit: 'cover',
+    height: '100%',
   },
 })
 

@@ -47,9 +47,12 @@ const ProdCard = styled.li<ProdCardProps>`
 
   background: #fdfbf5;
   border: ${props => (props.hasHeroImages ? 'none' : '1px solid black')};
-  padding-right: ${props => (props.hasHeroImages ? '0' : '1rem')};
-  &:first-child {
-    border-left: none;
+  padding-right: ${props => (!props.hasHeroImages ? '1rem' : '')};
+  /*   &:first-child { */
+  border-left: none;
+  /*   } */
+  &:last-child {
+    margin-right: ${props => (props.hasHeroImages ? '1rem' : '')};
   }
 `
 
@@ -143,9 +146,12 @@ function Slider(props) {
 
   return (
     <ScrollContainer>
-      {!heroImages && latestIncomes && <SectionHeader title={title} />}
-      <ScrollMenu transitionBehavior="smooth">{commonContent}</ScrollMenu>
-      {!heroImages && collection && <SectionHeader title={title} />}
+      {!heroImages && <SectionHeader title={title} />}
+      <ScrollMenu transitionBehavior="smooth">
+        <ul style={{ display: 'flex', flexDirection: 'row' }}>
+          {commonContent}
+        </ul>
+      </ScrollMenu>
     </ScrollContainer>
   )
 }
