@@ -23,6 +23,14 @@ const RemoteResponsiveVideo = (props: any) => {
           playing={true}
           loop={true}
           playsinline={true}
+          /*           preload={auto} */
+          attributes={{
+            autoPlay: true,
+            muted: true,
+            loop: true,
+            playsInline: true,
+            preload: 'auto',
+          }}
         />
       )}
     </>
