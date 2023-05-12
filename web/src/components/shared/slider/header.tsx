@@ -35,7 +35,7 @@ const Letter = styled.div<LetterProps>`
   ${({ animate, duration, delay }) =>
     animate &&
     css`
-      animation: ${appear} ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s
+      animation: ${appear} ${duration}s cubic-bezier(0.2, 0, 0.2, 1) ${delay}s
         forwards;
     `}
 `
@@ -61,7 +61,7 @@ const SectionHeader = ({ title }) => {
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px 30px 0px',
+        rootMargin: '0px 0px 40px 0px',
       },
     )
     if (ref.current) {

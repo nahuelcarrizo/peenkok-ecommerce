@@ -22,6 +22,7 @@ const RemoteResponsiveVideo = (props: any) => {
           controls={false}
           playing={true}
           loop={true}
+          playsinline={true}
         />
       )}
     </>
