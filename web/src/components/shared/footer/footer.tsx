@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 
 const FooterContainer = styled.footer`
-  ${tw`py-6 px-4 mt-10 flex flex-col justify-center items-start`}
-  background-color: #fec333;
+  ${tw`py-6 bg-gray-900 px-4 mt-10 flex flex-col justify-center items-start`}
 `
 
 const GridContainer = styled.div`
@@ -16,12 +15,8 @@ const GridItem = styled.div`
   ${tw`flex flex-col justify-center`}
 `
 
-const Title = styled.h2`
-  ${tw`text-white font-bold text-lg mb-2`}
-`
-
 const LinkList = styled.ul`
-  ${tw`text-gray-400 text-sm`}
+  ${tw`text-gray-500 text-sm`}
   list-style: none;
   padding: 0;
 `
@@ -31,13 +26,13 @@ const LinkListItem = styled.li`
 `
 
 const Link = styled.a`
-  ${tw`text-black hover:text-gray-500`}
+  ${tw`hover:text-gray-500`}
 `
 const StyledTitle = styled.h2`
-  ${tw`text-black font-bold text-lg mb-2`}
+  ${tw`text-gray-400 font-bold text-lg mb-2`}
   font-family: 'Circular Std Bold';
   letter-spacing: 0.1px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 `
 
 const Footer = () => {
@@ -98,6 +93,7 @@ const Footer = () => {
           fontSize: '.7rem',
           fontFamily: 'sans-serif',
           marginTop: '20px',
+          color: 'gray',
         }}
       >
         © 2023 NAHUEL CARRIZO - TODOS LOS DERECHOS RESERVADOS
