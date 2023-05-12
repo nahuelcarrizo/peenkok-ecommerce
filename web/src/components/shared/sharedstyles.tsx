@@ -32,7 +32,7 @@ const Title = styled.h1`
   text-decoration: none;
 
   a {
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
     &:hover,
     :focus,

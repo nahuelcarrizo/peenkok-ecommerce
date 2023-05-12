@@ -1,3 +1,4 @@
+import About from '../components/home/about'
 import Hero from '../components/home/hero'
 import Layout from '../components/shared/layout'
 import Navbar from '../components/shared/navbar/navbar'
@@ -45,6 +46,7 @@ export default function Home({
           <Stories heroVideo={heroVideo} />
           <Slider collection={collection.collections1} />
           <Slider collection={collection.collections2} />
+          {/*           <About about={about} /> */}
           <Suscribe suscribe={suscribe} />
         </Layout>
       </AppContainer>
@@ -134,8 +136,6 @@ export const getServerSideProps = async () => {
           metadata
         }
       },
-      "url": image.asset->url,
-      "metadata": image.asset->metadata
     }
   }
 `)

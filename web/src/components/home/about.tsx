@@ -1,10 +1,60 @@
 import { Container } from '../shared/sharedstyles'
-import React from 'react';
+import React from 'react'
+import RemoteResponsiveVideo from '../shared/image-types/remote-responsive-video'
+import styled from 'styled-components'
+import tw from 'twin.macro'
 
-const About = ({about}: any) => {
-    return(
-        <Container>{about.text}</Container>
-    )
+const StyledText = styled.div`
+  ${tw`
+        text-center
+        text-xl
+        [font-family: 'Circular Std Medium']
+        [color: '#003c47']
+        [line-height: 1.4]
+        `};
+`
+
+const StyledTextContainer = styled.div`
+  ${tw`
+        flex
+        flex-col
+        justify-center
+        items-center
+        w-full
+        h-full
+        absolute
+        p-12
+        [color: white]
+    `};
+  &:hover {
+    color: #003c47;
+    text-decoration: underline;
+  }
+`
+const StyledVideo = styled(RemoteResponsiveVideo)`
+  ${tw`
+      mb-4
+    `}
+`
+const StyledContainer = styled(Container)`
+  ${tw`
+    p-4
+    `}
+  height: 500px;
+`
+
+const About = ({ about }: any) => {
+  const { text, video } = about
+
+  console.log(JSON.stringify(text, null, 2), JSON.stringify(video, null, 2))
+  return (
+    <StyledContainer>
+      <StyledVideo url={video.asset.url} alt="about video" />
+      <StyledTextContainer>
+        <StyledText>{text}</StyledText>
+      </StyledTextContainer>
+    </StyledContainer>
+  )
 }
 
-export default About;
+export default About
