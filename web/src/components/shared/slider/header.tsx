@@ -16,10 +16,11 @@ const appear = keyframes`
 `
 
 const StyledH1 = styled.h1`
-  ${tw`text-7xl font-bold relative pl-4`};
+  ${tw`font-bold relative pl-4`};
+  font-size: 4.2rem;
   font-weight: bold;
   font-family: 'Circular Std Black';
-  top: 8.5rem;
+  top: 9.2rem;
 `
 
 interface LetterProps {
