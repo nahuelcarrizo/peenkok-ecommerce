@@ -18,9 +18,8 @@ const appear = keyframes`
 const StyledH1 = styled.h1`
   ${tw`font-bold relative pl-4`};
   font-size: 4.2rem;
-  font-weight: bold;
   font-family: 'Circular Std Black';
-  top: 9.2rem;
+  top: 9rem;
 `
 
 interface LetterProps {
@@ -31,14 +30,14 @@ interface LetterProps {
 
 const Letter = styled.div<LetterProps>`
   margin-right: -4px;
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
   ${({ animate, duration, delay }) =>
     animate &&
     css`
       animation: ${appear} ${duration}s cubic-bezier(0, 0, 0.2, 1) ${delay}s
         forwards;
     `}
+  display: inline-block;
+  width: auto;
 `
 
 const StyledLink = styled(Link)`
@@ -80,7 +79,7 @@ const SectionHeader = ({ title }) => {
               key={index}
               animate={animate}
               delay={(index / contentLength) * 0.8}
-              duration={2}
+              duration={1.5}
             >
               {letter}
             </Letter>

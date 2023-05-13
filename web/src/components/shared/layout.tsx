@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 
+import Cookies from '../shared/cookies'
 import Footer from './footer/footer'
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
@@ -39,6 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
         <title>Péenkok</title>
       </Head>
       <Main>{children}</Main>
+      <Cookies />
       <Footer />
     </>
   )

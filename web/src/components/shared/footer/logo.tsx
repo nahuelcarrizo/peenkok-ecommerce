@@ -18,8 +18,7 @@ const LogoContainer = styled(Link)`
 const LogoSVG = styled.img`
   ${tw`
     m-0
-    z-10
-    
+  
   `};
   width: 40rem;
 `

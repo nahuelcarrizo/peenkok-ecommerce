@@ -9,6 +9,7 @@ import RemoteFixedSizeImage from '../image-types/remote-fixed-size-image'
 import SectionHeader from './header'
 import styled from 'styled-components'
 import tw from 'twin.macro'
+import { useEffect } from 'react'
 
 const ScrollContainer = styled(Container)`
   ${tw`
@@ -103,6 +104,9 @@ function Slider(props) {
 
     setItems(imagesData)
     setTitle(titleData)
+    window.onload = () => {
+      console.log('Se termino de cargar la pagina')
+    }
   }, [heroImages, latestIncomes, collection])
   const [selected, setSelected] = React.useState([])
   const [position, setPosition] = React.useState(0)

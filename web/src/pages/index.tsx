@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import About from '../components/home/about'
 import Hero from '../components/home/hero'
 import Layout from '../components/shared/layout'
