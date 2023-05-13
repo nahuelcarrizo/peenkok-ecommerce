@@ -36,12 +36,6 @@ const CookiesText = styled.div`
   line-height: 1.5;
 `
 
-const StyledLink = styled.a`
-  &.underline {
-    text-decoration: underline;
-  }
-`
-
 const CookiesBtns = styled.div`
   display: flex;
   margin: 20px 0 0;
@@ -49,7 +43,7 @@ const CookiesBtns = styled.div`
   font-family: 'Circular Std Book';
 `
 
-const StyledButton = styled.button`
+const sharedButtonStyles = `
   height: 2.5rem;
   font-size: 1.1rem;
   border: 1px solid black;
@@ -62,9 +56,14 @@ const StyledButton = styled.button`
   overflow: hidden;
   position: relative;
   width: 8rem;
-  &.btn-hover {
-    /* Estilos de hover para el botón */
-  }
+`
+
+const StyledButton = styled.button`
+  ${sharedButtonStyles}/* Estilos adicionales del botón */
+`
+
+const StyledLink = styled.a`
+  ${sharedButtonStyles}/* Estilos adicionales del enlace */
 `
 
 const Cookies = () => {
