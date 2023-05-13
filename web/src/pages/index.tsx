@@ -40,13 +40,13 @@ export default function Home({
       <AppContainer>
         <Navbar navbarItems={navbarItems} />
         <Layout>
+          <Stories heroVideo={heroVideo} />
           <Hero heroVideo={heroVideo} />
           <Slider heroImages={heroImages} />
           <Slider latestIncomes={latestIncomes} />
-          <Stories heroVideo={heroVideo} />
           <Slider collection={collection.collections1} />
           <Slider collection={collection.collections2} />
-          {/*           <About about={about} /> */}
+          <About about={about} />
           <Suscribe suscribe={suscribe} />
         </Layout>
       </AppContainer>

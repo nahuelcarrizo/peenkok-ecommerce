@@ -38,27 +38,29 @@ const StyledTitle = styled.h2`
 const Footer = () => {
   const rows = [
     {
-      title: 'Unite Unite',
+      title: 'Menu',
       links: [
-        { label: 'Sobre nosotros', url: '/sobre-nosotros' },
-        { label: 'FAQ', url: '/faq' },
-        { label: 'Contáctanos', url: '/contactanos' },
+        { label: 'Shop', url: '/' },
+        { label: 'Stories', url: '/' },
+        { label: 'Activism', url: '/' },
+        { label: 'Sustainability', url: '/' },
       ],
     },
     {
-      title: 'Menu Cliente',
+      title: 'Cliente',
       links: [
-        { label: 'Cómo comprar', url: '/como-comprar' },
-        { label: 'Trackea tu orden', url: '/trackea-tu-orden' },
-        { label: 'Cambios & Devoluciones', url: '/cambios-devoluciones' },
+        { label: 'Login', url: '/' },
+        { label: 'Loyalty Program', url: '/' },
+        { label: 'Contact us', url: '/' },
+        { label: 'Our story and values', url: '/' },
       ],
     },
     {
       title: 'Legal Social',
       links: [
-        { label: 'Políticas de privacidad', url: '/politicas-privacidad' },
-        { label: 'Política de compras', url: '/politica-compras' },
-        { label: 'Términos de servicios', url: '/terminos-servicios' },
+        { label: 'Terms & Conditions', url: '/' },
+        { label: 'Shipping info', url: '/' },
+        { label: 'Privacy Policy', url: '/' },
       ],
     },
     {

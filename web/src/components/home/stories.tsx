@@ -8,6 +8,7 @@ const StyledContainer = styled.div`
       h-full
       border-b
       border-black
+      relative
     `}
   height: 500px;
 `
@@ -16,18 +17,45 @@ const StyledVideo = styled(RemoteResponsiveVideo)`
       mb-4
       `};
 `
+const StyledTextContainer = styled.div`
+  ${tw`
+        flex
+        flex-col
+        justify-center
+        items-center
+        w-full
+        h-full
+        absolute
+        p-12
+        top-0	
+        [color: white]
+    `};
+  &:hover {
+    color: #003c47;
+    text-decoration: underline;
+  }
+`
+const StyledText = styled.div`
+  ${tw`
+        text-center
+        text-xl
+        [font-family: 'Circular Std Medium']
+        [color: '#003c47']
+        [line-height: 1.4]
+        `};
+`
 
 const Stories = ({ heroVideo: video }: any) => {
-  /*   const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play()
-    }
-  }, []) */
   return (
     <StyledContainer>
       <StyledVideo url={video.asset.url} alt="stories video" />
+      <StyledTextContainer>
+        <StyledText>
+          Video Seccion 'Stories'
+          <br />
+          (TEASER)
+        </StyledText>
+      </StyledTextContainer>
     </StyledContainer>
   )
 }

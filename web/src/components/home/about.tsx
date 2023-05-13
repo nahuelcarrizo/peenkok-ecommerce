@@ -30,16 +30,10 @@ const StyledTextContainer = styled.div`
     color: #003c47;
     text-decoration: underline;
   }
+  border-bottom: 1px solid black;
 `
-const StyledVideo = styled(RemoteResponsiveVideo)`
-  ${tw`
-      mb-4
-    `}
-`
+const StyledVideo = styled(RemoteResponsiveVideo)``
 const StyledContainer = styled(Container)`
-  ${tw`
-    p-4
-    `}
   height: 500px;
 `
 
@@ -51,7 +45,7 @@ const About = ({ about }: any) => {
     <StyledContainer>
       <StyledVideo url={video.asset.url} alt="about video" />
       <StyledTextContainer>
-        <StyledText>{text}</StyledText>
+        <StyledText>Sección Valores</StyledText>
       </StyledTextContainer>
     </StyledContainer>
   )
