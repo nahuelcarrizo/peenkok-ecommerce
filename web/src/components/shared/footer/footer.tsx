@@ -66,9 +66,11 @@ const Footer = () => {
     {
       title: 'Social',
       links: [
-        { label: 'Instagram', url: 'https://www.instagram.com' },
-        { label: 'Twitter', url: 'https://www.twitter.com' },
-        { label: 'Facebook', url: 'https://www.facebook.com' },
+        { label: 'TikTok', url: '/' },
+        { label: 'Twitter', url: '/' },
+        { label: 'Instagram', url: '/' },
+        { label: 'Facebook', url: '/' },
+        { label: 'Youtube', url: '/' },
       ],
     },
   ]

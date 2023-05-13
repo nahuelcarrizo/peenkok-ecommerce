@@ -92,9 +92,9 @@ const Cookies = () => {
           </p>
         </CookiesText>
         <CookiesBtns>
-          <StyledButton href="/">
+          <StyledLink>
             <span>LEARN</span>
-          </StyledButton>
+          </StyledLink>
           <StyledButton
             onClick={handleAcceptClick}
             style={{ color: 'white', backgroundColor: '#003c47' }}
