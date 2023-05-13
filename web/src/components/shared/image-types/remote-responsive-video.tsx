@@ -13,7 +13,7 @@ const RemoteResponsiveVideo = (props: any) => {
         ;(video as HTMLVideoElement).play()
       })
     }
-    setIsLoaded(true)S
+    setIsLoaded(true)
   }, [])
   return (
     <>
@@ -28,7 +28,7 @@ const RemoteResponsiveVideo = (props: any) => {
           playing={true}
           loop={true}
           playsinline={true}
-          autoplay="autoplay"
+          autoPlay="autoPlay"
           attributes={{
             muted: true,
             loop: true,

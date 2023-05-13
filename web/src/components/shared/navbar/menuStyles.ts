@@ -43,6 +43,6 @@ export default {
     lineHeight: '1.2em',
   },
   bmOverlay: {
-    background: 'rgba(0, 0, 0, 0.3)',
+    background: 'rgba(0, 0, 0, 0)',
   },
 }

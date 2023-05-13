@@ -193,6 +193,7 @@ const Navbar = ({ navbarItems }) => {
   const items = navbarItems.navbarItems
   const scrollbarRef = useRef(null)
   const isDesktop = useMediaQuery({ minWidth: device.desktop })
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const renderNavbarItems = () => {
     return items.map(el => (
@@ -201,7 +202,18 @@ const Navbar = ({ navbarItems }) => {
       </li>
     ))
   }
+  const handleStateChange = state => {
+    setIsMenuOpen(state.isOpen)
+  }
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.documentElement.style.overflow = 'hidden'
+    } else {
+      document.documentElement.style.overflow = 'auto'
+    }
+  }),
+    [isMenuOpen]
   return (
     <>
       <NavbarContainer>
@@ -230,7 +242,7 @@ const Navbar = ({ navbarItems }) => {
                 <StyledSpan>INGRESAR</StyledSpan>
                 <StyledSpan>CARRITO (0)</StyledSpan>
                 <StyledBurguer>
-                  <Menu right styles={styles}>
+                  <Menu right styles={styles} onStateChange={handleStateChange}>
                     <ul>{renderNavbarItems()}</ul>
                   </Menu>
                 </StyledBurguer>
