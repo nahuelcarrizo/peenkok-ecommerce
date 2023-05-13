@@ -8,10 +8,12 @@ const RemoteResponsiveVideo = (props: any) => {
 
   useEffect(() => {
     window.onload = () => {
-      document.querySelectorAll('video').play()
-      console.log(document.querySelectorAll('video').play())
+      const videos = document.querySelectorAll('video')
+      videos.forEach(video => {
+        ;(video as HTMLVideoElement).play()
+      })
     }
-    setIsLoaded(true)
+    setIsLoaded(true)S
   }, [])
   return (
     <>
@@ -19,7 +21,6 @@ const RemoteResponsiveVideo = (props: any) => {
         <ReactPlayer
           alt={alt}
           url={url}
-          muted="true"
           height="100%"
           width="100%"
           className={className}
