@@ -24,6 +24,7 @@ const StyledTextContainer = styled.div`
         h-full
         absolute
         p-12
+        [top:200px]
         [color: white]
     `};
   &:hover {

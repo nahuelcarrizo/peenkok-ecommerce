@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import tw from 'twin.macro'
 
-const LetterWrapper = tw.div`flex flex-row`
+const LetterWrapper = tw.div`inline-flex`
 
 const appear = keyframes`
   from {
@@ -19,7 +19,7 @@ const StyledH1 = styled.h1`
   ${tw`font-bold relative pl-4`};
   font-size: 4.2rem;
   font-family: 'Circular Std Black';
-  top: 9rem;
+  top: 9.3rem;
 `
 
 interface LetterProps {
@@ -36,7 +36,7 @@ const Letter = styled.div<LetterProps>`
       animation: ${appear} ${duration}s cubic-bezier(0, 0, 0.2, 1) ${delay}s
         forwards;
     `}
-  display: inline-block;
+  display: inline;
   width: auto;
 `
 
