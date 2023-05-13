@@ -40,7 +40,6 @@ const StyledContainer = styled(Container)`
 const About = ({ about }: any) => {
   const { text, video } = about
 
-  console.log(JSON.stringify(text, null, 2), JSON.stringify(video, null, 2))
   return (
     <StyledContainer>
       <StyledVideo url={video.asset.url} alt="about video" />
