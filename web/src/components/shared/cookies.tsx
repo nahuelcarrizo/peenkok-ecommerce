@@ -70,13 +70,25 @@ const Cookies = () => {
   const cookiesWrapperRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(true)
   const handleAcceptClick = () => {
+    localStorage.setItem('CookieBar', 'accepted')
     setVisible(false)
   }
+
+  useEffect(() => {
+    const cookieBarStatus = localStorage.getItem('CookieBar')
+    if (cookieBarStatus === 'accepted') {
+      setVisible(false)
+    } else {
+      setVisible(true)
+    }
+  }, [])
+
   useEffect(() => {
     if (cookiesWrapperRef.current) {
       cookiesWrapperRef.current.style.display = visible ? 'flex' : 'none'
     }
   }, [visible])
+
   return (
     <CookiesWrapper ref={cookiesWrapperRef} visible={visible}>
       <CookiesHold>

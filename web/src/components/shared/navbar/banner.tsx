@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import Marquee from 'react-fast-marquee'
 import styled from 'styled-components'
@@ -6,6 +6,7 @@ import tw from 'twin.macro'
 
 const StyledList = styled.ul`
   ${tw`
+    pt-2
       list-none
       flex  
       items-center
@@ -14,16 +15,27 @@ const StyledList = styled.ul`
       flex
       whitespace-nowrap
     `};
-  font-family: 'Circular Std Regular';
-  font-size: 1.6rem;
-  &:hover {
-    color: #003c47;
+  li {
+    ${tw`
+      px-1
+      `};
   }
+  font-family: 'Circular Std Black';
+  font-size: 1.2rem;
+  color: ${({ isOpen }) => (isOpen ? 'black' : '#F36600')};
+  transition: color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
+    ${({ isOpen }) => (isOpen ? '0s' : '0.5s')};
 `
 
-const Banner = () => {
+const Banner = ({ isMenuOpen }) => {
+  const [isOpen, setIsOpen] = useState('false')
+
+  useEffect(() => {
+    setIsOpen(isMenuOpen)
+  }, [isMenuOpen])
+
   return (
-    <StyledList>
+    <StyledList isOpen={isOpen}>
       <span>☻☻☻</span>
       <li>15/6 - ENJOY BEACH CLEAN AT BARCELONA SPAIN</li>
       <span>☻☻☻</span>

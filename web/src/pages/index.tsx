@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-
 import About from '../components/home/about'
+import { Container } from '../components/shared/sharedstyles'
 import Hero from '../components/home/hero'
 import Layout from '../components/shared/layout'
 import Navbar from '../components/shared/navbar/navbar'
@@ -12,14 +11,6 @@ import { sanity } from '../../lib/sanity'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-const AppContainer = tw.div`
-  flex
-  flex-col
-  w-full
-  h-full
-  overflow-hidden
-  relative
-`
 const StyledDiv = tw.div`
   w-screen
   h-screen    
@@ -39,11 +30,10 @@ export default function Home({
 }) {
   return (
     <>
-      <AppContainer>
-        <Navbar navbarItems={navbarItems} />
+      <Container>
+        <Navbar navbarItems={navbarItems} isHome={true} />
         <Layout>
-          <Hero heroVideo={heroVideo} />
-          <Slider heroImages={heroImages} />
+          <Hero heroImages={heroImages} />
           <Slider latestIncomes={latestIncomes} />
           <Stories heroVideo={heroVideo} />
           <Slider collection={collection.collections1} />
@@ -51,7 +41,7 @@ export default function Home({
           <About about={about} />
           <Suscribe suscribe={suscribe} />
         </Layout>
-      </AppContainer>
+      </Container>
     </>
   )
 }

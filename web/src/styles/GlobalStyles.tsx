@@ -5,14 +5,14 @@ import React from 'react'
 
 const myTheme = {
   colors: {
-    primary: '#fdfbf5', // Aquí puedes asignar el color que desees
+    primary: '#fdfbf5',
   },
 }
 
 const GlobalStyles = createGlobalStyle({
   body: {
     ...tw`antialiased`,
-    backgroundColor: myTheme.colors.primary, // Utiliza el color asignado del tema aquí
+    backgroundColor: myTheme.colors.primary,
   },
   ...(globalStyles as CSSObject),
   html: {
@@ -23,6 +23,16 @@ const GlobalStyles = createGlobalStyle({
     objectFit: 'cover',
     height: '100%',
   },
+  '.bm-menu-wrap': {
+    left: '0px',
+  },
+  /*
+  '.bm-burger-button': {
+    zIndex: '2010 !important',
+  },
+  '.bm-item': {
+    zIndex: '10 !important',
+  }, */
 })
 
 export default GlobalStyles

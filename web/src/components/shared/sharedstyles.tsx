@@ -8,12 +8,9 @@ const Container = styled.div`
     flex-col
     overflow-hidden
     relative
-    justify-center
-    items-center
     w-full
     h-full
   `};
-  /*   height: 28rem; */
 `
 const Main = styled.main`
   padding: 5rem 0;

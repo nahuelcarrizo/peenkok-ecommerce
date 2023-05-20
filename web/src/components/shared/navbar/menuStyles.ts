@@ -1,9 +1,9 @@
 export default {
   bmBurgerButton: {
-    position: 'relative',
+    position: 'absolute',
     width: '25px',
     height: '20px',
-    justifySelf: 'flex-end',
+    display: 'none',
   },
   bmBurgerBars: {
     background: '#000',
@@ -23,10 +23,10 @@ export default {
     position: 'fixed',
     width: '100%',
     height: '100%',
-    top: '5.5rem',
+    top: '21.5vw',
   },
   bmMenu: {
-    background: '#fdfbf5',
+    background: 'white',
     fontSize: '3em',
     fontFamily: 'Circular Std Black',
     letterSpacing: '-0.05em',
@@ -36,7 +36,7 @@ export default {
   },
   bmItemList: {
     color: '#b8b7ad',
-    padding: '0.8em',
+    padding: '0.8em 0.8em 0.8em 1rem',
   },
   bmItem: {
     display: 'inline-block',
@@ -44,5 +44,6 @@ export default {
   },
   bmOverlay: {
     background: 'rgba(0, 0, 0, 0)',
+    display: 'none',
   },
 }

@@ -1,39 +1,35 @@
 import { AiOutlineHeart, AiOutlineShopping } from 'react-icons/ai'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import Banner from './banner'
-import { BiUser } from 'react-icons/bi'
-import { FiSearch } from 'react-icons/fi'
+import { GiHamburgerMenu } from 'react-icons/gi'
 import Link from 'next/link'
 import Logo from './logo'
 import Marquee from 'react-fast-marquee'
-import { slide as Menu } from 'react-burger-menu'
-import Scrollbar from 'smooth-scrollbar'
-import { device } from '../../../config/device'
+import { fallDown as Menu } from 'react-burger-menu'
+import { RiUser3Line } from 'react-icons/ri'
 import styled from 'styled-components'
 import styles from './menuStyles'
 import tw from 'twin.macro'
-import { useMediaQuery } from 'react-responsive'
+import { useInView } from 'react-intersection-observer'
+import useIsSSR from '../../../hooks/useIsSSR '
 
 const NavbarContainer = styled.div`
   ${tw`
-        flex
-        flex-col
-        justify-center
-        items-center
-        z-10
-        fixed
-    `};
-  background-color: #fdfbf5;
-`
+    flex
+    flex-col
+    justify-center
+    items-center
+    z-10
+    fixed
+    w-full
+  `};
 
-const StyledMenu = styled.div`
-  ${tw`   
-        flex
-        w-full
-        relative
-    `};
-  height: 3.3rem;
+  z-index: 2000;
+  background-color: ${({ isMenuOpen }) =>
+    isMenuOpen ? 'white' : 'transparent'};
+  transition: background-color 0s ease
+    ${({ isMenuOpen }) => (isMenuOpen ? '0s' : '0.5s')};
 `
 
 const StyledNav = tw.nav`
@@ -51,10 +47,6 @@ const StyledList = styled.ul`
   position: fixed;
   font-family: 'Circular Std Black';
   font-size: 1.3rem;
-
-  @media ${device.desktop} {
-    font-size: 0.8rem;
-  }
 `
 
 const StyledLink = styled(Link)`
@@ -63,15 +55,6 @@ const StyledLink = styled(Link)`
   &:hover {
     color: #003c47;
   }
-`
-const StyledClock = styled.div`
-  font-family: 'Circular Std Bold';
-  display: inline-flex;
-  font-size: 1.2rem;
-  flex-direction: row;
-  position: relative;
-  transition: transform 1s cubic-bezier(0.16, 1.08, 0.38, 0.98);
-  will-change: transform;
 `
 
 const StyledIcons = styled.div`
@@ -86,8 +69,6 @@ const TopRow = styled.div`
         flex
         justify-center
         items-center
-        border-b
-        border-black
     `};
 `
 
@@ -96,29 +77,12 @@ const BottomRow = styled.div`
         flex
         justify-between
         w-full
-        border-b
-        border-black
+        relative
         pl-4
+    h-full
     `};
-`
-
-const RigthMenu = styled.div`
-  ${tw`
-        flex
-        justify-between
-        items-center
-        w-full
-        pl-10
-    `};
-`
-
-const StyledBurguer = styled.div`
-  ${tw`
-        p-5
-        border-l
-        border-black
-        h-full
-    `};
+  z-index: 2000;
+  height: 16vw;
 `
 
 const StyledSpan = styled.span`
@@ -129,71 +93,47 @@ const StyledSpan = styled.span`
     `};
 `
 
+const Nav = styled.nav`
+  ${tw`
+      flex
+      flex-row
+      w-full
+      h-full
+      justify-between
+      items-center
+      [font-size: 6vw]
+      pr-4
+      [width: 35%]
+  `}
+  color: ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
+  transition: color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
+    ${({ isMenuOpen }) => (isMenuOpen ? '0s' : '0.5s')};
+`
+const StyledMenu = styled.div`
+  position: absolute;
+  height: 22vw;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+`
+const Border = styled.div`
+  width: 100%;
+  border-bottom: 2px solid
+    ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
+  transition: border-bottom 1s ease;
+  z-index: 2000;
+`
 const options = {
   damping: 0.04,
   renderByPixels: true,
 }
 
-const continuousTransform = offset => {
-  const minOffset = 70
-  const maxOffset = 190
-
-  // Map offset to a value between 0 and 1
-  const normalizedOffset = Math.min(
-    (offset - minOffset) / (maxOffset - minOffset),
-    1,
-  )
-
-  // Calculate opacity based on the normalized offset
-  const opacity = 1 - 1 * normalizedOffset
-
-  // Return the opacity value
-  return opacity
-}
-
-const BarcelonaClock = () => {
-  const [now, setNow] = useState<null | string>(null)
-  const BarcelonaClockRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const clock = BarcelonaClockRef.current
-
-    const interval = setInterval(() => {
-      setNow(
-        new Date().toLocaleTimeString('en-US', {
-          timeZone: 'Europe/Madrid',
-          hour12: false,
-        }),
-      )
-    }, 1000)
-
-    /*     const scrollbar = () => {
-      Scrollbar.init(document.body, options).addListener(function (status) {
-        const offset = status.offset
-
-        clock.style.opacity = continuousTransform(offset.y)
-      })
-    }
-    scrollbar() */
-    /*     const elements = document.getElementsByClassName('scrollbar-track show')
-    if (elements.length > 0) {
-      elements[0].style.opacity = '0'
-    } */
-    return () => clearInterval(interval)
-  }, [])
-  return (
-    <StyledClock ref={BarcelonaClockRef}>
-      <span>BARCELONA</span>
-      <span>{now}</span>
-    </StyledClock>
-  )
-}
-
 const Navbar = ({ navbarItems }) => {
   const items = navbarItems.navbarItems
   const scrollbarRef = useRef(null)
-  const isDesktop = useMediaQuery({ minWidth: device.desktop })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
+  const isSSR = useIsSSR()
 
   const renderNavbarItems = () => {
     return items.map(el => (
@@ -202,55 +142,49 @@ const Navbar = ({ navbarItems }) => {
       </li>
     ))
   }
-  const handleStateChange = state => {
-    setIsMenuOpen(state.isOpen)
-  }
+
+  const handleButtonClick = () => setOpen(prevOpen => !prevOpen)
 
   useEffect(() => {
+    setIsMenuOpen(PrevisMenuOpen => !PrevisMenuOpen)
     if (isMenuOpen) {
       document.documentElement.style.overflow = 'hidden'
     } else {
       document.documentElement.style.overflow = 'auto'
     }
-  }),
-    [isMenuOpen]
+
+    console.log(isMenuOpen)
+  }, [open])
+
   return (
     <>
-      <NavbarContainer>
+      <NavbarContainer isMenuOpen={isMenuOpen}>
         <TopRow style={{ maxWidth: '100vw' }}>
-          <Marquee autoFill={true} style={{ height: '2rem' }}>
-            <Banner />
+          <Marquee
+            autoFill={true}
+            style={{ height: '5.5vw', zIndex: '3000 !important' }}
+          >
+            <Banner isMenuOpen={isMenuOpen} />
           </Marquee>
         </TopRow>
         <BottomRow>
-          <Logo />
-          <StyledMenu>
-            {isDesktop ? (
-              <>
-                {/*                 <BarcelonaClock /> */}
-                <StyledNav>
-                  <StyledList>renderNavbarItems()</StyledList>
-                </StyledNav>
-
-                <StyledIcons>
-                  <BiUser />
-                  <AiOutlineShopping />
-                </StyledIcons>
-              </>
-            ) : (
-              <RigthMenu>
-                <StyledSpan>INGRESAR</StyledSpan>
-                <StyledSpan>CARRITO (0)</StyledSpan>
-                <StyledBurguer>
-                  <Menu right styles={styles} onStateChange={handleStateChange}>
-                    <ul>{renderNavbarItems()}</ul>
-                  </Menu>
-                </StyledBurguer>
-              </RigthMenu>
-            )}
-          </StyledMenu>
+          <Logo isMenuOpen={isMenuOpen} />
+          <Nav isMenuOpen={isMenuOpen}>
+            <AiOutlineShopping />
+            <RiUser3Line />
+            <GiHamburgerMenu onClick={handleButtonClick} />
+          </Nav>
         </BottomRow>
+        <Border isMenuOpen={isMenuOpen} />
       </NavbarContainer>
+      <Menu
+        fallDown
+        isOpen={open}
+        styles={styles}
+        /*   onStateChange={handleButtonClick} */
+      >
+        <ul id="list">{renderNavbarItems()}</ul>
+      </Menu>
     </>
   )
 }
