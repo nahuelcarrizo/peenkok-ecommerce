@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 
-import Marquee from 'react-fast-marquee'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-const StyledList = styled.ul`
+interface StyledListProps {
+  isOpen: boolean
+}
+
+const StyledList = styled.ul<StyledListProps>`
   ${tw`
       m-0
       list-none
@@ -29,7 +32,7 @@ const StyledList = styled.ul`
 `
 
 const Banner = ({ isMenuOpen }) => {
-  const [isOpen, setIsOpen] = useState('false')
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     setIsOpen(isMenuOpen)

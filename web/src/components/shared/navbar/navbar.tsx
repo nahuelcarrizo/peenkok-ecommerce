@@ -69,7 +69,11 @@ const StyledIcons = styled.div`
   position: relative;
 `
 
-const TopRow = styled.div`
+interface TopRowProps {
+  isMenuOpen: boolean
+}
+
+const TopRow = styled.div<TopRowProps>`
   ${tw`
         flex
         justify-center

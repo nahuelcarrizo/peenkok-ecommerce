@@ -31,7 +31,7 @@ export default function Home({
   return (
     <>
       <Container>
-        <Navbar navbarItems={navbarItems} isHome={true} />
+        <Navbar navbarItems={navbarItems} />
         <Layout>
           <Hero heroImages={heroImages} />
           <Slider latestIncomes={latestIncomes} />
