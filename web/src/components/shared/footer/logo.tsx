@@ -26,7 +26,7 @@ const LogoSVG = styled.img`
 const Logo = () => {
   return (
     <LogoContainer href="/" passHref>
-      <LogoSVG src="/assets/peenkokLogo.svg" alt="Logo" />
+      <LogoSVG src="/assets/LogoPeenkok_black.svg" alt="Logo" />
     </LogoContainer>
   )
 }

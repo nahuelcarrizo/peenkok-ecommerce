@@ -28,6 +28,7 @@
     "react-player": "^2.12.0",
     "react-responsive": "^9.0.2",
     "react-scroll": "^1.8.9",
+    "react-useanimations": "^2.10.0",
     "smooth-scrollbar": "^8.8.3",
     "styled-components": "^5.3.9"
   },

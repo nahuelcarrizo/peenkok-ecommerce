@@ -18,6 +18,7 @@ export default {
   },
   bmCross: {
     background: '#bdc3c7',
+    display: 'none',
   },
   bmMenuWrap: {
     position: 'fixed',
@@ -41,6 +42,9 @@ export default {
   bmItem: {
     display: 'inline-block',
     lineHeight: '1.2em',
+    hover: {
+      color: '#3B1B5D',
+    },
   },
   bmOverlay: {
     background: 'rgba(0, 0, 0, 0)',

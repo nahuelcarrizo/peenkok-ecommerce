@@ -6,7 +6,7 @@ import tw from 'twin.macro'
 
 const StyledList = styled.ul`
   ${tw`
-    pt-2
+      m-0
       list-none
       flex  
       items-center
@@ -21,8 +21,9 @@ const StyledList = styled.ul`
       `};
   }
   font-family: 'Circular Std Black';
-  font-size: 1.2rem;
-  color: ${({ isOpen }) => (isOpen ? 'black' : '#F36600')};
+  font-size: 1rem;
+  color: ${({ isOpen }) => (isOpen ? 'black !important' : '#F36600')};
+
   transition: color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
     ${({ isOpen }) => (isOpen ? '0s' : '0.5s')};
 `

@@ -2,17 +2,20 @@ import React, { useContext, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import Link from 'next/link'
-import { NavbarContext } from '../../../context/navbarContext'
 import tw from 'twin.macro'
 
-const StyledLogo = styled.div`
+interface LogoProps {
+  isMenuOpen: boolean
+}
+
+const StyledLogo = styled.div<LogoProps>`
   width: 35vw;
   path {
-    transition: fill 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
-      ${({ isMenuOpen }) => (isMenuOpen ? '0s' : '0.5s')};
+    transition: fill 01s cubic-bezier(0, 1.04, 0.54, 1)
+      ${({ isMenuOpen }) => (isMenuOpen ? '0' : '0.5')}s;
   }
 
-  ${({ isMenuOpen }) =>
+  /*   ${({ isMenuOpen }) =>
     isMenuOpen &&
     css`
       path {
@@ -24,9 +27,9 @@ const StyledLogo = styled.div`
     !isMenuOpen &&
     css`
       path {
-        fill: #f36600;
+        fill: '#f36600';
       }
-    `};
+    `}; */
 `
 const LogoContainer = styled(Link)`
   ${tw`
@@ -40,13 +43,18 @@ const LogoContainer = styled(Link)`
 `
 
 const LogoNaranja = ({ isMenuOpen }) => {
-  const [fill, setFill] = useState('#f36600')
+  const [fill, setFill] = useState('')
   const [isOpen, setIsOpen] = useState('false')
 
   useEffect(() => {
-    setFill(isMenuOpen ? 'black' : '#f36600')
+    if (!isMenuOpen) {
+      setTimeout(() => {
+        setFill(isMenuOpen ? 'black' : '#f36600')
+      }, 500)
+    }
+    setFill('black')
   }, [isMenuOpen])
-
+  console.log(fill)
   return (
     <LogoContainer href="/">
       <StyledLogo isMenuOpen={isMenuOpen}>

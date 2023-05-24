@@ -26,10 +26,10 @@ const GlobalStyles = createGlobalStyle({
   '.bm-menu-wrap': {
     left: '0px',
   },
-  /*
   '.bm-burger-button': {
     zIndex: '2010 !important',
   },
+  /*
   '.bm-item': {
     zIndex: '10 !important',
   }, */

@@ -8,13 +8,18 @@ import Logo from './logo'
 import Marquee from 'react-fast-marquee'
 import { fallDown as Menu } from 'react-burger-menu'
 import { RiUser3Line } from 'react-icons/ri'
+import UseAnimations from 'react-useanimations'
+import menu2 from 'react-useanimations/lib/menu2'
 import styled from 'styled-components'
 import styles from './menuStyles'
 import tw from 'twin.macro'
 import { useInView } from 'react-intersection-observer'
-import useIsSSR from '../../../hooks/useIsSSR '
 
-const NavbarContainer = styled.div`
+interface NavbarContainerProps {
+  isMenuOpen: boolean
+}
+
+const NavbarContainer = styled.div<NavbarContainerProps>`
   ${tw`
     flex
     flex-col
@@ -70,6 +75,11 @@ const TopRow = styled.div`
         justify-center
         items-center
     `};
+  border-bottom: 2px solid
+    ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
+  transition: border-color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
+    ${({ isMenuOpen }) => (isMenuOpen ? '0s' : '0.4s')};
+  padding: 0.5vw 0;
 `
 
 const BottomRow = styled.div`
@@ -92,8 +102,10 @@ const StyledSpan = styled.span`
         pl-2
     `};
 `
-
-const Nav = styled.nav`
+interface NavProps {
+  isMenuOpen: boolean
+}
+const Nav = styled.nav<NavProps>`
   ${tw`
       flex
       flex-row
@@ -107,7 +119,7 @@ const Nav = styled.nav`
   `}
   color: ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
   transition: color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
-    ${({ isMenuOpen }) => (isMenuOpen ? '0s' : '0.5s')};
+    ${({ isMenuOpen }) => (isMenuOpen ? '0s' : '0.4s')};
 `
 const StyledMenu = styled.div`
   position: absolute;
@@ -116,7 +128,11 @@ const StyledMenu = styled.div`
   display: flex;
   align-items: center;
 `
-const Border = styled.div`
+
+interface BorderProps {
+  isMenuOpen: boolean
+}
+const Border = styled.div<BorderProps>`
   width: 100%;
   border-bottom: 2px solid
     ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
@@ -131,9 +147,9 @@ const options = {
 const Navbar = ({ navbarItems }) => {
   const items = navbarItems.navbarItems
   const scrollbarRef = useRef(null)
+  const [isScrolling, setIsScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [open, setOpen] = useState(false)
-  const isSSR = useIsSSR()
 
   const renderNavbarItems = () => {
     return items.map(el => (
@@ -143,45 +159,74 @@ const Navbar = ({ navbarItems }) => {
     ))
   }
 
-  const handleButtonClick = () => setOpen(prevOpen => !prevOpen)
-
-  useEffect(() => {
+  const handleButtonClick = () => {
+    setOpen(prevOpen => !prevOpen)
     setIsMenuOpen(PrevisMenuOpen => !PrevisMenuOpen)
+  }
+
+  const handleChange = state => {
+    console.log(state)
+  }
+  useEffect(() => {
     if (isMenuOpen) {
       document.documentElement.style.overflow = 'hidden'
     } else {
       document.documentElement.style.overflow = 'auto'
     }
-
-    console.log(isMenuOpen)
   }, [open])
+
+  ///////////scroll
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY
+    setIsScrolling(scrollPosition > 0)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <>
-      <NavbarContainer isMenuOpen={isMenuOpen}>
-        <TopRow style={{ maxWidth: '100vw' }}>
+      <NavbarContainer isMenuOpen={isMenuOpen || isScrolling}>
+        <TopRow
+          style={{ maxWidth: '100vw' }}
+          isMenuOpen={isMenuOpen || isScrolling}
+        >
           <Marquee
             autoFill={true}
+            speed={65}
             style={{ height: '5.5vw', zIndex: '3000 !important' }}
           >
-            <Banner isMenuOpen={isMenuOpen} />
+            <Banner isMenuOpen={isMenuOpen || isScrolling} />
           </Marquee>
         </TopRow>
         <BottomRow>
-          <Logo isMenuOpen={isMenuOpen} />
-          <Nav isMenuOpen={isMenuOpen}>
+          <Logo isMenuOpen={isMenuOpen || isScrolling} />
+          <Nav isMenuOpen={isMenuOpen || isScrolling}>
             <AiOutlineShopping />
             <RiUser3Line />
-            <GiHamburgerMenu onClick={handleButtonClick} />
+            <UseAnimations
+              animation={menu2}
+              size={35}
+              onClick={handleButtonClick}
+              speed={2}
+              pathCss="stroke-width: 2.5px; transition: stroke 0s ease 0.5s "
+              strokeColor={isMenuOpen || isScrolling ? 'black' : '#F36600'}
+            />
           </Nav>
         </BottomRow>
-        <Border isMenuOpen={isMenuOpen} />
+        <Border isMenuOpen={isMenuOpen || isScrolling} />
       </NavbarContainer>
       <Menu
+        noOverlay
         fallDown
         isOpen={open}
         styles={styles}
-        /*   onStateChange={handleButtonClick} */
+        onStateChange={handleChange}
       >
         <ul id="list">{renderNavbarItems()}</ul>
       </Menu>
