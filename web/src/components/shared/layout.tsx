@@ -13,13 +13,13 @@ import tw from 'twin.macro'
 
 const Main = styled.main`
   ${tw`
-        flex    
+/*         flex    
         flex-col
         h-full
         w-full
-        relative
+        relative */
     `};
-  overscroll-behavior: none;
+
   background-color: #fdfbf5;
 `
 

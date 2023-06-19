@@ -6,6 +6,7 @@ import { Container } from '../../shared/sharedstyles'
 import Link from 'next/link'
 import React from 'react'
 import RemoteFixedSizeImage from '../image-types/remote-fixed-size-image'
+import Scrollbar from 'smooth-scrollbar'
 import SectionHeader from './header'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -22,7 +23,6 @@ const ProdCardTitle = styled.div`
   ${tw`
       flex
       flex-col
-      pt-3
       [font-family: 'Circular Std Black']
       [font-size: 1.2rem]
   `}
@@ -39,16 +39,14 @@ const ProdCard = styled.li<ProdCardProps>`
   ${tw`
       flex
       flex-col
-      pl-4
-      pt-4
-      pb-4
+
       w-full
       h-full
   `};
-
+  padding: 2.7vw;
   background: #fdfbf5;
   border: ${props => (props.hasHeroImages ? 'none' : '1px solid black')};
-  padding-right: ${props => (!props.hasHeroImages ? '1rem' : '')};
+  /*   padding-right: ${props => (!props.hasHeroImages ? '1rem' : '')}; */
   /*   &:first-child { */
   border-left: none;
   /*   } */
@@ -71,6 +69,7 @@ function Slider(props) {
         url: image.asset.url,
         asset: image.asset,
         image: image,
+        key: image.asset._id,
       }))
     } else if (latestIncomes) {
       imagesData = latestIncomes.latestIncomesMedia.map(image => ({
@@ -78,6 +77,7 @@ function Slider(props) {
         url: image.asset.url,
         asset: image.asset,
         image: image,
+        key: image.asset._id,
       }))
       titleData = latestIncomes.latestIncomesText
     } else if (collection) {
@@ -98,15 +98,13 @@ function Slider(props) {
         url: image.asset.url,
         asset: image.asset,
         image: image,
+        key: image.asset._id,
       }))
       titleData = collectionText // Actualizar titleData aquí
     }
 
     setItems(imagesData)
     setTitle(titleData)
-    window.onload = () => {
-      console.log('Se termino de cargar la pagina')
-    }
   }, [heroImages, latestIncomes, collection])
   const [selected, setSelected] = React.useState([])
   const [position, setPosition] = React.useState(0)
@@ -125,8 +123,8 @@ function Slider(props) {
       )
     }
 
-  const commonContent = items.map(({ id, url, asset, image }) => (
-    <ProdCard hasHeroImages={heroImages}>
+  const commonContent = items.map(({ id, url, asset, image, index }) => (
+    <ProdCard hasHeroImages={heroImages} key={index}>
       <Card
         itemId={id}
         imageUrl={url}
@@ -165,16 +163,15 @@ const ImageLink = styled.a`
       w-full
       h-full
     `};
-  height: 18.3rem;
-  width: 16.9rem;
+
   border: 1px solid black;
 `
 const StyledImg = styled(RemoteFixedSizeImage)`
   ${tw`
-      h-full
-      w-full
       object-cover
   `};
+  height: 30vw;
+  width: 29vw;
 `
 
 function Card({ onClick, selected, title, itemId, imageUrl, asset, image }) {

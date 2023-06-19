@@ -6,10 +6,10 @@ const Container = styled.div`
   ${tw`
     flex
     flex-col
-    overflow-hidden
     relative
     w-full
-    h-full
+    [height: 120vh]
+    overflow-hidden
   `};
 `
 const Main = styled.main`

@@ -1,88 +1,71 @@
-import styled, { css, keyframes } from 'styled-components'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
+import tw, { styled } from 'twin.macro'
 
 import Link from 'next/link'
-import tw from 'twin.macro'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { gsap } from 'gsap/dist/gsap'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const LetterWrapper = tw.div`inline-flex`
 
-const appear = keyframes`
-  from {
-    transform: translateY(0%);
-  }
-  to {
-    transform: translateY(-180%);
-  }
-`
-
 const StyledH1 = styled.h1`
-  ${tw`font-bold relative pl-4`};
-  font-size: 3.5rem;
+  ${tw`font-bold relative`};
+  font-size: 16vw;
   font-family: 'Circular Std Black';
-  top: 8.3rem;
+  left: 1.4vw;
+  margin: 0vw 0px;
 `
 
-interface LetterProps {
-  animate?: boolean
-  duration: number
-  delay: number
-}
-
-const Letter = styled.div<LetterProps>`
-  margin-right: -4px;
-  ${({ animate, duration, delay }) =>
-    animate &&
-    css`
-      animation: ${appear} ${duration}s cubic-bezier(0, 0.4, 0.2, 1) ${delay}s
-        forwards;
-    `}
-  display: inline;
-  width: auto;
+const Letter = styled.div`
+  margin-right: -0.8vw;
 `
 
 const StyledLink = styled(Link)`
-  ${tw`relative flex justify-start`}
-  /*   border-bottom: 2px solid black; */
+  ${tw`relative flex justify-start w-full`}
+  height: 17vw;
   opacity: 0.9;
 `
 
 const SectionHeader = ({ title }) => {
-  const [animate, setAnimate] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const contentLength = title.length
+  const letterContainerRef = useRef(null)
+  const letterRefs = useRef([])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting || entry.intersectionRatio > 0) {
-          setAnimate(true)
-          observer.unobserve(entry.target)
-        }
-      },
+    const select = gsap.utils.selector(letterContainerRef.current)
+    const letters = select('.gsanim')
+    const tl = gsap.timeline()
+    tl.fromTo(
+      letters,
+      { y: 50, autoAlpha: 0 },
       {
-        threshold: 0.1,
-        rootMargin: '0px 0px 160px 0px',
+        y: 0,
+        autoAlpha: 1,
+        duration: 1,
+        ease: 'power2.out',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: letterContainerRef.current,
+          start: 'top bottom',
+          markers: true,
+          toggleActions: 'play none none reverse',
+        },
       },
     )
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
-    return () => observer.disconnect()
   }, [])
+
   return (
     <StyledLink href="/" passHref>
-      <StyledH1 ref={ref}>
-        <LetterWrapper>
+      <StyledH1>
+        <LetterWrapper ref={letterContainerRef} className="letter-container">
           {title.split('').map((letter, index) => (
-            <Letter
+            <div
               key={index}
-              animate={animate}
-              delay={(index / contentLength) * 0.8}
-              duration={1.3}
+              className="gsanim"
+              style={{ marginRight: '-0.8vw' }}
             >
               {letter.toUpperCase()}
-            </Letter>
+            </div>
           ))}
         </LetterWrapper>
       </StyledH1>

@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import Scrollbar from 'smooth-scrollbar'
 
 type LazyImageProps = {
   src: string
@@ -22,7 +24,7 @@ const LazyImage = ({
   const [usableSrcSet, setSrcSet] = React.useState('')
   const container = React.useRef()
 
-  React.useEffect(() => {
+  useEffect(() => {
     let observer: IntersectionObserver
 
     if (
@@ -60,7 +62,7 @@ const LazyImage = ({
       observer.observe(container.current)
     }
 
-    return () => observer?.disconnect()
+    return () => observer.disconnect()
   }, [src, isLoading, image, setImage, usableSrcSet, setSrcSet, srcSet])
 
   return (

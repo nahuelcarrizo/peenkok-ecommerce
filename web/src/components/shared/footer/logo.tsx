@@ -11,14 +11,13 @@ const LogoContainer = styled(Link)`
     justify-center
     relative
     pb-2
-    mt-10
+    mt-3
   `};
 `
 
 const LogoSVG = styled.img`
   ${tw`
     m-0
-  
   `};
   width: 40rem;
 `

@@ -6,3 +6,8 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* body {
+  width: 100vw;
+  height: 100vh;
+} */

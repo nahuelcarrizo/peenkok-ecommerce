@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 
 const FooterContainer = styled.footer`
-  ${tw`py-6 px-4 bg-white mt-10 flex flex-col justify-center items-center`}
+  ${tw`px-4 bg-white mt-10 flex flex-col justify-evenly items-center`}
+  height: 78.5vh;
 `
 
 const GridContainer = styled.div`
@@ -35,9 +36,9 @@ const Link = styled.a`
 `
 
 const SuscribeContainer = styled.div`
-  ${tw`flex flex-col justify-center items-center w-full py-10`}
+  ${tw`flex flex-col justify-center items-center w-full py-6`}
   width: calc(100% - 20vw);
-  margin-top: 10vw;
+  margin-top: 1em;
 `
 
 const StyledForm = styled.form`
@@ -135,7 +136,6 @@ const Footer = () => {
         style={{
           fontSize: '.7rem',
           fontFamily: 'sans-serif',
-          marginTop: '20px',
           color: 'gray',
         }}
       >
