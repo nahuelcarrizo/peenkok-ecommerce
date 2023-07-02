@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 
-import Link from 'next/link'
-import RemoteFixedSizeImage from '../../image-types/remote-fixed-size-image'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import ScrolleableContent from './scrolleableContent'
 import SectionHeader from '../header'
-import { gsap } from 'gsap/dist/gsap'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import { useIsomorphicLayoutEffect } from '../../../../hooks/isomorphicEffect'
