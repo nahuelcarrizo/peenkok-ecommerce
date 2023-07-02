@@ -35,7 +35,7 @@ interface SliderProps {
   } | null // Replace 'null' with the actual type for the 'collection' prop
 }
 
-function Slider({ collection }: SliderProps) {
+function Slider2({ collection }: SliderProps) {
   const [items, setItems] = useState<ScrolleableContentProps[]>([])
   const [title, setTitle] = useState<string>('')
 
@@ -77,4 +77,4 @@ function Slider({ collection }: SliderProps) {
   )
 }
 
-export default Slider
+export default Slider2

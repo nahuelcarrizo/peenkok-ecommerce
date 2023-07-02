@@ -39,7 +39,7 @@ interface SliderProps {
     latestIncomesText: string
   }
 }
-function Slider({ latestIncomes }: SliderProps) {
+function Slider1({ latestIncomes }: SliderProps) {
   const [items, setItems] = useState<ScrolleableContentProps[]>([])
   const [title, setTitle] = useState<string>('')
 
@@ -74,4 +74,4 @@ function Slider({ latestIncomes }: SliderProps) {
   )
 }
 
-export default Slider
+export default Slider1
