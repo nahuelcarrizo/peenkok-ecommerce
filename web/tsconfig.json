@@ -24,7 +24,7 @@
     "**/*.tsx",
     "src/pages/function.js",
     "src/hooks/useIsSSR .js",
-    "src/components/shared/Slider/**/*.tsx"
+    "src/components/shared/slider/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
