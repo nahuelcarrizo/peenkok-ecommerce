@@ -17,6 +17,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/function.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/function.js",
+    "src/hooks/useIsSSR .js"
+  ],
   "exclude": ["node_modules"]
 }

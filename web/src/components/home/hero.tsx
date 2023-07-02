@@ -1,7 +1,8 @@
+import React, { Ref, forwardRef } from 'react'
+
 import { Container } from '../shared/sharedstyles'
 import { GiFalloutShelter } from 'react-icons/gi'
 import Marquee from 'react-fast-marquee'
-import React from 'react'
 import RemoteFixedSizeImage from '../shared/image-types/remote-fixed-size-image'
 import { device } from '../../config/device'
 import styled from 'styled-components'
@@ -17,7 +18,9 @@ overflow-hidden
         relative
     `};
   height: 115vh;
-  width: 100vw;
+  /*   width: 100vw; */
+  top: 0;
+  border: 1px solid black;
 `
 
 const StyledImg = styled(RemoteFixedSizeImage)`
@@ -29,28 +32,17 @@ const StyledImg = styled(RemoteFixedSizeImage)`
   bottom: -50px;
   height: 110%;
 `
-const HeroOverlay = styled.div`
-  ${tw`
-      absolute
-      top-0
-      left-0
-      w-full h-full 
-      `};
 
-  content: '';
-  background: linear-gradient(rgba(19, 18, 18, 0.27), rgba(0, 0, 0, 0.01));
-  z-index: 1;
-`
 const ShopNowMarquee = styled.div`
   height: 2.5vw;
-  width: 12vw;
+  width: 9vw;
   ${tw`
       absolute
-      [bottom: 34vh]    
+      [bottom: 25vh]    
       align-middle
       flex
       `}
-  left: 10.1vw;
+  left: 8.4vw;
   transform: translateX(-50%);
   background-color: #f36600;
   z-index: 2;
@@ -62,23 +54,36 @@ const ShopNowMarquee = styled.div`
   overflow-x: hidden !important;
   overflow-block: hidden !important;
 `
-
-const Hero = ({ image }: any) => {
+const ImgContainer = styled.div`
+  height: 100vh !important;
+  width: 100vw !important;
+`
+const Hero = forwardRef(function Hero(
+  { image }: any,
+  ref: Ref<HTMLDivElement>,
+) {
   return (
-    <StyledContainer>
-      <StyledImg
-        image={image[0].image}
-        asset={image[0].asset}
-        alt="hero image"
-        className="gs-parallax"
-      />
-      <ShopNowMarquee className="add-lag">
-        <Marquee autoFill speed={40}>
-          <span style={{ paddingLeft: '8px' }}> SHOP NOW </span>
-        </Marquee>
-      </ShopNowMarquee>
-    </StyledContainer>
+    <>
+      <StyledContainer ref={ref}>
+        <ImgContainer>
+          <StyledImg
+            image={image[0].image}
+            asset={image[0].asset}
+            width={1920}
+            height={1185}
+            alt="hero image"
+            className="hero-image"
+            /*         className="gs-parallax" */
+          />
+        </ImgContainer>
+        <ShopNowMarquee>
+          <Marquee autoFill speed={40}>
+            <span style={{ paddingLeft: '8px' }}> SHOP NOW </span>
+          </Marquee>
+        </ShopNowMarquee>
+      </StyledContainer>
+    </>
   )
-}
+})
 
 export default Hero

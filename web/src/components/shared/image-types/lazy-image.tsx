@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import Scrollbar from 'smooth-scrollbar'
+import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 
 type LazyImageProps = {
   src: string
@@ -24,7 +24,7 @@ const LazyImage = ({
   const [usableSrcSet, setSrcSet] = React.useState('')
   const container = React.useRef()
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     let observer: IntersectionObserver
 
     if (

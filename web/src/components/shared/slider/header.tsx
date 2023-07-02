@@ -4,68 +4,80 @@ import tw, { styled } from 'twin.macro'
 import Link from 'next/link'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { gsap } from 'gsap/dist/gsap'
+import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
+
+const LetterWrapper = tw.div`flex`
 
 gsap.registerPlugin(ScrollTrigger)
-
-const LetterWrapper = tw.div`inline-flex`
-
+const StyledLink = styled(Link)`
+  ${tw`relative flex justify-start w-full`}
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-top: -4%;
+  margin-bottom: -1%;
+  z-index: 1;
+`
 const StyledH1 = styled.h1`
   ${tw`font-bold relative`};
   font-size: 16vw;
-  font-family: 'Circular Std Black';
-  left: 1.4vw;
-  margin: 0vw 0px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  color: rgb(25, 25, 25);
+  -webkit-font-smoothing: antialiased;
+  left: 2.75vw;
 `
 
 const Letter = styled.div`
-  margin-right: -0.8vw;
-`
-
-const StyledLink = styled(Link)`
-  ${tw`relative flex justify-start w-full`}
-  height: 17vw;
-  opacity: 0.9;
+  margin-right: -0.6vw;
 `
 
 const SectionHeader = ({ title }) => {
-  const letterContainerRef = useRef(null)
-  const letterRefs = useRef([])
+  const ContainerRef = useRef<HTMLAnchorElement>(null)
 
-  useEffect(() => {
-    const select = gsap.utils.selector(letterContainerRef.current)
-    const letters = select('.gsanim')
-    const tl = gsap.timeline()
-    tl.fromTo(
-      letters,
-      { y: 50, autoAlpha: 0 },
-      {
-        y: 0,
-        autoAlpha: 1,
-        duration: 1,
-        ease: 'power2.out',
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: letterContainerRef.current,
-          start: 'top bottom',
-          markers: true,
-          toggleActions: 'play none none reverse',
-        },
-      },
-    )
-  }, [])
+  useIsomorphicLayoutEffect(() => {
+    if (!ContainerRef.current) return
+    const ctx = gsap.context(() => {
+      const array = gsap.utils.toArray<HTMLDivElement>(
+        '.header-letter',
+        ContainerRef.current,
+      )
+
+      const tl = gsap.timeline()
+      ScrollTrigger.create({
+        trigger: ContainerRef.current,
+        start: 'top+=20% bottom',
+
+        animation: tl,
+      })
+      console.log('array: ' + array)
+      array.forEach((el: HTMLElement, index: number) => {
+        tl.from(
+          el,
+          {
+            ease: 'power4.easeOut',
+            duration: 1.2,
+            y: 210,
+          },
+          '<+=6%',
+        )
+      })
+    })
+
+    ScrollTrigger.refresh()
+    return () => {
+      ctx.revert()
+    }
+  }, [title])
 
   return (
-    <StyledLink href="/" passHref>
+    <StyledLink href="/" passHref ref={ContainerRef}>
       <StyledH1>
-        <LetterWrapper ref={letterContainerRef} className="letter-container">
+        <LetterWrapper>
           {title.split('').map((letter, index) => (
-            <div
-              key={index}
-              className="gsanim"
-              style={{ marginRight: '-0.8vw' }}
-            >
+            <Letter key={index} className="header-letter">
               {letter.toUpperCase()}
-            </div>
+            </Letter>
           ))}
         </LetterWrapper>
       </StyledH1>

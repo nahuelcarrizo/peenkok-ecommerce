@@ -5,7 +5,7 @@ import tw from 'twin.macro'
 
 const FooterContainer = styled.footer`
   ${tw`px-4 bg-white mt-10 flex flex-col justify-evenly items-center`}
-  height: 78.5vh;
+  height: 100%;
 `
 
 const GridContainer = styled.div`
@@ -22,7 +22,7 @@ const LinkList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  line-height: 1.5rem;
+  line-height: 4.5rem;
 `
 
 const LinkListItem = styled.li`

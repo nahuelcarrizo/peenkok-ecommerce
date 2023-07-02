@@ -56,7 +56,13 @@ const Suscribe = ({ suscribe }: any) => {
   return (
     <SuscribeContainer>
       <FormContainer id="nahuelc">
-        <StyledImage asset={image.asset} image={image} alt="suscribe-image" />
+        <StyledImage
+          asset={image.asset}
+          image={image}
+          alt="suscribe-image"
+          width={1210}
+          height={700}
+        />
         <StyledText>
           Sección
           <br /> suscribe

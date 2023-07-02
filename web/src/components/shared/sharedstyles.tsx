@@ -8,8 +8,8 @@ const Container = styled.div`
     flex-col
     relative
     w-full
-    [height: 120vh]
-    overflow-hidden
+    h-full
+
   `};
 `
 const Main = styled.main`
@@ -29,7 +29,7 @@ const Title = styled.h1`
   text-decoration: none;
 
   a {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
     &:hover,
     :focus,

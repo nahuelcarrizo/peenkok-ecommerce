@@ -24,11 +24,10 @@ export const sanityWriteClient = createClient({
 
 export const builder = imageUrlBuilder(sanity)
 
-export const getDefaultImage = (image: any) =>
-  builder.image(image).auto('format')
+export const getImageMetadata = (asset: SanityImageSourceAsset) =>
+  asset ? getImageAsset(asset).metadata : null
 
 export const getImagePlaceholder = (asset: SanityImageSourceAsset) =>
   asset ? getImageAsset(asset).metadata.lqip : ''
 
-export const getImageMetadata = (asset: SanityImageSourceAsset) =>
-  asset ? getImageAsset(asset).metadata : null
+export const getDefaultImage = image => builder.image(image)

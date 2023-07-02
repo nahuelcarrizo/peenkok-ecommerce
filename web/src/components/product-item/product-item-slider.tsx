@@ -1,7 +1,3 @@
-import 'react-horizontal-scrolling-menu/dist/styles.css'
-
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu'
-
 import { Container } from '../shared/sharedstyles'
 import Link from 'next/link'
 import React from 'react'
@@ -77,11 +73,11 @@ function ProductItemSlider(props) {
 
   return (
     <ScrollContainer>
-      <ScrollMenu transitionBehavior="smooth">
+      <div>
         <ul style={{ display: 'flex', flexDirection: 'row' }}>
           {commonContent}
         </ul>
-      </ScrollMenu>
+      </div>
     </ScrollContainer>
   )
 }
@@ -93,7 +89,7 @@ const ImageLink = styled.a`
     `};
   height: 100%;
   width: 100vw;
-  border: 1px solid black;
+  border: 1px solid #191919;
 `
 const StyledImg = styled(RemoteFixedSizeImage)`
   ${tw`
@@ -104,11 +100,16 @@ const StyledImg = styled(RemoteFixedSizeImage)`
 `
 
 function Card({ onClick, selected, title, itemId, imageUrl, asset, image }) {
-  const visibility = React.useContext(VisibilityContext)
   return (
-    <ImageLink onClick={() => onClick(visibility)} tabIndex={0}>
+    <ImageLink>
       <div className="card" style={{ height: '100%' }}>
-        <StyledImg asset={asset} image={image} alt={title} />
+        <StyledImg
+          asset={asset}
+          image={image}
+          alt={title}
+          width={560}
+          height={730}
+        />
       </div>
     </ImageLink>
   )

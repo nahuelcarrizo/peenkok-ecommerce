@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import React, { Ref, forwardRef, useEffect, useRef } from 'react'
 
 import Cookies from '../shared/cookies'
 import Footer from './footer/footer'
@@ -9,25 +9,24 @@ import SEO from '../../../next-seo.config'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-// importar modelo de categoria, footer, navbar, colores
-
 const Main = styled.main`
   ${tw`
-/*         flex    
-        flex-col
-        h-full
+
         w-full
-        relative */
+      h-full
     `};
 
-  background-color: #fdfbf5;
+  background-color: #fff;
 `
 
 type LayoutProps = {
   children: ReactNode | undefined
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = forwardRef<HTMLElement, LayoutProps>(function Layout(
+  { children }: LayoutProps,
+  layoutRef,
+) {
   return (
     <>
       <NextSeo
@@ -39,11 +38,11 @@ const Layout = ({ children }: LayoutProps) => {
       <Head>
         <title>Péenkok</title>
       </Head>
-      <Main>{children}</Main>
+      <Main ref={layoutRef}>{children}</Main>
       <Cookies />
       <Footer />
     </>
   )
-}
+})
 
 export default Layout

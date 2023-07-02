@@ -1,22 +1,24 @@
 import { AiOutlineHeart, AiOutlineShopping } from 'react-icons/ai'
+import { CartContext, CartContextType } from '../../../context/index'
+import React, { forwardRef, useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import Banner from './banner'
-import { GiHamburgerMenu } from 'react-icons/gi'
 import { IconContext } from 'react-icons'
 import { IoBag } from 'react-icons/io5'
 import Link from 'next/link'
 import Marquee from 'react-fast-marquee'
 import { fallDown as Menu } from 'react-burger-menu'
 import { RiUser3Line } from 'react-icons/ri'
-import Scrollbar from 'smooth-scrollbar'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import UseAnimations from 'react-useanimations'
 import { device } from '../../../config/device'
+import { gsap } from 'gsap/dist/gsap'
 import menu2 from 'react-useanimations/lib/menu2'
 import styles from './menuStyles'
 import tw from 'twin.macro'
-import { useInView } from 'react-intersection-observer'
+import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 import { useMediaQuery } from 'react-responsive'
 
 interface NavbarContainerProps {
@@ -31,18 +33,13 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
     justify-center
     items-center
     z-10
-/*    fixed  */
-absolute
+    absolute
     w-full
   `};
 
-  z-index: 2000;
+  z-index: 9;
   @media ${device.movilXL} {
-    background-color: ${({ isMenuOpen, isScrolling }) =>
-      isMenuOpen || isScrolling ? 'white' : 'transparent'};
-    transition: background-color 0s ease
-      ${({ isMenuOpen, isScrolling }) =>
-        isMenuOpen || isScrolling ? '0s' : !isMenuOpen ? '.5s' : '1s'};
+    background-color: transparent;
   }
 `
 
@@ -61,11 +58,9 @@ const StyledList = styled.ul<StyledProps>`
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  margin: 0;
   padding: 0;
   position: fixed;
   align-self: center;
-  color: black;
   &:after {
     content: '';
     position: absolute;
@@ -88,13 +83,8 @@ const Nav = styled.nav<NavProps>`
       items-start
       w-full
       h-full
-      [font-size: 6vw]
+    /*   [font-size: 6vw] */
   `}
-  /*   @media ${device.portatilL} {
-    margin-top: 0.2vw;
-  } */
-/*   margin-top: 0.4vw; */
-/*   top: 0.3vw; */
   position: relative;
   color: ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
   transition: color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
@@ -109,30 +99,24 @@ const TopRow = styled.div<TopRowProps>`
         justify-center
         items-center
     `};
-  /*   border-bottom: 2px solid
-    ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
-  transition: border-color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
-    ${({ isMenuOpen }) => (isMenuOpen ? '0s' : '0.4s')}; */
-  /*   padding: 0.5vw 0; */
 `
 
 const BottomRow = styled.div`
   ${tw`
         inline-flex
         justify-center
-        w-full
+       w-full
         relative
-        h-full
         place-items-center
     `};
-  z-index: 2000;
-  /*   margin-top: 0.3vw; */
-  @media ${device.portatilL} {
-    height: 6vh;
+  z-index: 9;
+  top: 1.2rem;
+  /*   @media ${device.portatilL} {
+    height: 4.5vh;
   }
   @media ${device.portatil} {
-    height: 3.5vw;
-  }
+    height: 5vh;
+  } */
   width: 92vw;
 `
 
@@ -165,38 +149,30 @@ const options = {
 const StyledLi = styled.li`
   font-family: 'Circular Std Medium';
   letter-spacing: -0.2px;
-  @media ${device.portatilL} {
-    font-size: 1.1vw;
-  }
-  font-size: 1.2vw;
-  ${tw`text-xl`}
+  font-size: 1.1rem;
+
   margin: 0;
   list-style: none;
   text-align: center;
-  transition: color 0.4s cubic-bezier(0.16, 1.08, 0.38, 0.98);
-  height: 1.8vw;
+  height: 1.7rem;
   overflow: hidden;
-  /*   @media ${device.portatilL} {
-    height: 4.3vh;
-  }
-  height: 2.3vw; */
   display: flex;
   align-items: center;
 `
 interface StyledLinkProps {
-  navBackground: boolean
+  isAfterPosition: boolean
 }
 
 const StyledLink = styled(Link)<StyledLinkProps>`
   ${tw`
   px-2
-  h-full
   w-full
+  h-full
 `};
 
-  display: inline;
+  display: inline-flex;
   align-items: center;
-  color: ${({ navBackground }) => (navBackground ? 'black' : '#F36600')};
+  color: ${({ isAfterPosition }) => (isAfterPosition ? 'black' : '#F36600')};
   overflow: hidden;
   position: relative;
   transition: color 0.4s cubic-bezier(0.16, 1.08, 0.38, 0.98);
@@ -212,19 +188,19 @@ const StyledLink = styled(Link)<StyledLinkProps>`
     position: absolute;
     bottom: 0;
     right: 100%;
-    height: 97%;
+    height: 95%;
     width: 100%;
     background-color: black;
     z-index: -1;
     transition: transform 0.4s cubic-bezier(0.16, 1.08, 0.38, 0.98) 0s;
   }
 `
-const CartIcon = styled.div`
+const CartIcon = styled.button`
   position: relative;
   border-radius: 50%;
   background-color: #f36600;
-  height: 2.3vw;
-  width: 2.3vw;
+  height: 1.9vw;
+  width: 1.9vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,8 +210,8 @@ const UserIcon = styled(Link)`
   position: relative;
   border-radius: 50%;
   background-color: #f36600;
-  height: 2.3vw;
-  width: 2.3vw;
+  height: 1.9vw;
+  width: 1.9vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -244,7 +220,8 @@ const UserIcon = styled(Link)`
 const StyledIcons = styled.div`
   display: flex;
   flex-direction: row;
-  position: relative;
+  position: absolute;
+  right: 0;
   height: auto;
   gap: 6px;
   background-color: transparent;
@@ -260,21 +237,29 @@ const CartCounter = styled.span`
   top: 16%;
   left: 58%;
 `
-
-const Navbar = ({ navbarItems, offset, navBackground }) => {
+interface NavbarProps {
+  navbarItems: { _key: string; title: string; link: string }[];
+}
+const Navbar = forwardRef<HTMLDivElement, NavbarProps>(function NavBar({ navbarItems }: any, ref) {
   const items = navbarItems.navbarItems
-  const scrollbarRef = useRef(null)
   const [isScrolling, setIsScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [open, setOpen] = useState(false)
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
   const [isAfterPosition, setAfterPosition] = useState(false)
+  const listRef = useRef<HTMLUListElement | null>(null)
+  const TopRowRef = useRef<HTMLDivElement | null>(null)
+  const logoRef = useRef<HTMLDivElement | null>(null)
 
+  const { toggleMenu, setToggleMenu } = useContext<CartContextType>(CartContext)
+  const StyledIconsRef = useRef<HTMLDivElement | null>(null);
   const renderNavbarItems = () => {
     return items.map(el => (
       <StyledLi key={el._key}>
-        <StyledLink navBackground={navBackground} passHref href={el.link}>
-          {el.title}
+        <StyledLink isAfterPosition={isAfterPosition} passHref href={el.link}>
+          <p style={{ marginBottom: '-3px', position: 'relative' }}>
+            {el.title}
+          </p>
         </StyledLink>
       </StyledLi>
     ))
@@ -285,25 +270,30 @@ const Navbar = ({ navbarItems, offset, navBackground }) => {
     setOpen(prevOpen => !prevOpen)
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
-  useEffect(() => {
-    console.log(navBackground)
-    if (navBackground) {
-      setAfterPosition(true)
-    } else {
-      setAfterPosition(false)
-    }
-  }, [navBackground])
 
-  ///////////scroll
-  useEffect(() => {
-    offset > 10 ? setIsScrolling(true) : setIsScrolling(false)
-  }, [offset])
+  useIsomorphicLayoutEffect(() => {
+
+    logoRef.current = document.querySelector('#LogoContainer')
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: listRef.current!,
+        start: 'top top',
+        end: 99999,
+        onToggle: self =>
+          self.isActive ? setAfterPosition(true) : setAfterPosition(false),
+      })
+    })
+    return () => ctx.revert()
+  }, [])
+
   return (
     <>
       <NavbarContainer isMenuOpen={isMenuOpen} isScrolling={isScrolling}>
         <TopRow
           style={{ maxWidth: '100vw' }}
           isMenuOpen={isMenuOpen || isScrolling}
+          ref={TopRowRef}
         >
           <Marquee
             autoFill={true}
@@ -311,28 +301,32 @@ const Navbar = ({ navbarItems, offset, navBackground }) => {
             style={{
               height: '3.5vh',
               zIndex: '3000 !important',
+              overflowY: 'hidden',
             }}
           >
-            <Banner isMenuOpen={isMenuOpen || isScrolling} />
+            <Banner />
           </Marquee>
         </TopRow>
-        <BottomRow>
+        <BottomRow ref={ref}>
           {isLargeDevice && (
             <Nav isMenuOpen={isMenuOpen || isScrolling}>
-              <StyledList isAfterPosition={isAfterPosition}>
+              <StyledList
+                isAfterPosition={isAfterPosition}
+                ref={listRef}
+                id="list"
+              >
                 {renderNavbarItems()}
               </StyledList>
             </Nav>
           )}
           <IconContext.Provider
             value={{
-              size: '1.1vw',
+              size: '0.9vw',
             }}
           >
-            <StyledIcons>
-              <CartIcon>
+            <StyledIcons ref={StyledIconsRef}>
+              <CartIcon onClick={() => setToggleMenu(prev => !prev)}>
                 <IoBag />
-                {/*           <CartCounter>0</CartCounter> */}
               </CartIcon>
               <UserIcon href="/">
                 <RiUser3Line />
@@ -357,6 +351,6 @@ const Navbar = ({ navbarItems, offset, navBackground }) => {
       </Menu>
     </>
   )
-}
+})
 
 export default Navbar
