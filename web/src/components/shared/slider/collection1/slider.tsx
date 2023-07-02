@@ -26,7 +26,7 @@ const Container = styled.div`
   height: 100%;
   z-index: 2;
 `
-function Slider({ latestIncomes }) {
+function Slider({ latestIncomes }: any) {
   const [items, setItems] = React.useState([])
   const arrayRef = useRef([null])
 

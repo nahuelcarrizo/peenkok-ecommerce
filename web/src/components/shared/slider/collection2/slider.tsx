@@ -20,7 +20,7 @@ relative
   overscroll-behavior: none;
   z-index: 2;
 `
-function Slider({ collection }) {
+function Slider({ collection }: any) {
   const [items, setItems] = React.useState([])
   const arrayRef = useRef([null])
 
