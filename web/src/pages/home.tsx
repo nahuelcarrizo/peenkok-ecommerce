@@ -203,11 +203,11 @@ export default function Home({
         <div id="smooth-content" ref={contentRef} style={{ width: '100vw' }}>
           <Hero image={image} ref={HeroRef} />
           <Layout ref={layoutRef}>
-            <Collection1 latestIncomes={latestIncomes} />
+            <Slider1 latestIncomes={latestIncomes} />
             <About about={about} />
             <Suscribe suscribe={suscribe} />
-            <Collection2 collection={collection} />
-            <Collection3 collection={collection} />
+            <Slider2 collection={collection} />
+            <Slider3 collection={collection} />
             <Stories heroVideo={heroVideo} />
             <Hashtag />
           </Layout>
