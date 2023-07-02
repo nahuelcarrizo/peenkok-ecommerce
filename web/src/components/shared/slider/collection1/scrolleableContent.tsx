@@ -129,7 +129,7 @@ function ScrolleableContent({ items }) {
       })
       ScrollTrigger.create({
         trigger: '.collection1-slider',
-        start: 'top+=10% top-=2%',
+        start: 'top top',
         pin: true,
         scrub: true,
 
