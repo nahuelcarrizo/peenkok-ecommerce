@@ -1,4 +1,4 @@
-/* import { Container } from '../../components/shared/sharedstyles'
+import { Container } from '../../components/shared/sharedstyles'
 import Layout from '../../components/shared/layout'
 import Navbar from '../../components/shared/navbar/navbar'
 import { NextPageContext } from 'next'
@@ -9,15 +9,15 @@ import { sanity } from '../../../lib/sanity'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-const ProductItem = ({ product, navbarItems, productId }) => {
+const ProductItem = (/* { product, navbarItems, productId } */) => {
   return (
     <>
-      <Container>
+      {/*       <Container>
         <Navbar navbarItems={navbarItems} />
         <Layout>
           <ProductItemDisplay product={product} />
         </Layout>
-      </Container>
+      </Container> */}
     </>
   )
 }
@@ -54,4 +54,3 @@ export const getServerSideProps = async (context: NextPageContext) => {
     },
   }
 }
- */
