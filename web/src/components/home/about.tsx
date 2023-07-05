@@ -134,9 +134,6 @@ const About = ({ about }: any) => {
             pinType: 'transform',
 
             toggleActions: 'play none reverse none',
-            onEnter: () => {
-              console.log('enter')
-            },
           },
         })
 
@@ -150,26 +147,28 @@ const About = ({ about }: any) => {
     return () => ctx.revert()
   }, [])
   return (
-    <StyledContainer ref={mainContainerRef} className="about-container">
-      <Container ref={ContainerRef} className="about-content">
-        <LeftPanel className="left-panel">
-          <LeftText className="left-text">Sustentabilidad</LeftText>
-          <LeftText className="left-text">Diseño</LeftText>
-          <LeftText className="left-text">Innovación</LeftText>
-        </LeftPanel>
-        <RightPanel className="right-panel">
-          <RightText className="right-text">
-            <Sustentabilidad />
-          </RightText>
-          <RightText className="right-text">
-            <Diseño />
-          </RightText>
-          <RightText className="right-text">
-            <Innovación />
-          </RightText>
-        </RightPanel>
-      </Container>
-    </StyledContainer>
+    <div>
+      <StyledContainer ref={mainContainerRef} className="about-container">
+        <Container ref={ContainerRef} className="about-content">
+          <LeftPanel className="left-panel">
+            <LeftText className="left-text">Sustentabilidad</LeftText>
+            <LeftText className="left-text">Diseño</LeftText>
+            <LeftText className="left-text">Innovación</LeftText>
+          </LeftPanel>
+          <RightPanel className="right-panel">
+            <RightText className="right-text">
+              <Sustentabilidad />
+            </RightText>
+            <RightText className="right-text">
+              <Diseño />
+            </RightText>
+            <RightText className="right-text">
+              <Innovación />
+            </RightText>
+          </RightPanel>
+        </Container>
+      </StyledContainer>
+    </div>
   )
 }
 

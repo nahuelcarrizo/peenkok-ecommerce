@@ -68,12 +68,12 @@ function Slider2({ collection }: SliderProps) {
   }, [collection])
 
   return (
-    <>
+    <div>
       <SectionHeader title={title} />
       <Container className="collection2-slider">
         <ScrolleableContent items={items} />
       </Container>
-    </>
+    </div>
   )
 }
 

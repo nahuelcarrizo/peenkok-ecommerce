@@ -1,28 +1,132 @@
-import tw, { styled } from 'twin.macro'
+import { Slider1, Slider2, Slider3 } from '../components/shared/slider'
 
-import { FaTools } from 'react-icons/fa'
+import About from '../components/home/about'
+import Hashtag from '../components/home/hashtag'
+import Hero from '../components/home/hero'
 import React from 'react'
+import Stories from '../components/home/stories'
+import Suscribe from '../components/shared/suscribe'
+import { sanity } from '../../lib/sanity'
 
-// Estilos usando twin.macro
-const PageContainer = styled.div`
-  ${tw`h-screen flex flex-col justify-center items-center`}
-`
-
-const UnderConstructionIcon = styled(FaTools)`
-  ${tw`text-4xl mb-4`}
-`
-
-const Message = styled.p`
-  ${tw`text-xl font-semibold`}
-`
-
-const ConstruccionPage = () => {
+const Home = ({
+  homeSettings: {
+    heroVideo,
+    heroImages: image,
+    latestIncomes,
+    collection,
+    about,
+    suscribe,
+  },
+}: {
+  homeSettings: any
+}) => {
   return (
-    <PageContainer>
-      <UnderConstructionIcon />
-      <Message>¡Sitio web en construcción!</Message>
-    </PageContainer>
+    <>
+      <Hero image={image} />
+      <Slider1 latestIncomes={latestIncomes} />
+      {/* <About about={about} /> */}
+      <Suscribe suscribe={suscribe} />
+      <Slider2 collection={collection} />
+      {/*   <Slider3 collection={collection} /> */}
+      <Stories heroVideo={heroVideo} />
+      <Hashtag />
+    </>
   )
 }
 
-export default ConstruccionPage
+export default Home
+
+export const getServerSideProps = async () => {
+  const homeSettings = await sanity.fetch(`
+    *[_type == "homeSettings"][0]{
+      homePageTitle,
+      heroVideo {
+        "asset": asset-> {
+          url,
+          metadata
+        }
+      },
+      heroImages[]{
+        "image": {
+          ...,
+        },
+        "asset": asset -> {
+          url, 
+          metadata
+        }
+      },
+      latestIncomes {
+        latestIncomesText,
+        latestIncomesMedia[]{
+          "image": {
+            ...,
+          },
+          "asset": asset -> {
+            url, 
+            metadata
+          }
+        }
+      },
+      storiesVideo {
+        "asset": asset -> {
+          url, 
+          metadata
+        }
+      },
+      collection {
+        collections1 {
+          collection1Text,
+          collection1Media[]{
+            "image": {
+              ...,
+            },
+            "asset": asset -> {
+              url, 
+              metadata
+            }
+          }
+        },
+        collections2 {
+          collection2Text,
+          collection2Media[]{
+            "image": {
+              ...,
+            },
+            "asset": asset -> {
+              url, 
+              metadata
+            }
+          }
+        }
+      },
+      about {
+        text,
+        video {
+          ...,
+          "asset": asset -> {
+            url, 
+            metadata
+          }
+        }
+      },
+      suscribe {
+        text,
+        image {
+          ...,
+          "asset": asset -> {
+            url, 
+            metadata
+          }
+        },
+      }
+    }
+  `)
+
+  const [homeSettingsResult] = await Promise.all([homeSettings])
+
+  return {
+    props: {
+      homeSettings: homeSettingsResult,
+    },
+  }
+}

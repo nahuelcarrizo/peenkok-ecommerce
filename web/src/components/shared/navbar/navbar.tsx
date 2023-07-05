@@ -8,8 +8,10 @@ import Banner from './banner'
 import { IconContext } from 'react-icons'
 import { IoBag } from 'react-icons/io5'
 import Link from 'next/link'
+import Logo from './logoeditado'
 import Marquee from 'react-fast-marquee'
 import { fallDown as Menu } from 'react-burger-menu'
+import PageTransition from '../transitions/pageTransition'
 import { RiUser3Line } from 'react-icons/ri'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import UseAnimations from 'react-useanimations'
@@ -20,6 +22,7 @@ import styles from './menuStyles'
 import tw from 'twin.macro'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 import { useMediaQuery } from 'react-responsive'
+import { useRouter } from 'next/router'
 
 interface NavbarContainerProps {
   isMenuOpen: boolean
@@ -33,11 +36,10 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
     justify-center
     items-center
     z-10
-    absolute
+    fixed
     w-full
   `};
 
-  z-index: 9;
   @media ${device.movilXL} {
     background-color: transparent;
   }
@@ -85,6 +87,7 @@ const Nav = styled.nav<NavProps>`
       h-full
     /*   [font-size: 6vw] */
   `}
+  /*   z-index: 15; */
   position: relative;
   color: ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
   transition: color 0.3s cubic-bezier(0.26, 1.04, 0.54, 1)
@@ -106,18 +109,18 @@ const BottomRow = styled.div`
         inline-flex
         justify-center
        w-full
-        relative
         place-items-center
+        absolute
     `};
-  z-index: 9;
-  top: 1.2rem;
+  top: 1.6rem;
   /*   @media ${device.portatilL} {
     height: 4.5vh;
   }
   @media ${device.portatil} {
     height: 5vh;
   } */
-  width: 92vw;
+  width: 100vw;
+  padding: 0 1.6rem;
 `
 
 const StyledSpan = styled.span`
@@ -139,7 +142,7 @@ const Border = styled.div<BorderProps>`
   border-bottom: 2px solid
     ${({ isMenuOpen }) => (isMenuOpen ? 'black' : '#F36600')};
   transition: border-bottom 1s ease;
-  z-index: 2000;
+  /*   z-index: 2000; */
 `
 const options = {
   damping: 0.04,
@@ -169,7 +172,7 @@ const StyledLink = styled(Link)<StyledLinkProps>`
   w-full
   h-full
 `};
-
+  margin-bottom: -3px;
   display: inline-flex;
   align-items: center;
   color: ${({ isAfterPosition }) => (isAfterPosition ? 'black' : '#F36600')};
@@ -188,7 +191,7 @@ const StyledLink = styled(Link)<StyledLinkProps>`
     position: absolute;
     bottom: 0;
     right: 100%;
-    height: 95%;
+    height: 99%;
     width: 100%;
     background-color: black;
     z-index: -1;
@@ -206,7 +209,7 @@ const CartIcon = styled.button`
   justify-content: center;
 `
 
-const UserIcon = styled(Link)`
+const UserIcon = styled.div`
   position: relative;
   border-radius: 50%;
   background-color: #f36600;
@@ -220,8 +223,8 @@ const UserIcon = styled(Link)`
 const StyledIcons = styled.div`
   display: flex;
   flex-direction: row;
-  position: absolute;
-  right: 0;
+  position: relative;
+  /*   z-index: 10; */
   height: auto;
   gap: 6px;
   background-color: transparent;
@@ -237,11 +240,33 @@ const CartCounter = styled.span`
   top: 16%;
   left: 58%;
 `
+const MainLogo = styled.div`
+  /* width: 100vw;
+  height: 23vw;
+  top: 2.7vw; */
+  align-items: center;
+  display: flex;
+  /*   position: absolute; */
+  align-items: center;
+  justify-content: center;
+  /* z-index: 7; */
+  height: 6vh;
+  width: 11vw;
+  /*   transition: transform 0.7s cubic-bezier(0.16, 1.08, 0.38, 0.98); */
+  will-change: transform;
+  /*   transform-origin: left top; */
+`
+
+const FixedLogo = styled(Logo)`
+  /*  height: 30px; */
+  /*   position: fixed; */
+`
+
 interface NavbarProps {
-  navbarItems: { _key: string; title: string; link: string }[];
+  navbarItems: { _key: string; title: string; link: string }[]
 }
-const Navbar = forwardRef<HTMLDivElement, NavbarProps>(function NavBar({ navbarItems }: any, ref) {
-  const items = navbarItems.navbarItems
+
+const Navbar = () => {
   const [isScrolling, setIsScrolling] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [open, setOpen] = useState(false)
@@ -252,14 +277,21 @@ const Navbar = forwardRef<HTMLDivElement, NavbarProps>(function NavBar({ navbarI
   const logoRef = useRef<HTMLDivElement | null>(null)
 
   const { toggleMenu, setToggleMenu } = useContext<CartContextType>(CartContext)
-  const StyledIconsRef = useRef<HTMLDivElement | null>(null);
+  const StyledIconsRef = useRef<HTMLDivElement | null>(null)
+
+  const items = [
+    { _key: '1', title: 'SHOP', link: '/onprogress' },
+    { _key: '2', title: 'STORIES', link: '/onprogress' },
+    { _key: '3', title: 'ACTIVISM', link: '/onprogress' },
+    { _key: '4', title: 'LOYALTY', link: '/onprogress' },
+    { _key: '5', title: 'ABOUT US', link: '/onprogress' },
+  ]
   const renderNavbarItems = () => {
+    console.log(items)
     return items.map(el => (
       <StyledLi key={el._key}>
-        <StyledLink isAfterPosition={isAfterPosition} passHref href={el.link}>
-          <p style={{ marginBottom: '-3px', position: 'relative' }}>
-            {el.title}
-          </p>
+        <StyledLink isAfterPosition={isAfterPosition} href={el.link}>
+          {el.title}
         </StyledLink>
       </StyledLi>
     ))
@@ -271,18 +303,65 @@ const Navbar = forwardRef<HTMLDivElement, NavbarProps>(function NavBar({ navbarI
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
 
-  useIsomorphicLayoutEffect(() => {
-
-    logoRef.current = document.querySelector('#LogoContainer')
-
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: listRef.current!,
+  function middle(target, heroImage) {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        scrub: 1,
         start: 'top top',
-        end: 99999,
-        onToggle: self =>
-          self.isActive ? setAfterPosition(true) : setAfterPosition(false),
-      })
+        end: 200,
+        trigger: target,
+        toggleActions: 'play none reverse none',
+      },
+      ease: 'power4.easeInOut',
+    })
+
+    tl.to(target, {
+      scale: 0.975,
+    })
+    tl.to(
+      heroImage,
+      {
+        scale: 1.07,
+        /*         delay: 0.5, */
+      },
+      '<',
+    )
+    return tl
+  }
+
+  function intro(heroRef) {
+    const tl = gsap.timeline()
+    tl.from(logoRef.current, {
+      scale: 10,
+      xPercent: 480,
+      yPercent: 480,
+      ease: 'power4.easeInOut',
+    })
+
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      pin: heroRef,
+      pinType: 'transform',
+      end: () => window.innerHeight,
+      scrub: 1,
+      toggleActions: 'play none reverse none',
+      animation: tl,
+      onLeave: () => setAfterPosition(true),
+      onEnterBack: () => setAfterPosition(false),
+    })
+
+    return tl
+  }
+
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const heroRef = document.querySelector('#hero-container')
+      const heroImg = document.querySelector('.hero-image')
+
+      const master = gsap.timeline()
+      master.add(intro(heroRef))
+      master.add(middle(heroRef, heroImg))
     })
     return () => ctx.revert()
   }, [])
@@ -307,18 +386,19 @@ const Navbar = forwardRef<HTMLDivElement, NavbarProps>(function NavBar({ navbarI
             <Banner />
           </Marquee>
         </TopRow>
-        <BottomRow ref={ref}>
-          {isLargeDevice && (
-            <Nav isMenuOpen={isMenuOpen || isScrolling}>
-              <StyledList
-                isAfterPosition={isAfterPosition}
-                ref={listRef}
-                id="list"
-              >
-                {renderNavbarItems()}
-              </StyledList>
-            </Nav>
-          )}
+        <BottomRow>
+          <MainLogo id="LogoContainer" ref={logoRef}>
+            <FixedLogo />
+          </MainLogo>
+          <Nav isMenuOpen={isMenuOpen || isScrolling}>
+            <StyledList
+              isAfterPosition={isAfterPosition}
+              ref={listRef}
+              id="list"
+            >
+              {renderNavbarItems()}
+            </StyledList>
+          </Nav>
           <IconContext.Provider
             value={{
               size: '0.9vw',
@@ -328,7 +408,7 @@ const Navbar = forwardRef<HTMLDivElement, NavbarProps>(function NavBar({ navbarI
               <CartIcon onClick={() => setToggleMenu(prev => !prev)}>
                 <IoBag />
               </CartIcon>
-              <UserIcon href="/">
+              <UserIcon>
                 <RiUser3Line />
               </UserIcon>
             </StyledIcons>
@@ -344,13 +424,13 @@ const Navbar = forwardRef<HTMLDivElement, NavbarProps>(function NavBar({ navbarI
             />
           )}
         </BottomRow>
-        {!isLargeDevice && <Border isMenuOpen={isMenuOpen || isScrolling} />}
+        {/*       {!isLargeDevice && <Border isMenuOpen={isMenuOpen || isScrolling} />} */}
       </NavbarContainer>
       <Menu noOverlay fallDown isOpen={open} styles={styles}>
         <ul id="list">{renderNavbarItems()}</ul>
       </Menu>
     </>
   )
-})
+}
 
 export default Navbar

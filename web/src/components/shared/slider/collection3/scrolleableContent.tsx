@@ -95,13 +95,7 @@ const Strip = styled.div`
   flex-col
     `}
 `
-const Content = styled.div`
-  height: 100vh;
-  width: 6ch;
-  display: flex;
-  flex-direction: row;
-  overscroll-behavior: none;
-`
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -135,7 +129,7 @@ function ScrolleableContent({ items }) {
       })
       ScrollTrigger.create({
         trigger: '.collection3-slider',
-        start: 'top+=27% top-=5.5%',
+        start: 'top top',
         pin: true,
         anticipatePin: 1,
         scrub: true,

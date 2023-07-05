@@ -19,7 +19,8 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 10;
+  background-color: white;
 `
 interface ScrolleableContentProps {
   id: string
@@ -59,14 +60,14 @@ function Slider1({ latestIncomes }: SliderProps) {
   }, [latestIncomes])
 
   return (
-    <>
+    <div>
       <Container>
         <SectionHeader title={title} />
         <Gallery className="collection1-slider">
           <ScrolleableContent items={items} />
         </Gallery>
       </Container>
-    </>
+    </div>
   )
 }
 

@@ -13,7 +13,6 @@ const remoteFixed = ({
   width = 1000,
 }: RemoteImageProps) => {
   const metadata = getImageMetadata(asset)
-  /*   console.log(met) */
 
   return (
     <LazyLoadImage

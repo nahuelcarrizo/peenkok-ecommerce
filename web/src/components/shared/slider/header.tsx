@@ -6,51 +6,53 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { gsap } from 'gsap/dist/gsap'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 
-const LetterWrapper = tw.div`flex`
+const LetterWrapper = styled.div`
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  ${tw`font-bold relative`};
+  font-size: 18vw;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  color: rgb(25, 25, 25);
+  -webkit-font-smoothing: antialiased;
+  left: 0.3vw;
+  height: 44vh;
+`
 
 gsap.registerPlugin(ScrollTrigger)
-const StyledLink = styled(Link)`
+const StyledLink = styled.div`
   ${tw`relative flex justify-start w-full`}
   overflow: hidden;
   display: flex;
   align-items: center;
   margin-top: -4%;
-  margin-bottom: -1%;
-  z-index: 1;
-`
-const StyledH1 = styled.h1`
-  ${tw`font-bold relative`};
-  font-size: 16vw;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 500;
-  color: rgb(25, 25, 25);
-  -webkit-font-smoothing: antialiased;
-  left: 2.75vw;
 `
 
 const Letter = styled.div`
   margin-right: -0.6vw;
+  z-index: 1;
 `
 
 const SectionHeader = ({ title }) => {
-  const ContainerRef = useRef<HTMLAnchorElement>(null)
+  const linkRef = useRef<HTMLAnchorElement>(null)
 
   useIsomorphicLayoutEffect(() => {
-    if (!ContainerRef.current) return
+    /*   if (!ContainerRef.current) return */
     const ctx = gsap.context(() => {
       const array = gsap.utils.toArray<HTMLDivElement>(
         '.header-letter',
-        ContainerRef.current,
+        linkRef.current,
       )
 
       const tl = gsap.timeline()
       ScrollTrigger.create({
-        trigger: ContainerRef.current,
+        trigger: linkRef.current,
         start: 'top+=20% bottom',
 
         animation: tl,
       })
-      console.log('array: ' + array)
+
       array.forEach((el: HTMLElement, index: number) => {
         tl.from(
           el,
@@ -71,16 +73,14 @@ const SectionHeader = ({ title }) => {
   }, [title])
 
   return (
-    <StyledLink href="/" passHref ref={ContainerRef}>
-      <StyledH1>
-        <LetterWrapper>
-          {title.split('').map((letter, index) => (
-            <Letter key={index} className="header-letter">
-              {letter.toUpperCase()}
-            </Letter>
-          ))}
-        </LetterWrapper>
-      </StyledH1>
+    <StyledLink ref={linkRef}>
+      <LetterWrapper>
+        {title.split('').map((letter, index) => (
+          <Letter key={index} className="header-letter">
+            {letter.toUpperCase()}
+          </Letter>
+        ))}
+      </LetterWrapper>
     </StyledLink>
   )
 }

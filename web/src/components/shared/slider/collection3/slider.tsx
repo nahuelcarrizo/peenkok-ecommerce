@@ -18,6 +18,7 @@ relative
     `}
   overscroll-behavior: none;
   z-index: 2;
+  background-color: white;
 `
 interface ScrolleableContentProps {
   id: string
@@ -67,12 +68,12 @@ function Slider3({ collection }: SliderProps) {
   }, [collection])
 
   return (
-    <>
+    <div>
       <SectionHeader title={title} />
       <Container className="collection3-slider">
         <ScrolleableContent items={items} />
       </Container>
-    </>
+    </div>
   )
 }
 

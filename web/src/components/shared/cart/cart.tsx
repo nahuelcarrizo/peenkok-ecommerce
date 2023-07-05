@@ -12,17 +12,17 @@ const Container = styled.div`
   height: 100vh;
   overflow: hidden;
   width: 50%;
-  position: fixed;
+  position: absolute;
   top: 0;
-  right: 0;
   background-color: white;
   overflow: hidden;
   right: 0;
-  z-index: 2000;
+  z-index: 200;
   will-change: transform;
   border: 1px solid black;
 `
 const Content = styled.div`
+  z-index: 100;
   width: 100%;
   height: 100%;
   display: flex;
@@ -95,7 +95,6 @@ const Cart: React.FC = () => {
   }, [])
 
   useIsomorphicLayoutEffect(() => {
-    console.log(toggleMenu)
     toggleMenu ? timeline.current?.play() : timeline.current?.reverse()
   }, [toggleMenu])
 

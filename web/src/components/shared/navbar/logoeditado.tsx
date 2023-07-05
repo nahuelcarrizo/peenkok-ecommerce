@@ -5,34 +5,40 @@ import Link from 'next/link'
 import { device } from '../../../config/device'
 import tw from 'twin.macro'
 import { useMediaQuery } from 'react-responsive'
+import { useRouter } from 'next/router'
 
 const StyledLogo = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  /*   z-index: 1; */
 `
 const LogoContainer = styled(Link)`
   ${tw`
     flex
     h-full
-
+    w-full
   `};
-  z-index: 5;
-  width: 93vw;
+
+  /*   width: 93vw; */
 `
 
 const LogoNaranja2 = () => {
   const [fill, setFill] = useState('#F36600')
   const [isOpen, setIsOpen] = useState('false')
-
+  const router = useRouter()
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
+  const handleClick = () => {
+    router.push('/home')
+  }
 
   return (
-    <LogoContainer id="parallax" href="/" passHref>
+    <LogoContainer id="parallax" href={'/home'}>
       <StyledLogo>
         <svg
           viewBox="-165.191 192.119 724 50"
           xmlns="http://www.w3.org/2000/svg"
+          /*  style={{ height: '100%' }} */
         >
           <g
             id="Capa_1-2"

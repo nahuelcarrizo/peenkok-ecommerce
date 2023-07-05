@@ -96,10 +96,7 @@ const Cookies = () => {
           <p>
             We use cookies to improve your experience. By using this website you
             agree to our{' '}
-            <a style={{ textDecoration: 'underline' }} href="/">
-              Cookie Policy
-            </a>
-            .
+            <a style={{ textDecoration: 'underline' }}>Cookie Policy</a>.
           </p>
         </CookiesText>
         <CookiesBtns>

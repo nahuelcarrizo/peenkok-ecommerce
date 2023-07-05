@@ -45,7 +45,7 @@ const ShopNowMarquee = styled.div`
   left: 8.4vw;
   transform: translateX(-50%);
   background-color: #f36600;
-  z-index: 2;
+
   font-family: 'Circular Std Black';
   font-size: 1.4rem;
   font-weight: 900;
@@ -63,8 +63,8 @@ const Hero = forwardRef(function Hero(
   ref: Ref<HTMLDivElement>,
 ) {
   return (
-    <>
-      <StyledContainer ref={ref}>
+    <div>
+      <StyledContainer ref={ref} id="hero-container">
         <ImgContainer>
           <StyledImg
             image={image[0].image}
@@ -73,7 +73,6 @@ const Hero = forwardRef(function Hero(
             height={1185}
             alt="hero image"
             className="hero-image"
-            /*         className="gs-parallax" */
           />
         </ImgContainer>
         <ShopNowMarquee>
@@ -82,7 +81,7 @@ const Hero = forwardRef(function Hero(
           </Marquee>
         </ShopNowMarquee>
       </StyledContainer>
-    </>
+    </div>
   )
 })
 

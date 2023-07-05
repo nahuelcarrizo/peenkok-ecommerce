@@ -9,14 +9,6 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 import { useIsomorphicLayoutEffect } from '../../../../hooks/isomorphicEffect'
 
-const Panel = styled.div`
-  ${tw`
-  flex
-  flex-col
-  w-full
-  h-full
-  `}
-`
 const ProdCardTitle = styled.div`
   ${tw`
       flex
@@ -46,7 +38,7 @@ const ProdCard = styled.div`
   flex-wrap: nowrap;
   will-change: transform;
   position: relative;
-  padding: 3.9vw 3.9vw 0vw 3.9vw;
+  padding: 2rem 1.2rem 0vw 1.2rem;
   border: 1px solid #191919;
   z-index: 10;
   border-left: none;
@@ -65,8 +57,8 @@ const StyledImg = styled(RemoteFixedSizeImage)`
   ${tw`
       object-cover
   `};
-  width: 27vw !important;
-  max-width: 29vw !important;
+  min-width: 27vw !important;
+  min-height: 29vh;
 `
 interface CardProps {
   title: string
@@ -90,11 +82,6 @@ function Card({ title, itemId, imageUrl, asset, image }: CardProps) {
     </ImageLink>
   )
 }
-const Strip = styled.div`
-  ${tw`
-  flex-col
-    `}
-`
 
 const Container = styled.div`
   width: 100%;
@@ -123,7 +110,7 @@ function ScrolleableContent({ items }) {
       const numSections = horizontalSections.length
 
       const tl = gsap.to(horizontalSections, {
-        xPercent: -52.4 * numSections,
+        xPercent: -42.6 * numSections,
 
         ease: 'none',
       })
@@ -148,22 +135,20 @@ function ScrolleableContent({ items }) {
       <Container ref={container} className="collection1-horizontal">
         {products.map(({ id, url, asset, image, index }) => (
           <ProdCard key={index} className="horiz-gallery-wrapper panel">
-            <Strip className="horiz-gallery-strip">
-              <Card
-                itemId={id}
-                imageUrl={url}
-                asset={asset}
-                image={image}
-                title={id}
-              />
+            <Card
+              itemId={id}
+              imageUrl={url}
+              asset={asset}
+              image={image}
+              title={id}
+            />
 
-              <ProdCardTitle>
-                <Link passHref href={'/'}>
-                  <ProductName>NSW CLUB T-SHIRT</ProductName>
-                </Link>
-                <Price>€ 10.00</Price>
-              </ProdCardTitle>
-            </Strip>
+            <ProdCardTitle>
+              <Link passHref href={'/'}>
+                <ProductName>NSW CLUB T-SHIRT</ProductName>
+              </Link>
+              <Price>€ 10.00</Price>
+            </ProdCardTitle>
           </ProdCard>
         ))}
       </Container>

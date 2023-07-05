@@ -9,14 +9,6 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 import { useIsomorphicLayoutEffect } from '../../../../hooks/isomorphicEffect'
 
-const Panel = styled.div`
-  ${tw`
-  flex
-  flex-col
-  w-full
-  h-full
-  `}
-`
 const ProdCardTitle = styled.div`
   ${tw`
       flex
@@ -90,18 +82,7 @@ function Card({ title, itemId, imageUrl, asset, image }: CardProps) {
     </ImageLink>
   )
 }
-const Strip = styled.div`
-  ${tw`
-  flex-col
-    `}
-`
-const Content = styled.div`
-  height: 100vh;
-  width: 6ch;
-  display: flex;
-  flex-direction: row;
-  overscroll-behavior: none;
-`
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -135,7 +116,7 @@ function ScrolleableContent({ items }) {
       })
       ScrollTrigger.create({
         trigger: '.collection2-slider',
-        start: 'top+=18.4% top-=3.4%',
+        start: 'top top',
         pin: true,
         scrub: true,
 
@@ -154,22 +135,20 @@ function ScrolleableContent({ items }) {
       <Container ref={container} className="collection2-horizontal">
         {products.map(({ id, url, asset, image, index }) => (
           <ProdCard key={index} className="horiz-gallery-wrapper panel">
-            <Strip className="horiz-gallery-strip">
-              <Card
-                itemId={id}
-                imageUrl={url}
-                asset={asset}
-                image={image}
-                title={id}
-              />
+            <Card
+              itemId={id}
+              imageUrl={url}
+              asset={asset}
+              image={image}
+              title={id}
+            />
 
-              <ProdCardTitle>
-                <Link passHref href={'/'}>
-                  <ProductName>NSW CLUB T-SHIRT</ProductName>
-                </Link>
-                <Price>€ 10.00</Price>
-              </ProdCardTitle>
-            </Strip>
+            <ProdCardTitle>
+              <Link passHref href={'/'}>
+                <ProductName>NSW CLUB T-SHIRT</ProductName>
+              </Link>
+              <Price>€ 10.00</Price>
+            </ProdCardTitle>
           </ProdCard>
         ))}
       </Container>

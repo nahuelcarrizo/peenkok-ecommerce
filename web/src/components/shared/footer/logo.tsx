@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-const LogoContainer = styled(Link)`
+const LogoContainer = styled.div`
   ${tw`
     flex
     items-center
@@ -24,7 +24,7 @@ const LogoSVG = styled.img`
 
 const Logo = () => {
   return (
-    <LogoContainer href="/" passHref>
+    <LogoContainer>
       <LogoSVG src="/assets/LogoPeenkok_black.svg" alt="Logo" />
     </LogoContainer>
   )

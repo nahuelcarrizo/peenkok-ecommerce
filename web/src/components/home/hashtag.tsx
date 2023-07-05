@@ -44,11 +44,13 @@ const StyledHashtag = styled.div`
 
 export default function Hashtag() {
   return (
-    <Container>
-      <StyledH2>
-        LET'S
-        <StyledHashtag>#SAVETHEPLANET</StyledHashtag>
-      </StyledH2>
-    </Container>
+    <div>
+      <Container>
+        <StyledH2>
+          LET'S
+          <StyledHashtag>#SAVETHEPLANET</StyledHashtag>
+        </StyledH2>
+      </Container>
+    </div>
   )
 }

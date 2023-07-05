@@ -10,7 +10,7 @@ const StyledContainer = styled.div`
       border-black
       relative
     `}
-  height: 500px;
+  height: 800px;
 `
 const StyledVideo = styled(RemoteResponsiveVideo)`
   ${tw`
@@ -47,16 +47,11 @@ const StyledText = styled.div`
 
 const Stories = ({ heroVideo: video }: any) => {
   return (
-    <StyledContainer>
-      <StyledVideo url={video.asset.url} alt="stories video" />
-      <StyledTextContainer>
-        <StyledText>
-          Video Seccion 'Stories'
-          <br />
-          (TEASER)
-        </StyledText>
-      </StyledTextContainer>
-    </StyledContainer>
+    <div>
+      <StyledContainer>
+        <StyledVideo url={video.asset.url} alt="stories video" />
+      </StyledContainer>
+    </div>
   )
 }
 

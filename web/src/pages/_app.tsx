@@ -1,11 +1,11 @@
 import '../config/fonts.css'
-import './boxes.css'
 
-import { CartContextType, CartProvider } from '../context'
 import React, { useRef, useState } from 'react'
 
 import type { AppProps } from 'next/app'
+import { CartProvider } from '../context'
 import GlobalStyles from '../styles/GlobalStyles'
+import Layout from '../components/shared/layout'
 import { ScrollSmoother } from 'gsap/dist/ScrollSmoother'
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -38,11 +38,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     ScrollTrigger.refresh()
     return () => ctx.revert()
   }, [])
+
   return (
     <>
       <CartProvider>
         <GlobalStyles />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </CartProvider>
     </>
   )

@@ -19,7 +19,7 @@ const StyledImage = styled(RemoteFixedSizeImage)`
       w-full
       object-cover
   `};
-  top: 50%;
+  top: 0;
 `
 const FormContainer = styled.div`
   background-color: transparent;
@@ -28,7 +28,7 @@ const FormContainer = styled.div`
   justify-content: center;
   position: relative;
 
-  height: 30vw;
+  height: 60vw;
   width: 100%;
 `
 
@@ -63,10 +63,7 @@ const Suscribe = ({ suscribe }: any) => {
           width={1210}
           height={700}
         />
-        <StyledText>
-          Sección
-          <br /> suscribe
-        </StyledText>
+        <StyledText></StyledText>
       </FormContainer>
     </SuscribeContainer>
   )
