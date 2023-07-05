@@ -306,10 +306,11 @@ const Navbar = () => {
   function middle(target, heroImage) {
     const tl = gsap.timeline({
       scrollTrigger: {
+        trigger: document.body,
         scrub: 1,
         start: 'top top',
         end: 200,
-        trigger: target,
+
         toggleActions: 'play none reverse none',
       },
       ease: 'power4.easeInOut',
