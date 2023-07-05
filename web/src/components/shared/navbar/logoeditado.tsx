@@ -28,12 +28,9 @@ const LogoNaranja2 = () => {
   const [isOpen, setIsOpen] = useState('false')
   const router = useRouter()
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
-  const handleClick = () => {
-    router.push('/home')
-  }
 
   return (
-    <LogoContainer id="parallax" href={'/home'}>
+    <LogoContainer id="parallax" href={'/'}>
       <StyledLogo>
         <svg
           viewBox="-165.191 192.119 724 50"

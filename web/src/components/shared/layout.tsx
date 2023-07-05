@@ -35,8 +35,11 @@ const Layout = ({ children }) => {
   const router = useRouter()
 
   useIsomorphicLayoutEffect(() => {
+    console.log(router.pathname)
     if (router.pathname === '/onprogress') {
-      setIsHome(prev => !prev)
+      setIsHome(false)
+    } else {
+      setIsHome(true)
     }
   }, [router])
 
