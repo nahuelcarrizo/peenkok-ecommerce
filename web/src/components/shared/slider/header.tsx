@@ -35,7 +35,7 @@ const Letter = styled.div`
 `
 
 const SectionHeader = ({ title }) => {
-  const linkRef = useRef<HTMLAnchorElement>(null)
+  const linkRef = useRef<HTMLDivElement>(null)
 
   useIsomorphicLayoutEffect(() => {
     /*   if (!ContainerRef.current) return */
