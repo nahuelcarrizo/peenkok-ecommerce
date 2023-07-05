@@ -191,7 +191,7 @@ const StyledLink = styled(Link)<StyledLinkProps>`
     position: absolute;
     bottom: 0;
     right: 100%;
-    height: 99%;
+    height: 100%;
     width: 100%;
     background-color: black;
     z-index: -1;
