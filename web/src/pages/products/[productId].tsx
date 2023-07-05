@@ -1,4 +1,4 @@
-import { Container } from '../../components/shared/sharedstyles'
+/* import { Container } from '../../components/shared/sharedstyles'
 import Layout from '../../components/shared/layout'
 import Navbar from '../../components/shared/navbar/navbar'
 import { NextPageContext } from 'next'
@@ -54,3 +54,4 @@ export const getServerSideProps = async (context: NextPageContext) => {
     },
   }
 }
+ */
