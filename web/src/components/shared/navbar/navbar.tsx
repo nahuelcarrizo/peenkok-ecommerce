@@ -337,19 +337,18 @@ const Navbar = () => {
       xPercent: 480,
       yPercent: 480,
       ease: 'power4.easeInOut',
-    })
-
-    ScrollTrigger.create({
-      trigger: document.body,
-      start: 'top top',
-      pin: heroRef,
-      pinType: 'transform',
-      end: () => window.innerHeight,
-      scrub: 1,
-      toggleActions: 'play none reverse none',
-      animation: tl,
-      onLeave: () => setAfterPosition(true),
-      onEnterBack: () => setAfterPosition(false),
+      scrolltrigger: {
+        trigger: document.body,
+        start: 'top top',
+        pin: heroRef,
+        pinType: 'transform',
+        end: () => window.innerHeight,
+        scrub: 1,
+        toggleActions: 'play none reverse none',
+        animation: tl,
+        onLeave: () => setAfterPosition(true),
+        onEnterBack: () => setAfterPosition(false),
+      },
     })
 
     return tl
