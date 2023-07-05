@@ -153,25 +153,26 @@ const PageTransition = () => {
           duration: 0.4,
           ease: 'power2.easeOut',
         })
+      if (elements) {
+        elements.forEach((element, index) => {
+          tl.to(element, {
+            autoAlpha: 1,
+            xPercent: 103,
+            duration: 0.5,
+          })
+          tl.to(element, {
+            xPercent: -100,
+            duration: 0.2,
+          })
 
-      elements.forEach((element, index) => {
-        tl.to(element, {
-          autoAlpha: 1,
-          xPercent: 103,
-          duration: 0.5,
-        })
-        tl.to(element, {
-          xPercent: -100,
-          duration: 0.2,
-        })
-
-        /*       gsap.to('.page-transition-wrapper', {
+          /*       gsap.to('.page-transition-wrapper', {
         xPercent: 100,
         duration: 2,
         delay: 8,
         ease: 'power2.inOut',
       }) */
-      })
+        })
+      }
     })
 
     return () => {
