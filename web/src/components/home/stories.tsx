@@ -49,6 +49,13 @@ const StyledText = styled.div`
 `
 
 const Stories = ({ heroVideo: video }: any) => {
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline()
+    })
+    return () => ctx.revert()
+  }, [])
+
   return (
     <div>
       <StyledContainer>

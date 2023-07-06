@@ -302,18 +302,11 @@ const Navbar = () => {
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
 
-  function intro({ heroRef, heroImg }) {
-    master.add(tl)
-    master.add(tl2, '>')
-    return master
-  }
-
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const heroRef = document.querySelector('#hero-container')
       const heroImg = document.querySelector('.hero-image')
 
-      const master = gsap.timeline()
       const tl = gsap.timeline()
       tl.from(logoRef.current, {
         scale: 9.85,
