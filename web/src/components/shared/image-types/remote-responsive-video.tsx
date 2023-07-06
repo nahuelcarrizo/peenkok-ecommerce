@@ -21,8 +21,8 @@ const RemoteResponsiveVideo = (props: any) => {
         <ReactPlayer
           alt={alt}
           url={url}
-          width="50vw"
-          height="60vh"
+          width="70vw"
+          height="90vh"
           style={{
             borderWidth: '1px',
             borderStyle: 'solid',
