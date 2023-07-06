@@ -251,7 +251,7 @@ const MainLogo = styled.div`
   justify-content: center;
   /* z-index: 7; */
   height: 6vh;
-  width: 11vw;
+  width: 9.4vw;
   /*   transition: transform 0.7s cubic-bezier(0.16, 1.08, 0.38, 0.98); */
   will-change: transform;
   /*   transform-origin: left top; */

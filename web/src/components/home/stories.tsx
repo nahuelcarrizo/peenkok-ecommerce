@@ -27,7 +27,7 @@ const Stories = ({ heroVideo: video }: any) => {
       const tl = gsap.timeline()
 
       tl.to('#stories-container', {
-        scale: 1.5,
+        scale: 1.2,
         duration: 1,
         ease: 'none',
       })
