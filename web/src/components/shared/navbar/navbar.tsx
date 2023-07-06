@@ -172,7 +172,7 @@ const StyledLink = styled(Link)<StyledLinkProps>`
   w-full
   h-full
 `};
-  margin-bottom: -3px;
+  /*  margin-bottom: 4px; */
   display: inline-flex;
   align-items: center;
   color: ${({ isAfterPosition }) => (isAfterPosition ? 'black' : '#F36600')};
@@ -191,7 +191,7 @@ const StyledLink = styled(Link)<StyledLinkProps>`
     position: absolute;
     bottom: 0;
     right: 100%;
-    height: 102%;
+    height: 100%;
     width: 100%;
     background-color: black;
     z-index: -1;
@@ -308,7 +308,7 @@ const Navbar = () => {
       scrollTrigger: {
         scrub: 1,
         start: 'top top',
-        end: 200,
+        end: () => window.innerHeight,
         trigger: target,
         toggleActions: 'play none reverse none',
       },
