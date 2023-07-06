@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
-
 import ReactPlayer from 'react-player'
+import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
+import { useState } from 'react'
 
 const RemoteResponsiveVideo = (props: any) => {
   const { url, alt, className } = props
   const [isLoaded, setIsLoaded] = useState(false)
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     window.onload = () => {
       const videos = document.querySelectorAll('video')
       videos.forEach(video => {
@@ -21,8 +21,13 @@ const RemoteResponsiveVideo = (props: any) => {
         <ReactPlayer
           alt={alt}
           url={url}
-          height="100%"
-          width="100%"
+          width="92vw"
+          height="100vh"
+          style={{
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: 'black',
+          }}
           className={className}
           controls={false}
           playing={true}

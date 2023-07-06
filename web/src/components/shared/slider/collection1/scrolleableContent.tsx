@@ -103,14 +103,13 @@ function ScrolleableContent({ items }) {
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const horizontalSections = document.querySelectorAll(
-        '.collection1-horizontal .panel',
-      )
-      const horizontal = document.querySelector('.collection1-horizontal ')
+      const wrapper = container.current
+      const horizontalSections = wrapper.querySelectorAll('.panel')
+
       const numSections = horizontalSections.length
 
       const tl = gsap.to(horizontalSections, {
-        xPercent: -46.6 * numSections,
+        xPercent: -44 * numSections,
 
         ease: 'none',
       })
@@ -131,28 +130,26 @@ function ScrolleableContent({ items }) {
   }, [products])
 
   return (
-    <>
-      <Container ref={container} className="collection1-horizontal">
-        {products.map(({ id, url, asset, image, index }) => (
-          <ProdCard key={index} className="horiz-gallery-wrapper panel">
-            <Card
-              itemId={id}
-              imageUrl={url}
-              asset={asset}
-              image={image}
-              title={id}
-            />
+    <Container ref={container} className="collection1-horizontal">
+      {products.map(({ id, url, asset, image, index }) => (
+        <ProdCard key={index} className="panel">
+          <Card
+            itemId={id}
+            imageUrl={url}
+            asset={asset}
+            image={image}
+            title={id}
+          />
 
-            <ProdCardTitle>
-              <Link passHref href={'/'}>
-                <ProductName>NSW CLUB T-SHIRT</ProductName>
-              </Link>
-              <Price>€ 10.00</Price>
-            </ProdCardTitle>
-          </ProdCard>
-        ))}
-      </Container>
-    </>
+          <ProdCardTitle>
+            <Link passHref href={'/'}>
+              <ProductName>NSW CLUB T-SHIRT</ProductName>
+            </Link>
+            <Price>€ 10.00</Price>
+          </ProdCardTitle>
+        </ProdCard>
+      ))}
+    </Container>
   )
 }
 

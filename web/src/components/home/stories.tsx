@@ -9,59 +9,52 @@ import { useIsomorphicLayoutEffect } from '../../hooks/isomorphicEffect'
 const StyledContainer = styled.div`
   ${tw`
       h-full
-      border-b
-      border-black
+
+
       relative
     `}
-  height: 800px;
+  height: 120vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
-const StyledVideo = styled(RemoteResponsiveVideo)`
-  ${tw`
-      mb-4
-      `};
-`
-const StyledTextContainer = styled.div`
-  ${tw`
-        flex
-        flex-col
-        justify-center
-        items-center
-        w-full
-        h-full
-        absolute
-        p-12
-        [top:200px]
-        [color: white]
-    `};
-  &:hover {
-    color: #003c47;
-    text-decoration: underline;
-  }
-`
-const StyledText = styled.div`
-  ${tw`
-        text-center
-        text-xl
-        [font-family: 'Circular Std Medium']
-        [color: '#003c47']
-        [line-height: 1.4]
-        `};
-`
+const StyledVideo = styled(RemoteResponsiveVideo)``
 
 const Stories = ({ heroVideo: video }: any) => {
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline()
+
+      tl.to('#stories-container', {
+        scale: 1.5,
+        duration: 1,
+        ease: 'none',
+      })
+
+      ScrollTrigger.create({
+        trigger: '#stories-container',
+        start: 'top-=25% top',
+        end: () => window.innerHeight * 2,
+        animation: tl,
+        pin: true,
+        scrub: true,
+        onLeave: () => {
+          gsap.to('#stories-container', {
+            scale: 1,
+            duration: 1,
+            ease: 'none',
+          })
+        },
+      })
     })
     return () => ctx.revert()
   }, [])
 
   return (
-    <div>
-      <StyledContainer>
-        <StyledVideo url={video.asset.url} alt="stories video" />
-      </StyledContainer>
-    </div>
+    <StyledContainer id="stories-container">
+      <StyledVideo url={video.asset.url} alt="stories video" />
+    </StyledContainer>
   )
 }
 

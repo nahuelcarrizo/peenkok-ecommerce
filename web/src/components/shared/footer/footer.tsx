@@ -4,12 +4,13 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 
 const FooterContainer = styled.footer`
-  ${tw`px-4 bg-white mt-10 flex flex-col justify-evenly items-center`}
-  height: 100%;
+  ${tw`px-4 bg-white flex flex-col justify-evenly items-center`}
+  height: 82vh !important;
+  margin-top: 18vh;
 `
 
 const GridContainer = styled.div`
-  ${tw`container grid-cols-2 gap-10 pt-6 px-4 flex justify-around`}
+  ${tw`container grid-cols-2 gap-10 px-4 flex justify-around`}/*   padding-top: 1.5rem; */
 `
 
 const GridItem = styled.div`
@@ -22,11 +23,12 @@ const LinkList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  line-height: 4.5rem;
+  line-height: 0.9rem;
 `
 
 const LinkListItem = styled.li`
-  ${tw`mb-3 [font-family: 'Circular Std Book'] [font-size: 4.3vw]`}
+  ${tw`mb-3 [font-family: 'Circular Std Book']
+   [font-size:1.2rem]`}
   display: inline-block;
   width: fit-content;
 `
@@ -36,16 +38,16 @@ const Link = styled.a`
 `
 
 const SuscribeContainer = styled.div`
-  ${tw`flex flex-col justify-center items-center w-full py-6`}
+  ${tw`flex flex-col justify-center items-center w-full `}
   width: calc(100% - 20vw);
-  margin-top: 1em;
 `
 
 const StyledForm = styled.form`
-  ${tw`w-full flex flex-row`}
-  margin-top: 6vw;
-  height: 8vw;
-  padding-top: 1.5vw;
+  ${tw`flex flex-row`}
+  /*   margin-top: 6vw; */
+  width: 21rem;
+  height: 4vw;
+  /*   padding-top: 1.5vw; */
   padding-left: 1vw;
   border-bottom: 2px solid black;
   font-family: 'Circular Std Bold';
@@ -53,11 +55,11 @@ const StyledForm = styled.form`
 const StyledInput = styled.input`
   ${tw`w-full h-full`}
   outline: none;
-  font-size: 4.5vw;
+  font-size: 1rem;
   text-transform: uppercase;
 
   ::placeholder {
-    font-size: 4vw;
+    font-size: 1vw;
     color: black;
     font-family: 'Circular Std Medium';
   }
@@ -65,9 +67,9 @@ const StyledInput = styled.input`
 
 const StyledText = styled.p`
   ${tw`
-    [font-size: 11vw]
+    [font-size: 2rem]
     [font-family: 'Circular Std Bold']
-    [line-height: 9vw]
+    [line-height:2rem]
     [letter-spacing: -0.5px]
     flex
     text-center

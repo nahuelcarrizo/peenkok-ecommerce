@@ -17,7 +17,6 @@ const Container = styled.div`
 relative
     `}
   overscroll-behavior: none;
-  z-index: 2;
 `
 interface ScrolleableContentProps {
   id: string

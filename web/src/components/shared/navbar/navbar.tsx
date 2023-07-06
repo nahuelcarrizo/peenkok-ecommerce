@@ -351,6 +351,7 @@ const Navbar = () => {
         onEnter: () => console.log('start'),
       })
     })
+
     return () => ctx.revert()
   }, [])
 

@@ -10,16 +10,17 @@ const LogoContainer = styled.div`
     items-center
     justify-center
     relative
-    pb-2
-    mt-3
+ 
+
   `};
+  margin-top: 2rem;
 `
 
 const LogoSVG = styled.img`
   ${tw`
     m-0
   `};
-  width: 40rem;
+  width: 35rem;
 `
 
 const Logo = () => {

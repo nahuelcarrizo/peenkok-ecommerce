@@ -15,10 +15,11 @@ const ProdCardTitle = styled.div`
       flex-col
       [font-family: 'Circular Std Black']
       [font-size: 1.2rem]
-      justify-center
+      justify-start
   `}
   letter-spacing: -.5px;
   height: 9vw;
+  margin-top: 0.5rem;
 `
 
 const Price = styled.span`
@@ -38,7 +39,7 @@ const ProdCard = styled.div`
   flex-wrap: nowrap;
   will-change: transform;
   position: relative;
-  padding: 3.9vw 3.9vw 0vw 3.9vw;
+  padding: 4rem 1.2rem 0vw 1.2rem;
   border: 1px solid #191919;
   z-index: 10;
   border-left: none;
@@ -58,7 +59,7 @@ const StyledImg = styled(RemoteFixedSizeImage)`
       object-cover
   `};
   width: 27vw !important;
-  max-width: 29vw !important;
+  max-width: 29vw;
 `
 interface CardProps {
   title: string
@@ -110,7 +111,7 @@ function ScrolleableContent({ items }) {
       const numSections = horizontalSections.length
 
       const tl = gsap.to(horizontalSections, {
-        xPercent: -42.6 * numSections,
+        xPercent: -44 * numSections,
 
         ease: 'none',
       })

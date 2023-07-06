@@ -61,7 +61,7 @@ function Slider1({ latestIncomes }: SliderProps) {
 
   return (
     <div>
-      <Container>
+      <Container id="collection1-slider">
         <SectionHeader title={title} />
         <Gallery className="collection1-slider">
           <ScrolleableContent items={items} />
