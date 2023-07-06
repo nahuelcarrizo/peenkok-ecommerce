@@ -324,7 +324,7 @@ const Navbar = () => {
       end: () => window.innerHeight,
       trigger: document.body,
       toggleActions: 'play none reverse none',
-      animation: tl2,
+      animation: tl,
     })
     return tl
   }
