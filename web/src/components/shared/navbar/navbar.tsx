@@ -309,7 +309,7 @@ const Navbar = () => {
         scrub: 1,
         start: 'top top',
         end: () => window.innerHeight,
-        trigger: target,
+        trigger: document.body,
         toggleActions: 'play none reverse none',
       },
       ease: 'power4.easeInOut',
@@ -318,10 +318,14 @@ const Navbar = () => {
     tl.to(target, {
       scale: 0.975,
     })
-    tl.to(heroImage, {
-      scale: 1.07,
-      /*         delay: 0.5, */
-    })
+    tl.to(
+      heroImage,
+      {
+        scale: 1.019,
+        /*         delay: 0.5, */
+      },
+      '<',
+    )
     return tl
   }
 
@@ -340,7 +344,7 @@ const Navbar = () => {
       pin: heroRef,
       pinType: 'transform',
       end: () => window.innerHeight,
-      scrub: 1,
+      scrub: 2,
       toggleActions: 'play none reverse none',
       animation: tl,
       onLeave: () => setAfterPosition(true),

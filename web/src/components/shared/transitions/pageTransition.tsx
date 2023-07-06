@@ -133,7 +133,7 @@ const PageTransition = () => {
 
       tl.to('#top-border', {
         width: '100%',
-        duration: 0.3,
+        duration: 0.2,
         ease: 'power2.easeIn',
       })
         .to('#right-border', {
@@ -149,14 +149,18 @@ const PageTransition = () => {
         })
         .to('#left-border', {
           height: '100%',
-          duration: 0.4,
+          duration: 0.23,
           ease: 'power2.easeOut',
         })
-      tl.to('#page-transition-inner__for', {
-        autoAlpha: 1,
-        duration: 0.1,
-        ease: 'none',
-      })
+      tl.to(
+        '#page-transition-inner__for',
+        {
+          autoAlpha: 1,
+          duration: 0.1,
+          ease: 'none',
+        },
+        '<-0.2',
+      )
       elements.forEach((element: any, index) => {
         tl.to(element, {
           autoAlpha: 1,
