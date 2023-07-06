@@ -287,7 +287,6 @@ const Navbar = () => {
     { _key: '5', title: 'ABOUT US', link: '/onprogress' },
   ]
   const renderNavbarItems = () => {
-    console.log(items)
     return items.map(el => (
       <StyledLi key={el._key}>
         <StyledLink isAfterPosition={isAfterPosition} href={el.link}>
@@ -303,65 +302,61 @@ const Navbar = () => {
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
 
-  function middle(target, heroImage) {
-    const tl = gsap.timeline({ defaults: { ease: 'power4.easeInOut' } })
-
-    tl.to(target, {
-      scale: 0.975,
-    })
-    tl.to(
-      heroImage,
-      {
-        scale: 1.019,
-        /*         delay: 0.5, */
-      },
-      '<',
-    )
-
-    ScrollTrigger.create({
-      scrub: 1,
-      start: 'top top',
-      end: () => window.innerHeight,
-      trigger: document.body,
-      toggleActions: 'play none reverse none',
-      animation: tl,
-    })
-    return tl
-  }
-
-  function intro(heroRef) {
-    const tl = gsap.timeline()
-    tl.from(logoRef.current, {
-      scale: 10,
-      xPercent: 480,
-      yPercent: 480,
-      ease: 'power4.easeInOut',
-    })
-
-    ScrollTrigger.create({
-      trigger: document.body,
-      start: 'top top',
-      pin: heroRef,
-      pinType: 'transform',
-      end: () => window.innerHeight,
-      scrub: 2,
-      toggleActions: 'play none reverse none',
-      animation: tl,
-      onLeave: () => setAfterPosition(true),
-      onEnterBack: () => setAfterPosition(false),
-    })
-
-    return tl
+  function intro({ heroRef, heroImg }) {
+    master.add(tl)
+    master.add(tl2, '>')
+    return master
   }
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const heroRef = document.querySelector('#hero-container')
-      const heroImg = document.querySelector('.hero-image')
+      const heroImg = document.querySelector('#hero-image')
 
       const master = gsap.timeline()
-      master.add(intro(heroRef))
-      master.add(middle(heroRef, heroImg))
+      const tl = gsap.timeline()
+      tl.from(logoRef.current, {
+        scale: 9.85,
+        xPercent: 430,
+        yPercent: 480,
+        ease: 'power4.easeInOut',
+      })
+
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: 'top top',
+        pin: heroRef,
+        pinType: 'transform',
+        end: () => window.innerHeight,
+        scrub: 1,
+        toggleActions: 'play none reverse none',
+        animation: tl,
+        onLeave: () => setAfterPosition(true),
+        onEnterBack: () => setAfterPosition(false),
+      })
+      const tl2 = gsap.timeline({})
+
+      tl2.to(heroRef, {
+        scale: 0.975,
+      })
+      tl2.to(
+        heroImg,
+        {
+          scale: 1.019,
+          /*         delay: 0.5, */
+        },
+        '<',
+      )
+
+      ScrollTrigger.create({
+        scrub: 1,
+        start: 'top top',
+        end: 200,
+        trigger: heroRef,
+        toggleActions: 'play none reverse none',
+        animation: tl2,
+        onEnter: () => console.log('start'),
+      })
     })
     return () => ctx.revert()
   }, [])

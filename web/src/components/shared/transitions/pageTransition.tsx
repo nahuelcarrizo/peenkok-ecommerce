@@ -108,6 +108,7 @@ const Span = styled.span`
   height: 80%;
   right: 0;
   background-color: #f36600;
+  border-radius: 25%;
 `
 const PageTransition = () => {
   const router = useRouter()
@@ -123,13 +124,8 @@ const PageTransition = () => {
             ease: 'power2.inOut',
           })
         },
-        /*    delay: 0.2, */
       })
       const elements = gsap.utils.toArray('.page-transition-inner__text')
-
-      /*  tl.set('#page-transition-inner__for', {
-        autoAlpha: 0,
-      }) */
 
       tl.to('#top-border', {
         width: '100%',

@@ -17,7 +17,6 @@ const Message = styled.p`
 `
 
 const Abou = props => {
-  console.log(props)
   return (
     <div>
       <PageContainer>
