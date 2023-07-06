@@ -304,16 +304,7 @@ const Navbar = () => {
   }
 
   function middle(target, heroImage) {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        scrub: 1,
-        start: 'top top',
-        end: () => window.innerHeight,
-        trigger: document.body,
-        toggleActions: 'play none reverse none',
-      },
-      ease: 'power4.easeInOut',
-    })
+    const tl = gsap.timeline({ defaults: { ease: 'power4.easeInOut' } })
 
     tl.to(target, {
       scale: 0.975,
@@ -326,6 +317,15 @@ const Navbar = () => {
       },
       '<',
     )
+
+    ScrollTrigger.create({
+      scrub: 1,
+      start: 'top top',
+      end: () => window.innerHeight,
+      trigger: document.body,
+      toggleActions: 'play none reverse none',
+      animation: tl2,
+    })
     return tl
   }
 
