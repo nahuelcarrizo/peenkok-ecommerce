@@ -57,8 +57,8 @@ const StyledImg = styled(RemoteFixedSizeImage)`
   ${tw`
       object-cover
   `};
-  min-width: 20em !important;
-  min-height: 22rem;
+  min-width: 27vw !important;
+  min-height: 29vh;
 `
 interface CardProps {
   title: string
@@ -112,7 +112,7 @@ function ScrolleableContent({ items }) {
       const numSections = horizontalSections.length
 
       const tl = gsap.to(horizontalSections, {
-        xPercent: -46 * numSections,
+        xPercent: -42 * numSections,
 
         ease: 'none',
       })
