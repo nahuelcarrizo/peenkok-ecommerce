@@ -104,6 +104,9 @@ function ScrolleableContent({ items }) {
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const wrapper = container.current
+      if ((wrapper = nulll)) {
+        return
+      }
       const horizontalSections = wrapper.querySelectorAll('.panel')
 
       const numSections = horizontalSections.length
