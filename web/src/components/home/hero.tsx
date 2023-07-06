@@ -71,7 +71,7 @@ const Hero = forwardRef(function Hero(
           width={1920}
           height={1185}
           alt="hero image"
-          id="hero-image"
+          className="hero-image"
         />
       </ImgContainer>
       <ShopNowMarquee>

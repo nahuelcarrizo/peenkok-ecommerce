@@ -1,7 +1,10 @@
 import React from 'react'
 import RemoteResponsiveVideo from '../shared/image-types/remote-responsive-video'
+import ScrollTrigger from 'gsap'
+import gsap from 'gsap/'
 import styled from 'styled-components'
 import tw from 'twin.macro'
+import { useIsomorphicLayoutEffect } from '../../hooks/isomorphicEffect'
 
 const StyledContainer = styled.div`
   ${tw`

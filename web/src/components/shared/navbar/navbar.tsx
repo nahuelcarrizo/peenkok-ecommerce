@@ -311,7 +311,7 @@ const Navbar = () => {
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const heroRef = document.querySelector('#hero-container')
-      const heroImg = document.querySelector('#hero-image')
+      const heroImg = document.querySelector('.hero-image')
 
       const master = gsap.timeline()
       const tl = gsap.timeline()
