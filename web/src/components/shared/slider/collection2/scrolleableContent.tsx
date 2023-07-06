@@ -86,7 +86,7 @@ function Card({ title, itemId, imageUrl, asset, image }: CardProps) {
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overscroll-behavior: none;
   display: flex;
   flex-direction: row;
