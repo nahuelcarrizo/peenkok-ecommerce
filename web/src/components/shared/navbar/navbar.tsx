@@ -191,7 +191,7 @@ const StyledLink = styled(Link)<StyledLinkProps>`
     position: absolute;
     bottom: 0;
     right: 100%;
-    height: 100%;
+    height: 102%;
     width: 100%;
     background-color: black;
     z-index: -1;
@@ -306,11 +306,10 @@ const Navbar = () => {
   function middle(target, heroImage) {
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: document.body,
         scrub: 1,
         start: 'top top',
         end: 200,
-
+        trigger: target,
         toggleActions: 'play none reverse none',
       },
       ease: 'power4.easeInOut',
@@ -319,14 +318,10 @@ const Navbar = () => {
     tl.to(target, {
       scale: 0.975,
     })
-    tl.to(
-      heroImage,
-      {
-        scale: 1.07,
-        /*         delay: 0.5, */
-      },
-      '<',
-    )
+    tl.to(heroImage, {
+      scale: 1.07,
+      /*         delay: 0.5, */
+    })
     return tl
   }
 
@@ -337,18 +332,19 @@ const Navbar = () => {
       xPercent: 480,
       yPercent: 480,
       ease: 'power4.easeInOut',
-      scrolltrigger: {
-        trigger: document.body,
-        start: 'top top',
-        pin: heroRef,
-        pinType: 'transform',
-        end: () => window.innerHeight,
-        scrub: 1,
-        toggleActions: 'play none reverse none',
-        animation: tl,
-        onLeave: () => setAfterPosition(true),
-        onEnterBack: () => setAfterPosition(false),
-      },
+    })
+
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      pin: heroRef,
+      pinType: 'transform',
+      end: () => window.innerHeight,
+      scrub: 1,
+      toggleActions: 'play none reverse none',
+      animation: tl,
+      onLeave: () => setAfterPosition(true),
+      onEnterBack: () => setAfterPosition(false),
     })
 
     return tl

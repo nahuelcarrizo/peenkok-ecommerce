@@ -63,25 +63,23 @@ const Hero = forwardRef(function Hero(
   ref: Ref<HTMLDivElement>,
 ) {
   return (
-    <div>
-      <StyledContainer ref={ref} id="hero-container">
-        <ImgContainer>
-          <StyledImg
-            image={image[0].image}
-            asset={image[0].asset}
-            width={1920}
-            height={1185}
-            alt="hero image"
-            className="hero-image"
-          />
-        </ImgContainer>
-        <ShopNowMarquee>
-          <Marquee autoFill speed={40}>
-            <span style={{ paddingLeft: '8px' }}> SHOP NOW </span>
-          </Marquee>
-        </ShopNowMarquee>
-      </StyledContainer>
-    </div>
+    <StyledContainer ref={ref} id="hero-container">
+      <ImgContainer>
+        <StyledImg
+          image={image[0].image}
+          asset={image[0].asset}
+          width={1920}
+          height={1185}
+          alt="hero image"
+          className="hero-image"
+        />
+      </ImgContainer>
+      <ShopNowMarquee>
+        <Marquee autoFill speed={40}>
+          <span style={{ paddingLeft: '8px' }}> SHOP NOW </span>
+        </Marquee>
+      </ShopNowMarquee>
+    </StyledContainer>
   )
 })
 
