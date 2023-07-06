@@ -112,7 +112,7 @@ function ScrolleableContent({ items }) {
       const numSections = horizontalSections.length
 
       const tl = gsap.to(horizontalSections, {
-        xPercent: -49 * numSections,
+        xPercent: -44 * numSections,
 
         ease: 'none',
       })
