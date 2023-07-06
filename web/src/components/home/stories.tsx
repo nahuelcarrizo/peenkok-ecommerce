@@ -35,8 +35,7 @@ const Stories = ({ heroVideo: video }: any) => {
       ScrollTrigger.create({
         trigger: '#stories-container',
         start: 'top-=25% top',
-        end: () => window.innerHeight * 1,
-        animation: tl,
+        end: () => window.innerHeight,
         pin: true,
         scrub: true,
       })
