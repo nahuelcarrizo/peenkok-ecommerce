@@ -35,17 +35,10 @@ const Stories = ({ heroVideo: video }: any) => {
       ScrollTrigger.create({
         trigger: '#stories-container',
         start: 'top-=25% top',
-        end: () => window.innerHeight * 2,
+        end: () => window.innerHeight * 1,
         animation: tl,
         pin: true,
         scrub: true,
-        onLeave: () => {
-          gsap.to('#stories-container', {
-            scale: 1,
-            duration: 1,
-            ease: 'none',
-          })
-        },
       })
     })
     return () => ctx.revert()

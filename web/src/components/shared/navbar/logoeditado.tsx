@@ -39,7 +39,7 @@ const LogoNaranja2 = () => {
         markers: true,
 
         toggleActions: 'play none reverse none',
-        onToggle: self => {
+        /*         onToggle: self => {
           if (self.direction === 1) {
             setFill('#000')
           } else {
@@ -47,7 +47,7 @@ const LogoNaranja2 = () => {
           }
 
           console.log('enter' + fill)
-        },
+        }, */
       })
     })
 
