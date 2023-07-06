@@ -120,7 +120,7 @@ const BottomRow = styled.div`
     height: 5vh;
   } */
   width: 100vw;
-  padding: 0 1.6rem;
+  padding: 0 4rem;
 `
 
 const StyledSpan = styled.span`
@@ -375,7 +375,7 @@ const Navbar = () => {
             speed={65}
             style={{
               height: '3.5vh',
-              zIndex: '3000 !important',
+              zIndex: '10',
               overflowY: 'hidden',
             }}
           >

@@ -84,7 +84,7 @@ const Text = styled.div`
 const ForText = styled.div`
   text-align: center;
   justify-content: end;
-
+  visibility: hidden;
   font-size: 2.1rem;
   font-family: 'Circular Std Medium';
   align-items: center;
@@ -127,9 +127,8 @@ const PageTransition = () => {
       })
       const elements = gsap.utils.toArray('.page-transition-inner__text')
 
-      /*       tl.set('.page-transition-inner__text', {
+      /*  tl.set('#page-transition-inner__for', {
         autoAlpha: 0,
-        xPercent: -200,
       }) */
 
       tl.to('#top-border', {
@@ -153,7 +152,11 @@ const PageTransition = () => {
           duration: 0.4,
           ease: 'power2.easeOut',
         })
-
+      tl.to('#page-transition-inner__for', {
+        autoAlpha: 1,
+        duration: 0.1,
+        ease: 'none',
+      })
       elements.forEach((element: any, index) => {
         tl.to(element, {
           autoAlpha: 1,
@@ -189,7 +192,7 @@ const PageTransition = () => {
           <RightBorder id="right-border" />
 
           <Content className="page-transition-inner__content">
-            <ForText>
+            <ForText id="page-transition-inner__for">
               For&nbsp;
               <Span />
             </ForText>
