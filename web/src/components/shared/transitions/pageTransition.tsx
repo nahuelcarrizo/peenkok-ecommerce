@@ -161,11 +161,11 @@ const PageTransition = () => {
         tl.to(element, {
           autoAlpha: 1,
           xPercent: 103,
-          duration: 0.5,
+          duration: 0.8,
         })
         tl.to(element, {
           xPercent: -100,
-          duration: 0.2,
+          duration: 0.4,
         })
 
         /*       gsap.to('.page-transition-wrapper', {
@@ -186,10 +186,10 @@ const PageTransition = () => {
     <>
       <Wrapper className="page-transition-wrapper">
         <Inner className="page-transition-inner">
-          <TopBorder id="top-border" />
+          {/*           <TopBorder id="top-border" />
           <BottomBorder id="bottom-border" />
           <LeftBorder id="left-border" />
-          <RightBorder id="right-border" />
+          <RightBorder id="right-border" /> */}
 
           <Content className="page-transition-inner__content">
             <ForText id="page-transition-inner__for">

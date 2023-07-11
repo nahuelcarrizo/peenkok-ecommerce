@@ -21,8 +21,7 @@ const StyledList = styled.ul<StyledListProps>`
       px-1
       `};
   }
-  color: #f36600;
-  font-family: 'Circular Std Black';
+  font-family: 'Circular Std Medium';
   font-size: 0.85rem;
 `
 

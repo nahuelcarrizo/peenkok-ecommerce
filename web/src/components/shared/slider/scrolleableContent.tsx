@@ -1,29 +1,28 @@
 import React, { useRef, useState } from 'react'
 
 import Link from 'next/link'
-import RemoteFixedSizeImage from '../../image-types/remote-fixed-size-image'
+import RemoteFixedSizeImage from '../image-types/remote-fixed-size-image'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import SectionHeader from '../header'
+import SectionHeader from './header'
 import { gsap } from 'gsap/dist/gsap'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { useIsomorphicLayoutEffect } from '../../../../hooks/isomorphicEffect'
+import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 
 const ProdCardTitle = styled.div`
   ${tw`
       flex
       flex-col
-      [font-family: 'Circular Std Black']
-      [font-size: 1.2rem]
+      [font-size: 0.8rem]
       justify-center
   `}
   letter-spacing: -.5px;
-  height: 9vw;
+  padding: 0.5rem 0;
 `
 
 const Price = styled.span`
   font-family: 'Circular Std Book';
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 `
 
 const ProdCard = styled.div`
@@ -38,27 +37,25 @@ const ProdCard = styled.div`
   flex-wrap: nowrap;
   will-change: transform;
   position: relative;
-  padding: 4rem 1.2rem 0vw 1.2rem;
+  padding: 1.5rem 1.5rem 0 1.1rem;
   border: 1px solid #191919;
   z-index: 10;
   border-left: none;
+  width: 43rem !important;
 `
-const ProductName = styled.div`
+const ProductName = styled(Link)`
   font-family: 'Circular Std Black';
   font-size: 2vw;
-`
-const ImageLink = styled.a`
-  width: 100%;
-  height: auto;
-  border: 1px solid #191919;
+  height: 100%;
 `
 
 const StyledImg = styled(RemoteFixedSizeImage)`
   ${tw`
       object-cover
   `};
-  min-width: 27vw !important;
-  min-height: 29vh;
+  width: 32rem;
+  height: 100%;
+  border: 1px solid black;
 `
 interface CardProps {
   title: string
@@ -67,31 +64,50 @@ interface CardProps {
   asset: string
   image: string
 }
-function Card({ title, itemId, imageUrl, asset, image }: CardProps) {
+
+function Card({ title, images }: any) {
+  const [hovered, setHovered] = useState(false)
+
+  const handleHover = () => {
+    setHovered(prev => !prev)
+    console.log(hovered)
+  }
+
   return (
-    <ImageLink tabIndex={0} key={itemId}>
-      <div className="card" style={{ height: '100%' }}>
-        <StyledImg
-          asset={asset}
-          image={image}
-          alt={title}
-          width={560}
-          height={678}
-        />
-      </div>
-    </ImageLink>
+    <Container>
+      <StyledImg
+        asset={images[0].asset}
+        image={images[0]}
+        alt={title}
+        width={760}
+        height={878}
+      />
+    </Container>
   )
 }
-
+/*     const imagesData: ScrolleableContentProps[] = images.map(image => ({
+      id: image.asset._id,
+      url: image.asset.url,
+      asset: image.asset,
+      image: image,
+      key: image.asset._id,
+    }))
+ */
 const Container = styled.div`
   width: 100%;
   height: 100vh;
   overscroll-behavior: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `
-function ScrolleableContent({ items }) {
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 68vh;
+`
+function ScrolleableContent({ items, title }) {
   const [products, setProducts] = useState([])
+  const [isTitle, setTitle] = useState()
   const container = useRef<HTMLDivElement | null>(null)
   const content = useRef<HTMLDivElement | null>(null)
 
@@ -99,7 +115,11 @@ function ScrolleableContent({ items }) {
     if (items) {
       setProducts(items)
     }
-  }, [items])
+    if (title) {
+      setTitle(title)
+    }
+    products.map(product => console.log(product))
+  }, [items, title])
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -112,46 +132,42 @@ function ScrolleableContent({ items }) {
       const numSections = horizontalSections.length
 
       const tl = gsap.to(horizontalSections, {
-        xPercent: -44 * numSections,
+        x: '-100vw',
 
         ease: 'none',
       })
       ScrollTrigger.create({
-        trigger: '.collection1-slider',
-        start: 'top top',
+        trigger: container.current,
+        start: 'top top+=8%',
         pin: true,
         scrub: true,
-
-        pinType: 'transform',
-        end: () => '+=' + 3000,
-        animation: tl,
         anticipatePin: 1,
+        pinType: 'transform',
+        end: () => '+=' + wrapper.offsetWidth,
+        animation: tl,
       })
       ScrollTrigger.refresh()
     })
+    console.log(products)
     return () => ctx.revert()
   }, [products])
 
   return (
     <Container ref={container} className="collection1-horizontal">
-      {products.map(({ id, url, asset, image, index }) => (
-        <ProdCard key={index} className="panel">
-          <Card
-            itemId={id}
-            imageUrl={url}
-            asset={asset}
-            image={image}
-            title={id}
-          />
+      {isTitle && <SectionHeader title={isTitle} />}
+      <Content>
+        {products.map(({ id, images, name, index }) => (
+          <ProdCard key={index} className="panel">
+            <Card itemId={id} images={images} title={id} />
 
-          <ProdCardTitle>
-            <Link passHref href={'/'}>
-              <ProductName>NSW CLUB T-SHIRT</ProductName>
-            </Link>
-            <Price>€ 10.00</Price>
-          </ProdCardTitle>
-        </ProdCard>
-      ))}
+            <ProdCardTitle>
+              <ProductName href="/">{name.toUpperCase()}</ProductName>
+
+              <Price>€ 10.00</Price>
+            </ProdCardTitle>
+          </ProdCard>
+        ))}
+      </Content>
     </Container>
   )
 }

@@ -11,22 +11,21 @@ const LetterWrapper = styled.div`
   align-content: center;
   flex-wrap: wrap;
   ${tw`font-bold relative`};
-  font-size: 18vw;
+  font-size: 8.9vw;
   font-family: 'Oswald', sans-serif;
   font-weight: 500;
   color: rgb(25, 25, 25);
   -webkit-font-smoothing: antialiased;
-  left: 0.3vw;
-  height: 44vh;
+  left: 0.5vw;
+  height: 20vh;
 `
 
-gsap.registerPlugin(ScrollTrigger)
 const StyledLink = styled.div`
   ${tw`relative flex justify-start w-full`}
   overflow: hidden;
   display: flex;
   align-items: center;
-  margin-top: -4%;
+  height: 24vh;
 `
 
 const Letter = styled.div`

@@ -4,12 +4,12 @@ export default {
   name: 'collection',
   icon: BsArchive,
   type: 'document',
-  title: 'Colleciones',
+  title: 'Colecciones',
   fields: [
     {
-    title: 'Nombre',
-    name: 'name',
-    type: 'string',
+      title: 'Nombre',
+      name: 'name',
+      type: 'string',
     },
     {
       title: 'URL',
@@ -21,6 +21,17 @@ export default {
       name: 'description',
       type: 'string',
       layout: 'box',
+    },
+    {
+      title: 'Productos',
+      name: 'products',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'product'}],
+        },
+      ],
     },
   ],
 }

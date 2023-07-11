@@ -57,6 +57,9 @@ const LeftText = styled.div`
   left: 0;
   top: 0;
   will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 const RightText = styled.div`
   position: absolute;
@@ -119,29 +122,6 @@ const About = ({ about }: any) => {
     const ctx = gsap.context(() => {
       const left = gsap.utils.toArray('.left-text')
       const right = gsap.utils.toArray(rightContent)
-      gsap.set('.left-text', {
-        zIndex: (i, target, targets) => targets.length - i,
-      })
-      left.forEach((el, i) => {
-        const element = el as HTMLElement
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: '.about-content',
-            start: () => 'top -' + window.innerHeight * i,
-            end: () => '+=' + window.innerHeight * 2,
-            scrub: true,
-            pin: mainContainerRef.current,
-            pinType: 'transform',
-
-            toggleActions: 'play none reverse none',
-          },
-        })
-
-        tl.to(element, { duration: 0.5, autoAlpha: 1 }).from(element, {
-          duration: 0.5,
-          autoAlpha: 0,
-        })
-      })
     })
 
     return () => ctx.revert()

@@ -33,30 +33,10 @@ export default {
       ],
     },
     {
-      title: 'Ultimos ingresos',
-      name: 'latestIncomes',
-      type: 'object',
-      fields: [
-        {
-          title: 'Texto',
-          name: 'latestIncomesText',
-          type: 'string',
-        },
-        {
-          title: 'Ultimos ingresos fotos',
-          name: 'latestIncomesMedia',
-          type: 'array',
-          of: [
-            {
-              type: 'image',
-              name: 'image',
-              options: {
-                metadata: ['lqip'],
-              },
-            },
-          ],
-        },
-      ],
+      title: 'Novedades',
+      name: 'latest',
+      type: 'reference',
+      to: [{type: 'collection'}],
     },
     {
       title: 'Seccion stories Video',
@@ -67,64 +47,18 @@ export default {
       },
     },
     {
-      title: 'Colecciones',
-      name: 'collection',
-      type: 'object',
-      fields: [
-        {
-          title: 'Colecciones 1',
-          name: 'collections1',
-          type: 'object',
-          fields: [
-            {
-              title: 'Nombre de la colección 1',
-              name: 'collection1Text',
-              type: 'string',
-            },
-            {
-              title: 'Imagenes Colección 1',
-              name: 'collection1Media',
-              type: 'array',
-              of: [
-                {
-                  type: 'image',
-                  name: 'image',
-                  options: {
-                    metadata: ['lqip'],
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          title: 'Colecciones 2',
-          name: 'collections2',
-          type: 'object',
-          fields: [
-            {
-              title: 'Nombre de la colección 2',
-              name: 'collection2Text',
-              type: 'string',
-            },
-            {
-              title: 'Imagenes Colección 2',
-              name: 'collection2Media',
-              type: 'array',
-              of: [
-                {
-                  type: 'image',
-                  name: 'image',
-                  options: {
-                    metadata: ['lqip'],
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      title: 'Coleccion 1',
+      name: 'collection1',
+      type: 'reference',
+      to: [{type: 'collection'}],
     },
+    {
+      title: 'Coleccion 2',
+      name: 'collection2',
+      type: 'reference',
+      to: [{type: 'collection'}],
+    },
+
     {
       title: 'Seccion valores',
       name: 'about',

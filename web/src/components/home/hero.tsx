@@ -42,11 +42,11 @@ const ShopNowMarquee = styled.div`
       align-middle
       flex
       `}
-  left: 8.4vw;
+  left: 6.7vw;
   transform: translateX(-50%);
   background-color: #f36600;
 
-  font-family: 'Circular Std Black';
+  font-family: 'Circular Std Bold';
   font-size: 1.4rem;
   font-weight: 900;
   letter-spacing: -1px;

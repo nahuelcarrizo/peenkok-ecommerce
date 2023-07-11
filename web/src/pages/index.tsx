@@ -1,9 +1,8 @@
-import { Slider1, Slider2, Slider3 } from '../components/shared/slider'
-
 import About from '../components/home/about'
 import Hashtag from '../components/home/hashtag'
 import Hero from '../components/home/hero'
 import React from 'react'
+import Slider from '../components/shared/slider/slider'
 import Stories from '../components/home/stories'
 import Suscribe from '../components/shared/suscribe'
 import { sanity } from '../../lib/sanity'
@@ -12,22 +11,26 @@ const Home = ({
   homeSettings: {
     heroVideo,
     heroImages: image,
-    latestIncomes,
-    collection,
+    latest,
     about,
     suscribe,
+    collection1,
+    collection2,
   },
 }: {
   homeSettings: any
 }) => {
+  /*   console.log('latest: ' + JSON.stringify(latest, null, 2))
+  console.log('colleccion 1: ' + JSON.stringify(collection1, null, 2))
+  console.log('collection 2: ' + JSON.stringify(collection2, null, 2)) */
   return (
     <>
       <Hero image={image} />
-      <Slider1 latestIncomes={latestIncomes} />
-      {/* <About about={about} /> */}
+      <Slider data={latest} />
+      <About about={about} />
       <Suscribe suscribe={suscribe} />
-      <Slider2 collection={collection} />
-      {/*   <Slider3 collection={collection} /> */}
+      {/*       <Slider data={latest} />
+      <Slider data={latest} /> */}
       <Stories heroVideo={heroVideo} />
       <Hashtag />
     </>
@@ -55,15 +58,21 @@ export const getServerSideProps = async () => {
           metadata
         }
       },
-      latestIncomes {
-        latestIncomesText,
-        latestIncomesMedia[]{
-          "image": {
+      latest{
+        "collection": *[_type == "collection" && _id == ^._ref][0]{
+          name,
+          searchName,
+          description,
+          "products": *[_type == "product" && references(^._id)]{
+            _id,
+            name,
+            images[]{
             ...,
-          },
-          "asset": asset -> {
-            url, 
-            metadata
+            "asset": asset -> {
+              url,
+              metadata
+            }
+          }
           }
         }
       },
@@ -71,32 +80,6 @@ export const getServerSideProps = async () => {
         "asset": asset -> {
           url, 
           metadata
-        }
-      },
-      collection {
-        collections1 {
-          collection1Text,
-          collection1Media[]{
-            "image": {
-              ...,
-            },
-            "asset": asset -> {
-              url, 
-              metadata
-            }
-          }
-        },
-        collections2 {
-          collection2Text,
-          collection2Media[]{
-            "image": {
-              ...,
-            },
-            "asset": asset -> {
-              url, 
-              metadata
-            }
-          }
         }
       },
       about {
@@ -118,7 +101,41 @@ export const getServerSideProps = async () => {
             metadata
           }
         },
-      }
+      },
+      collection1{
+        "collection": *[_type == "collection" && _id == ^._ref][0]{
+          name,
+          searchName,
+          description,
+          "products": *[_type == "product" && references(^._id)]{
+            _id,
+            name,
+            images[],
+            ...,
+            "asset": asset -> {
+              url,
+              metadata
+            }
+          }
+        }
+      },
+      collection2{
+        "collection": *[_type == "collection" && _id == ^._ref][0]{
+          name,
+          searchName,
+          description,
+          "products": *[_type == "product" && references(^._id)]{
+            _id,
+            name,
+            images[],
+            ...,
+            "asset": asset -> {
+              url,
+              metadata
+            }
+          }
+        }
+      },
     }
   `)
 
