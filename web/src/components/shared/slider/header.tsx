@@ -56,11 +56,11 @@ const SectionHeader = ({ title }) => {
         tl.from(
           el,
           {
-            ease: 'power4.easeOut',
-            duration: 1.2,
+            ease: 'Expo.easeOut',
+            duration: 2.6,
             y: 210,
           },
-          '<+=6%',
+          '<+=3%',
         )
       })
     })

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 
+import Card from './card/card'
 import Link from 'next/link'
-import RemoteFixedSizeImage from '../image-types/remote-fixed-size-image'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import SectionHeader from './header'
 import { gsap } from 'gsap/dist/gsap'
@@ -37,7 +37,7 @@ const ProdCard = styled.div`
   flex-wrap: nowrap;
   will-change: transform;
   position: relative;
-  padding: 1.5rem 1.5rem 0 1.1rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
   border: 1px solid #191919;
   z-index: 10;
   border-left: none;
@@ -48,14 +48,12 @@ const ProductName = styled(Link)`
   font-size: 2vw;
   height: 100%;
 `
-
-const StyledImg = styled(RemoteFixedSizeImage)`
-  ${tw`
-      object-cover
-  `};
-  width: 32rem;
-  height: 100%;
-  border: 1px solid black;
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  overscroll-behavior: none;
+  display: flex;
+  flex-direction: column;
 `
 interface CardProps {
   title: string
@@ -65,26 +63,6 @@ interface CardProps {
   image: string
 }
 
-function Card({ title, images }: any) {
-  const [hovered, setHovered] = useState(false)
-
-  const handleHover = () => {
-    setHovered(prev => !prev)
-    console.log(hovered)
-  }
-
-  return (
-    <Container>
-      <StyledImg
-        asset={images[0].asset}
-        image={images[0]}
-        alt={title}
-        width={760}
-        height={878}
-      />
-    </Container>
-  )
-}
 /*     const imagesData: ScrolleableContentProps[] = images.map(image => ({
       id: image.asset._id,
       url: image.asset.url,
@@ -93,13 +71,7 @@ function Card({ title, images }: any) {
       key: image.asset._id,
     }))
  */
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  overscroll-behavior: none;
-  display: flex;
-  flex-direction: column;
-`
+
 const Content = styled.div`
   display: flex;
   flex-direction: row;
@@ -158,7 +130,7 @@ function ScrolleableContent({ items, title }) {
       <Content>
         {products.map(({ id, images, name, index }) => (
           <ProdCard key={index} className="panel">
-            <Card itemId={id} images={images} title={id} />
+            <Card images={images} title={id} />
 
             <ProdCardTitle>
               <ProductName href="/">{name.toUpperCase()}</ProductName>

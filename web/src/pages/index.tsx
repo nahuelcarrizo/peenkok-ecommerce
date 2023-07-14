@@ -1,10 +1,10 @@
-import About from '../components/home/about'
+import About from '../components/home/about/about'
 import Hashtag from '../components/home/hashtag'
 import Hero from '../components/home/hero'
 import React from 'react'
 import Slider from '../components/shared/slider/slider'
 import Stories from '../components/home/stories'
-import Suscribe from '../components/shared/suscribe'
+import Suscribe from '../components/home/suscribe/suscribe'
 import { sanity } from '../../lib/sanity'
 
 const Home = ({
@@ -20,17 +20,14 @@ const Home = ({
 }: {
   homeSettings: any
 }) => {
-  /*   console.log('latest: ' + JSON.stringify(latest, null, 2))
-  console.log('colleccion 1: ' + JSON.stringify(collection1, null, 2))
-  console.log('collection 2: ' + JSON.stringify(collection2, null, 2)) */
   return (
     <>
       <Hero image={image} />
       <Slider data={latest} />
       <About about={about} />
       <Suscribe suscribe={suscribe} />
-      {/*       <Slider data={latest} />
-      <Slider data={latest} /> */}
+      <Slider data={latest} />
+      <Slider data={latest} />
       <Stories heroVideo={heroVideo} />
       <Hashtag />
     </>

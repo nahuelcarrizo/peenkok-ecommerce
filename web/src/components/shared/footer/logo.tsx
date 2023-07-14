@@ -13,14 +13,14 @@ const LogoContainer = styled.div`
  
 
   `};
-  margin-top: 2rem;
+  margin-bottom: 15vh;
 `
 
 const LogoSVG = styled.img`
   ${tw`
     m-0
   `};
-  width: 35rem;
+  width: 55vw;
 `
 
 const Logo = () => {

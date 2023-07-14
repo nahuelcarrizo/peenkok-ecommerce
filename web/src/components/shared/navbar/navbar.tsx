@@ -1,6 +1,7 @@
 import { AiOutlineHeart, AiOutlineShopping } from 'react-icons/ai'
 import { CartContext, CartContextType } from '../../../context/index'
 import React, { forwardRef, useContext } from 'react'
+import { RiSettingsFill, RiUser3Line } from 'react-icons/ri'
 import styled, { css } from 'styled-components'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
@@ -12,7 +13,6 @@ import Logo from './logoeditado'
 import Marquee from 'react-fast-marquee'
 import { fallDown as Menu } from 'react-burger-menu'
 import PageTransition from '../transitions/pageTransition'
-import { RiUser3Line } from 'react-icons/ri'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import UseAnimations from 'react-useanimations'
 import { device } from '../../../config/device'
@@ -45,10 +45,6 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
 const StyledNav = tw.nav`
     relative
 `
-
-interface StyledProps {
-  isAfterPosition: boolean
-}
 
 const StyledList = styled.ul<StyledProps>`
   display: inline-flex;
@@ -127,9 +123,6 @@ const StyledLi = styled.li`
   display: flex;
   align-items: center;
 `
-interface StyledLinkProps {
-  isAfterPosition: boolean
-}
 
 const StyledLink = styled(Link)<StyledLinkProps>`
   ${tw`
@@ -217,12 +210,9 @@ interface NavbarProps {
 }
 
 const Navbar = () => {
-  const [isScrolling, setIsScrolling] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [fill, setFill] = useState('#F36600')
   const [open, setOpen] = useState(false)
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
-  const [isAfterPosition, setAfterPosition] = useState(false)
-  const listRef = useRef<HTMLUListElement | null>(null)
   const TopRowRef = useRef<HTMLDivElement | null>(null)
   const logoRef = useRef<HTMLDivElement | null>(null)
 
@@ -239,9 +229,7 @@ const Navbar = () => {
   const renderNavbarItems = () => {
     return items.map(el => (
       <StyledLi key={el._key}>
-        <StyledLink isAfterPosition={isAfterPosition} href={el.link}>
-          {el.title}
-        </StyledLink>
+        <StyledLink href={el.link}>{el.title}</StyledLink>
       </StyledLi>
     ))
   }
@@ -276,8 +264,14 @@ const Navbar = () => {
         scrub: 1,
         toggleActions: 'play none reverse none',
         animation: tl,
-        onLeave: () => tl3.play(),
-        onEnterBack: () => tl3.reverse(),
+        onLeave: () => {
+          tl3.play()
+          setFill('black')
+        },
+        onEnterBack: () => {
+          tl3.reverse()
+          setFill('#F36600')
+        },
       })
       const tl2 = gsap.timeline()
 
@@ -340,21 +334,12 @@ const Navbar = () => {
 
   return (
     <>
-      <NavbarContainer
-        isMenuOpen={isMenuOpen}
-        isScrolling={isScrolling}
-        className="navbar-container"
-      >
-        <TopRow
-          style={{ maxWidth: '100vw' }}
-          isMenuOpen={isMenuOpen || isScrolling}
-          ref={TopRowRef}
-        >
+      <NavbarContainer className="navbar-container">
+        <TopRow style={{ maxWidth: '100vw' }} ref={TopRowRef}>
           <Marquee
             autoFill={true}
             speed={65}
             style={{
-              height: '3.5vh',
               zIndex: '10',
               overflowY: 'hidden',
             }}
@@ -364,16 +349,10 @@ const Navbar = () => {
         </TopRow>
         <BottomRow>
           <MainLogo id="LogoContainer" ref={logoRef}>
-            <FixedLogo />
+            <FixedLogo fill={fill} />
           </MainLogo>
-          <Nav isMenuOpen={isMenuOpen || isScrolling}>
-            <StyledList
-              isAfterPosition={isAfterPosition}
-              ref={listRef}
-              id="list"
-            >
-              {renderNavbarItems()}
-            </StyledList>
+          <Nav>
+            <StyledList id="list">{renderNavbarItems()}</StyledList>
           </Nav>
           <IconContext.Provider
             value={{
@@ -400,11 +379,10 @@ const Navbar = () => {
               onClick={handleButtonClick}
               speed={2}
               pathCss="stroke-width: 2.5px; transition: stroke 0s ease 0.5s "
-              strokeColor={isMenuOpen || isScrolling ? 'black' : '#F36600'}
+              strokeColor={'#F36600'}
             />
           )}
         </BottomRow>
-        {/*       {!isLargeDevice && <Border isMenuOpen={isMenuOpen || isScrolling} />} */}
       </NavbarContainer>
       <Menu noOverlay fallDown isOpen={open} styles={styles}>
         <ul id="list">{renderNavbarItems()}</ul>

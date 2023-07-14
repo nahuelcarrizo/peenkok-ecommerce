@@ -23,11 +23,6 @@ const RemoteResponsiveVideo = (props: any) => {
           url={url}
           width="70vw"
           height="90vh"
-          style={{
-            borderWidth: '1px',
-            borderStyle: 'solid',
-            borderColor: 'black',
-          }}
           className={className}
           controls={false}
           playing={true}

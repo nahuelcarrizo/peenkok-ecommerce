@@ -29,8 +29,8 @@ const StyledImg = styled(RemoteFixedSizeImage)`
       object-cover
       absolute
   `};
-  bottom: -50px;
-  height: 110%;
+  /*   bottom: -50px;
+  height: 110%; */
 `
 
 const ShopNowMarquee = styled.div`

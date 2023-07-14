@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.section`
-  height: 100vh;
+  height: 50vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   text-align: center;
-  margin: 0;
+  margin-top: 20vh;
   position: relative;
   z-index: 1;
 `

@@ -1,51 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useState } from 'react'
 
-import Link from 'next/link'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { device } from '../../../config/device'
-import { gsap } from 'gsap/dist/gsap'
-import tw from 'twin.macro'
-import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
-import { useMediaQuery } from 'react-responsive'
-import { useRouter } from 'next/router'
+import gsap from 'gsap'
+import { useIsomorphicLayoutEffect } from '../../../../hooks/isomorphicEffect'
 
-const StyledLogo = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  /*   z-index: 1; */
-`
-const LogoContainer = styled(Link)`
-  ${tw`
-
-    w-full
-  `};
-  display: inline-flex;
-  height: 20rem;
-
-  /*   width: 93vw; */
-`
-
-const LogoNaranja2 = ({ fill }) => {
-  const [color, setColor] = useState('#F36600')
-  const [isOpen, setIsOpen] = useState('false')
-  const router = useRouter()
-  const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
+const Logo = ({ color }) => {
+  const [fill, setFill] = useState('#fff')
   useIsomorphicLayoutEffect(() => {
-    setColor(fill)
-    console.log(fill)
-  }, [fill])
+    if (color) {
+      setFill(color)
+    }
+  }, [color])
+
   return (
-    <svg
-      viewBox="-165.191 193.700 716 50"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ height: '100%' }}
-    >
-      <g
-        id="Capa_1-2"
-        transform="matrix(1.010003, 0, 0, 0.915748, -196.836828, 119.249454)"
-      >
+    <svg viewBox="-165.191 100 700 300" className="svg-css">
+      <g id="Capa_1-2" transform="matrix(1, 0, 0, 1, -180.836828, 119.249454)">
         <g id="n5FYb9" transform="matrix(1, 0, 0, 1, 31.332556, 24.966585)">
           <path
             d="M 498.352 49.32 C 541.782 49.69 575.062 84.19 575.042 126.02 C 575.022 168.79 540.872 203.12 498.352 203.1 C 455.922 203.08 421.852 168.83 421.752 126.11 C 421.652 84.46 454.762 49.73 498.352 49.32 Z M 498.392 173.51 C 524.162 173.48 545.632 151.89 545.402 125.93 C 545.172 99.6 523.622 79.01 498.322 79.05 C 473.292 79.09 451.482 99.47 451.412 126.08 C 451.352 152.19 472.722 173.53 498.382 173.5 L 498.392 173.51 Z"
@@ -100,4 +68,4 @@ const LogoNaranja2 = ({ fill }) => {
   )
 }
 
-export default LogoNaranja2
+export default Logo

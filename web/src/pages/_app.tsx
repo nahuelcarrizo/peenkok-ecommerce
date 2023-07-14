@@ -1,4 +1,5 @@
 import '../config/fonts.css'
+import '../../src/components/shared/slider/card/banner.css'
 
 import React, { useRef, useState } from 'react'
 
