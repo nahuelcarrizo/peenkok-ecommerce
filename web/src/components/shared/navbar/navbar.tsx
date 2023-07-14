@@ -124,7 +124,7 @@ const StyledLi = styled.li`
   align-items: center;
 `
 
-const StyledLink = styled(Link)<StyledLinkProps>`
+const StyledLink = styled(Link)`
   ${tw`
   px-2
   w-full
@@ -213,7 +213,7 @@ const Navbar = () => {
   const [fill, setFill] = useState('#F36600')
   const [open, setOpen] = useState(false)
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
-  const TopRowRef = useRef<HTMLDivElement | null>(null)
+
   const logoRef = useRef<HTMLDivElement | null>(null)
 
   const { toggleMenu, setToggleMenu } = useContext<CartContextType>(CartContext)
@@ -235,11 +235,11 @@ const Navbar = () => {
   }
 
   ////manejadores de eventos
-  const handleButtonClick = () => {
+  /*   const handleButtonClick = () => {
     setOpen(prevOpen => !prevOpen)
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
-
+ */
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const heroRef = document.querySelector('#hero-container')
@@ -335,7 +335,7 @@ const Navbar = () => {
   return (
     <>
       <NavbarContainer className="navbar-container">
-        <TopRow style={{ maxWidth: '100vw' }} ref={TopRowRef}>
+        <TopRow style={{ maxWidth: '100vw' }}>
           <Marquee
             autoFill={true}
             speed={65}
