@@ -63,10 +63,8 @@ const Nav = styled.nav`
   width: 100%;
   position: relative;
 `
-interface TopRowProps {
-  isMenuOpen: boolean
-}
-const TopRow = styled.div<TopRowProps>`
+
+const TopRow = styled.div`
   ${tw`
         flex
         justify-center
@@ -94,13 +92,6 @@ const StyledSpan = styled.span`
         pl-2
     `};
 `
-interface NavProps {
-  isMenuOpen: boolean
-}
-
-interface BorderProps {
-  isMenuOpen: boolean
-}
 
 const options = {
   damping: 0.04,
