@@ -46,7 +46,7 @@ const StyledNav = tw.nav`
     relative
 `
 
-const StyledList = styled.ul<StyledProps>`
+const StyledList = styled.ul`
   display: inline-flex;
   overflow: hidden;
   flex-direction: row;

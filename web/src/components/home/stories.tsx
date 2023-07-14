@@ -42,7 +42,7 @@ const Stories = ({ heroVideo: video }: any) => {
         start: 'top bottom',
         end: 'top top',
         /*      pin: true, */
-        markers: true,
+
         scrub: 2,
         animation: tl,
         onEnter: () => console.log(container.current?.offsetHeight),

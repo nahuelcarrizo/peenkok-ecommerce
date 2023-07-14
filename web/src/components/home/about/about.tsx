@@ -149,7 +149,7 @@ const About = ({ about }: any) => {
           endTrigger: '.about-content',
           end: 'bottom center',
           scrub: true,
-          markers: true,
+
           pin: true,
           anticipatePin: 1,
           pinSpacing: true,
