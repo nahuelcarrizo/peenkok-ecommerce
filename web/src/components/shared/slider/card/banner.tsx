@@ -28,7 +28,7 @@ const LogoContainer = styled.div`
   top: 0; */
 `
 
-const Banner = forwardRef(function Banner(props, ref) {
+const Banner = forwardRef(function Banner({}, ref) {
   const [fill, setFill] = useState('#fff')
   return (
     <>
