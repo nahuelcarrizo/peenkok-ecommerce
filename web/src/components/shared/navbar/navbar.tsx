@@ -221,11 +221,11 @@ const Navbar = () => {
   }
 
   ////manejadores de eventos
-  /*   const handleButtonClick = () => {
-    setOpen(prevOpen => !prevOpen)
-    setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
+  const handleButtonClick = () => {
+    /*    setOpen(prevOpen => !prevOpen)
+    setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen) */
   }
- */
+
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const heroRef = document.querySelector('#hero-container')
