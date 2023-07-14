@@ -24,12 +24,7 @@ import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/router'
 
-interface NavbarContainerProps {
-  isMenuOpen: boolean
-  isScrolling: boolean
-}
-
-const NavbarContainer = styled.div<NavbarContainerProps>`
+const NavbarContainer = styled.div`
   ${tw`
     flex
     flex-col
