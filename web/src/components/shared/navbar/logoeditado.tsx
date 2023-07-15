@@ -34,7 +34,6 @@ const LogoNaranja2 = ({ fill }) => {
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
   useIsomorphicLayoutEffect(() => {
     setColor(fill)
-    console.log(fill)
   }, [fill])
   return (
     <svg

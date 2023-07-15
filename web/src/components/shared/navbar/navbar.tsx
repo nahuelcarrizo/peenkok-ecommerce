@@ -237,7 +237,7 @@ const Navbar = () => {
 
       const movX = window.innerWidth * 0.936
       const movY = window.innerHeight * 0.003
-      console.log(movX)
+
       tl.to(logoRef.current, {
         scale: 0.069,
         x: -movX,
@@ -313,7 +313,6 @@ const Navbar = () => {
         trigger: heroRef,
         toggleActions: 'play none reverse none',
         animation: tl2,
-        onEnter: () => console.log('start'),
       })
     })
 

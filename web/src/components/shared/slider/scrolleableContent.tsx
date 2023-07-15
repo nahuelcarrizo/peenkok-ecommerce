@@ -90,7 +90,6 @@ function ScrolleableContent({ items, title }) {
     if (title) {
       setTitle(title)
     }
-    products.map(product => console.log(product))
   }, [items, title])
 
   useIsomorphicLayoutEffect(() => {
@@ -120,7 +119,7 @@ function ScrolleableContent({ items, title }) {
       })
       ScrollTrigger.refresh()
     })
-    console.log(products)
+
     return () => ctx.revert()
   }, [products])
 

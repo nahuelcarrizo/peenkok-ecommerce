@@ -45,7 +45,6 @@ const Stories = ({ heroVideo: video }: any) => {
 
         scrub: 2,
         animation: tl,
-        onEnter: () => console.log(container.current?.offsetHeight),
       })
     })
     return () => ctx.revert()

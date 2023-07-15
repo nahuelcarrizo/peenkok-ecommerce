@@ -7,6 +7,7 @@ import { useIsomorphicLayoutEffect } from '../../../../hooks/isomorphicEffect'
 
 function Card({ title, images }) {
   const imgRef = useRef(null)
+  const ContainerImgRef = useRef(null)
   const bannerRef = useRef<HTMLDivElement>(null)
 
   const img = gsap.utils.selector(imgRef)
@@ -35,18 +36,22 @@ function Card({ title, images }) {
       })
     })
 
-    imgRef.current.addEventListener('mouseenter', e => ctx.hover(e))
-    imgRef.current.addEventListener('mouseleave', e => ctx.hoverOut(e))
+    ContainerImgRef.current.addEventListener('mouseenter', e => ctx.hover(e))
+    ContainerImgRef.current.addEventListener('mouseleave', e => ctx.hoverOut(e))
     return () => {
       ctx.revert()
-      imgRef.current.removeEventListener('mouseenter', e => ctx.hover(e))
-      imgRef.current.removeEventListener('mouseleave', e => ctx.hover(e))
+      ContainerImgRef.current.removeEventListener('mouseenter', e =>
+        ctx.hover(e),
+      )
+      ContainerImgRef.current.removeEventListener('mouseleave', e =>
+        ctx.hover(e),
+      )
     }
   }, [])
 
   return (
-    <Container className="card-container">
-      <ImgContainer ref={imgRef}>
+    <Container className="card-container" ref={ContainerImgRef}>
+      <ImgContainer>
         <StyledImg
           asset={images[0].asset}
           image={images[0]}
