@@ -37,7 +37,7 @@ const ProdCard = styled.div`
   flex-wrap: nowrap;
   will-change: transform;
   position: relative;
-  padding: 1.3vw 1.3vw 0 1.3vw;
+  padding: 1.1vw 1.1vw 0 1.1vw;
   border: 1px solid #191919;
   z-index: 10;
   border-left: none;
