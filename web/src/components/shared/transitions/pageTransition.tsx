@@ -127,7 +127,7 @@ const PageTransition = () => {
       })
       const elements = gsap.utils.toArray('.page-transition-inner__text')
 
-      tl.to('#top-border', {
+      /*      tl.to('#top-border', {
         width: '100%',
         duration: 0.2,
         ease: 'power2.easeIn',
@@ -147,7 +147,7 @@ const PageTransition = () => {
           height: '100%',
           duration: 0.23,
           ease: 'power2.easeOut',
-        })
+        }) */
       tl.to(
         '#page-transition-inner__for',
         {
