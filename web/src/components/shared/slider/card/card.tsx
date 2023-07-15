@@ -10,7 +10,7 @@ function Card({ title, images }) {
   const ContainerImgRef = useRef(null)
   const bannerRef = useRef<HTMLDivElement>(null)
 
-  const img = gsap.utils.selector(imgRef)
+  const img = gsap.utils.selector(ContainerImgRef)
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(self => {
