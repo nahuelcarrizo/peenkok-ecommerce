@@ -139,10 +139,9 @@ const About = ({ about }: any) => {
         extendTimeline: true,
       })
 
-      const tl0 = gsap.timeline()
       const tl1 = gsap.timeline({ paused: true })
       const tl2 = gsap.timeline()
-      tl0.to('.about-inner', {
+      /*       tl0.to('.about-inner', {
         scrollTrigger: {
           trigger: '.about-inner',
           start: 'center center+=10',
@@ -157,6 +156,23 @@ const About = ({ about }: any) => {
           onEnter: () => {
             tl1.play()
           },
+        },
+      }) */
+
+      ScrollTrigger.create({
+        trigger: '.about-inner',
+        start: 'center center+=10',
+        endTrigger: '.about-content',
+        end: 'bottom center',
+        /*       scrub: true, */
+        markers: true,
+        pin: true,
+        anticipatePin: 1,
+        pinSpacing: true,
+        invalidateOnRefresh: true,
+        animation: tl1,
+        onEnter: () => {
+          tl1.play()
         },
       })
 
