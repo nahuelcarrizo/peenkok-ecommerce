@@ -1,6 +1,5 @@
 import React, { forwardRef, useState } from 'react'
 
-import Logo from './banner.logo'
 import Marquee from 'react-fast-marquee'
 import gsap from 'gsap'
 import styled from 'styled-components'
@@ -17,15 +16,6 @@ const Container = styled.div`
   overflow-y: hidden !important;
   overflow-x: hidden !important;
   overflow-block: hidden !important;
-`
-const LogoContainer = styled.div`
-  align-items: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  /*   position: absolute;
-  top: 0; */
 `
 
 const Banner = forwardRef(function Banner({}, bannerRef) {

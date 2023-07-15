@@ -168,6 +168,7 @@ const MainLogo = styled.div`
   /* width: 100vw;
   height: 23vw;
   top: 2.7vw; */
+  cursor: pointer;
   align-items: center;
   display: flex;
   position: absolute;
@@ -199,7 +200,7 @@ const Navbar = () => {
   const [fill, setFill] = useState('#F36600')
   const [open, setOpen] = useState(false)
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
-
+  const router = useRouter()
   const logoRef = useRef<HTMLDivElement | null>(null)
 
   const { toggleMenu, setToggleMenu } = useContext<CartContextType>(CartContext)
@@ -222,6 +223,7 @@ const Navbar = () => {
 
   ////manejadores de eventos
   const handleButtonClick = () => {
+    router.push('/')
     /*    setOpen(prevOpen => !prevOpen)
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen) */
   }
@@ -334,7 +336,11 @@ const Navbar = () => {
           </Marquee>
         </TopRow>
         <BottomRow>
-          <MainLogo id="LogoContainer" ref={logoRef}>
+          <MainLogo
+            id="LogoContainer"
+            ref={logoRef}
+            onClick={() => handleButtonClick()}
+          >
             <FixedLogo fill={fill} />
           </MainLogo>
           <Nav>

@@ -35,12 +35,12 @@ function Card({ title, images }) {
       })
     })
 
-    imgRef.current.addEventListener('mouseover', e => ctx.hover(e))
-    imgRef.current.addEventListener('mouseout', e => ctx.hoverOut(e))
+    imgRef.current.addEventListener('mouseenter', e => ctx.hover(e))
+    imgRef.current.addEventListener('mouseleave', e => ctx.hoverOut(e))
     return () => {
       ctx.revert()
-      imgRef.current.removeEventListener('mouseover', e => ctx.hover(e))
-      imgRef.current.removeEventListener('mouseout', e => ctx.hover(e))
+      imgRef.current.removeEventListener('mouseenter', e => ctx.hover(e))
+      imgRef.current.removeEventListener('mouseleave', e => ctx.hover(e))
     }
   }, [])
 
