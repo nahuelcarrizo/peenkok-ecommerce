@@ -72,7 +72,7 @@ const TopRow = styled.div`
     `};
 `
 
-const BottomRow = styled.div`S
+const BottomRow = styled.div`
   ${tw`
         flex
         justify-center
@@ -82,7 +82,7 @@ const BottomRow = styled.div`S
     `};
   width: 100vw;
   padding: 0.2rem 1.3vw;
-/*   border-bottom: 1px solid black; */
+  /*   border-bottom: 1px solid black; */
 `
 
 const StyledSpan = styled.span`

@@ -28,11 +28,14 @@ const LogoContainer = styled.div`
   top: 0; */
 `
 
-const Banner = forwardRef(function Banner({}, ref) {
+const Banner = forwardRef(function Banner({}, bannerRef) {
   const [fill, setFill] = useState('#fff')
   return (
     <>
-      <Container className="banner-card" ref={ref}>
+      <Container
+        className="banner-card"
+        ref={bannerRef as React.RefObject<HTMLDivElement>}
+      >
         <Marquee
           autoFill
           speed={340}

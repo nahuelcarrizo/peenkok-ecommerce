@@ -7,7 +7,7 @@ import { useIsomorphicLayoutEffect } from '../../../../hooks/isomorphicEffect'
 
 function Card({ title, images }) {
   const imgRef = useRef(null)
-  const bannerRef = useRef(null)
+  const bannerRef = useRef<HTMLDivElement>(null)
 
   const img = gsap.utils.selector(imgRef)
 

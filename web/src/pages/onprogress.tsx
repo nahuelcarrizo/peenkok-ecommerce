@@ -42,7 +42,7 @@ const ConstruccionPage = () => {
       <PageContainer>
         <StyledLink href="/">Back</StyledLink>
         <LogoContainer className="logo-edit">
-          <Logo />
+          <Logo fill={'#F36600'} />
         </LogoContainer>
         <Message>¡On progress!</Message>
       </PageContainer>
