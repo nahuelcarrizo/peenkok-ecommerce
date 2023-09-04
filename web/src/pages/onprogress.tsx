@@ -38,15 +38,13 @@ const StyledLink = styled(Link)`
 
 const ConstruccionPage = () => {
   return (
-    <>
-      <PageContainer>
-        <StyledLink href="/">Back</StyledLink>
-        <LogoContainer className="logo-edit">
-          <Logo fill={'#F36600'} />
-        </LogoContainer>
-        <Message>¡On progress!</Message>
-      </PageContainer>
-    </>
+    <PageContainer>
+      <StyledLink href="/">Back</StyledLink>
+      <LogoContainer className="logo-edit">
+        <Logo fill={'#F36600'} />
+      </LogoContainer>
+      <Message>¡On progress!</Message>
+    </PageContainer>
   )
 }
 

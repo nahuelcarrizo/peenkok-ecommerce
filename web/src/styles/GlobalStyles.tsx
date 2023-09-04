@@ -7,6 +7,7 @@ const myTheme = {
   colors: {
     white: '#fff',
     primary: '#fff',
+    soft: '#fdfbf5',
   },
 }
 
@@ -15,7 +16,7 @@ const GlobalStyles = createGlobalStyle({
 
   body: {
     /*     ...tw`antialiased`, */
-    backgroundColor: myTheme.colors.white,
+    backgroundColor: myTheme.colors.soft,
     width: '100%',
     height: '3000px',
     margin: '0',

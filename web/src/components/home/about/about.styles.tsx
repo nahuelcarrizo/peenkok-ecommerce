@@ -12,29 +12,29 @@ export const Container = styled.div`
 
 export const RightContent = styled.div`
   width: 100%;
-  margin-top: 100vh;
+  margin-top: 80vh;
   width: 35vw;
 
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 0px;
-  grid-row-gap: 100vh;
+  grid-row-gap: 50vh;
   margin-right: 15vw;
 `
 export const LeftContent = styled.div`
   width: 35vw;
-  margin-top: 50vh;
+  margin-top: 40vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 0px;
-  grid-row-gap: 100vh;
+  grid-row-gap: 50vh;
 
   margin-left: 15vw;
 `
 const Panel = styled.div`
-  height: 200vh;
+  height: 40vh;
   width: 35vw;
   display: flex;
   justify-content: center;

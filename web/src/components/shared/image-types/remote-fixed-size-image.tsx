@@ -13,13 +13,13 @@ const remoteFixed = ({
   width = 1000,
 }: RemoteImageProps) => {
   const metadata = getImageMetadata(asset)
-
   return (
     <LazyLoadImage
       className={className}
       alt={alt}
       src={getDefaultImage(image)?.height(height).width(width).url()}
-      placeholderSrc={metadata?.lqip || ''}
+      //@ts-ignore
+      /*       placeholderSrc={metadata.lqip || ''} */
     />
   )
 }

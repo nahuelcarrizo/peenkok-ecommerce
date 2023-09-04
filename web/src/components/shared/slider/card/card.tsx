@@ -13,6 +13,7 @@ function Card({ title, images }) {
   const img = gsap.utils.selector(ContainerImgRef)
 
   useIsomorphicLayoutEffect(() => {
+    console.log(images[0].asset)
     const ctx = gsap.context(self => {
       self.add(
         'hover',

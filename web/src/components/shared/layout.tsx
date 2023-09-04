@@ -4,9 +4,10 @@ import Cart from './cart/cart'
 import Cookies from '../shared/cookies'
 import Footer from './footer/footer'
 import Head from 'next/head'
+import HomeTransition from './transitions/HomeTransition'
 import Navbar from './navbar/navbar'
 import { NextSeo } from 'next-seo'
-import PageTransition from './transitions/pageTransition'
+import PageTransition from './transitions/PageTransition'
 import { ReactNode } from 'react'
 import SEO from '../../../next-seo.config'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -31,14 +32,14 @@ type LayoutProps = {
 }
 
 const Layout = ({ children }) => {
-  const [isHome, setIsHome] = useState<boolean>(true)
+  const [isHome, setIsHome] = useState<boolean>(false)
   const router = useRouter()
 
   useIsomorphicLayoutEffect(() => {
-    if (router.pathname === '/onprogress') {
-      setIsHome(false)
-    } else {
+    if (router.pathname === '/') {
       setIsHome(true)
+    } else {
+      setIsHome(false)
     }
   }, [router])
 
@@ -57,16 +58,17 @@ const Layout = ({ children }) => {
         id="smooth-wrapper"
         style={{ width: '100vw', height: '5000px !important' }}
       >
-        {isHome && <Navbar />}
-        {isHome && <Cart />}
+        <Navbar />
+        <Cart />
 
         <div id="smooth-content" style={{ width: '100vw' }}>
           <Main> {children} </Main>
-          {isHome && <Footer />}
+          <Footer />
 
           {/*    <Cookies /> */}
         </div>
-        <PageTransition />
+        {isHome && <HomeTransition />}
+        {!isHome && <PageTransition />}
       </div>
     </>
   )

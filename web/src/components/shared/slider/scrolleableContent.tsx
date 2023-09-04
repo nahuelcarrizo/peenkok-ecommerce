@@ -25,7 +25,7 @@ const Price = styled.span`
   font-size: 1.5rem;
 `
 
-const ProdCard = styled.div`
+const ProdCard = styled(Link)`
   ${tw`
       flex
       flex-col
@@ -41,7 +41,7 @@ const ProdCard = styled.div`
   border: 1px solid #191919;
   z-index: 10;
   border-left: none;
-  width: 43rem !important;
+  width: 43.5rem !important;
 `
 const ProductName = styled(Link)`
   font-family: 'Circular Std Black';
@@ -103,7 +103,7 @@ function ScrolleableContent({ items, title }) {
       const numSections = horizontalSections.length
 
       const tl = gsap.to(horizontalSections, {
-        x: '-100vw',
+        x: '-50vw',
 
         ease: 'none',
       })
@@ -127,17 +127,16 @@ function ScrolleableContent({ items, title }) {
     <Container ref={container} className="collection1-horizontal">
       {isTitle && <SectionHeader title={isTitle} />}
       <Content>
-        {products.map(({ id, images, name, index }) => (
-          <ProdCard key={index} className="panel">
-            <Card images={images} title={id} />
-
-            <ProdCardTitle>
-              <ProductName href="/">{name.toUpperCase()}</ProductName>
-
-              <Price>€ 10.00</Price>
-            </ProdCardTitle>
-          </ProdCard>
-        ))}
+        {products &&
+          products.map(({ _id, images, name, price, index }) => (
+            <ProdCard key={index} className="panel" href={`products/${_id}`}>
+              <Card images={images} title={_id} />
+              <ProdCardTitle>
+                <ProductName href="/">{name.toUpperCase()}</ProductName>
+                <Price>€ {price}</Price>
+              </ProdCardTitle>
+            </ProdCard>
+          ))}
       </Content>
     </Container>
   )

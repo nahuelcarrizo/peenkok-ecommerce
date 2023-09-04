@@ -3,7 +3,6 @@ import {
   Content,
   FormContainer,
   ImgContainer,
-  LinkSocial,
   StyledButton,
   StyledForm,
   StyledImage,
@@ -34,7 +33,6 @@ const Suscribe = ({ suscribe }: any) => {
           width={947}
           height={925}
         />
-        <LinkSocial>@PEENKOK.ES</LinkSocial>
       </ImgContainer>
       <SuscribeContainer>
         <Content>

@@ -1,56 +1,94 @@
-import { Container } from '../../components/shared/sharedstyles'
+import LatestSocial from '../../components/shared/feed'
 import Layout from '../../components/shared/layout'
 import Navbar from '../../components/shared/navbar/navbar'
 import { NextPageContext } from 'next'
-import ProductItemDisplay from '../../components/product-item/product-item'
+import ProductItemDisplay from '../../components/productPage/ProductView'
+import ProductView from '../../components/productPage/ProductView'
 import React from 'react'
+import Recommended from '../../components/shared/recommended'
 import Slider from '../../components/shared/slider/slider'
 import { sanity } from '../../../lib/sanity'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-const ProductItem = (/* { product, navbarItems, productId } */) => {
+const Container = styled.div`
+  ${tw`
+    flex
+    flex-col
+    relative
+    w-full
+    h-full
+/*     items-center */
+  `};
+`
+
+const ProductPage = ({ product, productId, collection }) => {
   return (
-    <>
-      {/*       <Container>
-        <Navbar navbarItems={navbarItems} />
-        <Layout>
-          <ProductItemDisplay product={product} />
-        </Layout>
-      </Container> */}
-    </>
+    <Container>
+      <ProductView product={product} />
+      <Slider data={collection} />
+      {/*       <LatestSocial /> */}
+    </Container>
   )
 }
 
-export default ProductItem
+export default ProductPage
 
 export const getServerSideProps = async (context: NextPageContext) => {
   const { productId } = context.query
+
   const product = await sanity.fetch(
     `
-    *[_type == "product" && slug.current == "${productId}"][0].images[]{
+    *[_type == "product" && _id == "${productId}"][0]{
+      _id,
+      name,
       ...,
-      "asset": asset-> {
-        url,
-        metadata}
+      images[]{
+        ...,
+      "asset": asset -> {
+        url, 
+        metadata
+      }
     }
-    `,
+    }`,
   )
 
-  const navbarItems = sanity.fetch(`
-        *[_type == "navbarItems"][0]
-      `)
+  const collectionQuery = await sanity.fetch(`
+  *[_type == "collection"][0]{
+    "collection": *[name == "recommended"][0]{
+      name,
+      _id,
+      searchName,
+      description,
+      "products": *[_type == "product" && _id in ^.products[]._ref]{
+        _id,
+        name,
+        images[]{
+          asset -> {
+            url,
+            metadata
+          }
+        },
+        ...,
+        "asset": asset -> {
+          url,
+          metadata
+        }
+      }
+      
+    }
+  } 
+     
+ `)
 
-  const [productItem, navbarItemsResult] = await Promise.all([
-    product,
-    navbarItems,
-  ])
+  const [productItem] = await Promise.all([product])
+  const [collection] = await Promise.all([collectionQuery])
 
   return {
     props: {
       product: productItem,
-      navbarItems: navbarItemsResult,
       productId: productId,
+      collection,
     },
   }
 }

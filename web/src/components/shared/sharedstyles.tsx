@@ -9,7 +9,7 @@ const Container = styled.div`
     relative
     w-full
     h-full
-
+    items-start
   `};
 `
 const Main = styled.main`

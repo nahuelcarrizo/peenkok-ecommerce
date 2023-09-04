@@ -16,11 +16,11 @@ const LetterWrapper = styled.div`
   font-weight: 500;
   color: rgb(25, 25, 25);
   -webkit-font-smoothing: antialiased;
-  left: 0.5vw;
+  left: 0.7vw;
   height: 20vh;
 `
 
-const StyledLink = styled.div`
+const StyledLink = styled(Link)`
   ${tw`relative flex justify-start w-full`}
   overflow: hidden;
   display: flex;
@@ -34,7 +34,7 @@ const Letter = styled.div`
 `
 
 const SectionHeader = ({ title }) => {
-  const linkRef = useRef<HTMLDivElement>(null)
+  const linkRef = useRef<HTMLAnchorElement>(null)
 
   useIsomorphicLayoutEffect(() => {
     /*   if (!ContainerRef.current) return */
@@ -72,7 +72,7 @@ const SectionHeader = ({ title }) => {
   }, [title])
 
   return (
-    <StyledLink ref={linkRef}>
+    <StyledLink ref={linkRef} href={`collections/${title.toLowerCase()}`}>
       <LetterWrapper>
         {title.split('').map((letter, index) => (
           <Letter key={index} className="header-letter">

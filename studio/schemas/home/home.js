@@ -33,8 +33,8 @@ export default {
       ],
     },
     {
-      title: 'Novedades',
-      name: 'latest',
+      title: 'Coleccion 1',
+      name: 'collection1',
       type: 'reference',
       to: [{type: 'collection'}],
     },
@@ -47,18 +47,11 @@ export default {
       },
     },
     {
-      title: 'Coleccion 1',
-      name: 'collection1',
-      type: 'reference',
-      to: [{type: 'collection'}],
-    },
-    {
       title: 'Coleccion 2',
       name: 'collection2',
       type: 'reference',
       to: [{type: 'collection'}],
     },
-
     {
       title: 'Seccion valores',
       name: 'about',

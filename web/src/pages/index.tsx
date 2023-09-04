@@ -16,21 +16,22 @@ const Home = ({
     suscribe,
     collection1,
     collection2,
+    collection3,
+    collections,
   },
 }: {
   homeSettings: any
 }) => {
   return (
-    <>
+    <div style={{ height: '100%', width: '100%' }}>
       <Hero image={image} />
-      <Slider data={latest} />
+      <Slider data={collection1} />
       <About about={about} />
       <Suscribe suscribe={suscribe} />
-      <Slider data={latest} />
-      <Slider data={latest} />
+      <Slider data={collection2} />
       <Stories heroVideo={heroVideo} />
       <Hashtag />
-    </>
+    </div>
   )
 }
 
@@ -50,27 +51,9 @@ export const getServerSideProps = async () => {
         "image": {
           ...,
         },
-        "asset": asset -> {
+        "asset": image.asset -> {
           url, 
           metadata
-        }
-      },
-      latest{
-        "collection": *[_type == "collection" && _id == ^._ref][0]{
-          name,
-          searchName,
-          description,
-          "products": *[_type == "product" && references(^._id)]{
-            _id,
-            name,
-            images[]{
-            ...,
-            "asset": asset -> {
-              url,
-              metadata
-            }
-          }
-          }
         }
       },
       storiesVideo {
@@ -104,12 +87,17 @@ export const getServerSideProps = async () => {
           name,
           searchName,
           description,
-          "products": *[_type == "product" && references(^._id)]{
+          "products": *[_type == "product" && _id in ^.products[]._ref]{
             _id,
             name,
-            images[],
+            images[]{
+              "asset": image.asset -> {
+                url,
+                metadata
+              }
+            },
             ...,
-            "asset": asset -> {
+            "asset": image.asset -> {
               url,
               metadata
             }
@@ -121,10 +109,37 @@ export const getServerSideProps = async () => {
           name,
           searchName,
           description,
-          "products": *[_type == "product" && references(^._id)]{
+          "products": *[_type == "product" && _id in ^.products[]._ref]{
             _id,
             name,
-            images[],
+            images[]{
+              "asset": image.asset -> {
+                url,
+                metadata
+              }
+            },
+            ...,
+            "asset": image.asset -> {
+              url,
+              metadata
+            }
+          }
+        }
+      },
+      collection3{
+        "collection": *[_type == "collection" && _id == ^._ref][0]{
+          name,
+          searchName,
+          description,
+          "products": *[_type == "product" && _id in ^.products[]._ref]{
+            _id,
+            name,
+            images[]{
+              asset -> {
+                url,
+                metadata
+              }
+            },
             ...,
             "asset": asset -> {
               url,
@@ -133,6 +148,11 @@ export const getServerSideProps = async () => {
           }
         }
       },
+      collections{
+        "collection": *[_type == "collection"]{
+          ...,
+        }
+      }
     }
   `)
 

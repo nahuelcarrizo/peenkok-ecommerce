@@ -8,7 +8,7 @@ import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 
 const Container = styled.div`
   position: relative;
-  width: 200vw;
+  width: 150vw;
   height: 100%;
   z-index: 10;
   background-color: white;
@@ -36,6 +36,7 @@ function Slider({ data }: any) {
     if (!data) {
       return
     }
+
     const prods = data.collection ? data.collection.products : []
     const name = data.collection ? data.collection.name : ''
 

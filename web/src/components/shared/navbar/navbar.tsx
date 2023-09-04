@@ -1,196 +1,35 @@
-import { AiOutlineHeart, AiOutlineShopping } from 'react-icons/ai'
+import {
+  BottomRow,
+  CartIcon,
+  FixedLogo,
+  MainLogo,
+  Nav,
+  NavbarContainer,
+  StyledIcons,
+  StyledLi,
+  StyledLink,
+  StyledList,
+  TopRow,
+  UserIcon,
+} from './navbar.styles'
 import { CartContext, CartContextType } from '../../../context/index'
-import React, { forwardRef, useContext } from 'react'
-import { RiSettingsFill, RiUser3Line } from 'react-icons/ri'
-import styled, { css } from 'styled-components'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useContext } from 'react'
+import { useRef, useState } from 'react'
 
 import Banner from './banner'
 import { IconContext } from 'react-icons'
 import { IoBag } from 'react-icons/io5'
-import Link from 'next/link'
-import Logo from './logoeditado'
 import Marquee from 'react-fast-marquee'
 import { fallDown as Menu } from 'react-burger-menu'
-import PageTransition from '../transitions/pageTransition'
+import { RiUser3Line } from 'react-icons/ri'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import UseAnimations from 'react-useanimations'
-import { device } from '../../../config/device'
 import { gsap } from 'gsap/dist/gsap'
 import menu2 from 'react-useanimations/lib/menu2'
 import styles from './menuStyles'
-import tw from 'twin.macro'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/router'
-
-const NavbarContainer = styled.div`
-  ${tw`
-    flex
-    flex-col
-    justify-center
-    items-center
-    z-10
-    fixed
-    w-full
-  `};
-  color: #f36600;
-`
-
-const StyledNav = tw.nav`
-    relative
-`
-
-const StyledList = styled.ul`
-  display: inline-flex;
-  overflow: hidden;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-  padding: 0;
-  position: fixed;
-  align-self: center;
-`
-const Nav = styled.nav`
-  ${tw`
-      flex
-      flex-row
-      justify-center
-      items-start
-  `}
-  height: 100%;
-  width: 100%;
-  position: relative;
-`
-
-const TopRow = styled.div`
-  ${tw`
-        flex
-        justify-center
-        items-center
-    `};
-`
-
-const BottomRow = styled.div`
-  ${tw`
-        flex
-        justify-center
-       w-full
-        place-items-center
-        relative
-    `};
-  width: 100vw;
-  padding: 0.2rem 1.3vw;
-  /*   border-bottom: 1px solid black; */
-`
-
-const StyledSpan = styled.span`
-  ${tw`
-        [font-size: .8rem]
-        [font-family: 'Circular Std Bold']
-        pl-2
-    `};
-`
-
-const options = {
-  damping: 0.04,
-  renderByPixels: true,
-}
-
-const StyledLi = styled.li`
-  font-family: 'Circular Std Medium';
-  letter-spacing: -0.2px;
-  font-size: 1rem;
-  margin: 0;
-  list-style: none;
-  text-align: center;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-`
-
-const StyledLink = styled(Link)`
-  ${tw`
-  px-2
-  w-full
-  h-full
-`};
-  /*  margin-bottom: 4px; */
-  display: inline-flex;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-`
-const CartIcon = styled.button`
-  position: relative;
-  border-radius: 50%;
-  background-color: #f36600;
-  height: 1.9vw;
-  width: 1.9vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const UserIcon = styled.div`
-  position: relative;
-  border-radius: 50%;
-  background-color: #f36600;
-  height: 1.9vw;
-  width: 1.9vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const StyledIcons = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  /*   z-index: 10; */
-  height: auto;
-  gap: 6px;
-  background-color: transparent;
-`
-
-const CartCounter = styled.span`
-  ${tw`
-  absolute
-  `}
-  font-size: .8vw;
-  font-family: 'Circular Std Bold';
-  color: #f36600;
-  top: 16%;
-  left: 58%;
-`
-const MainLogo = styled.div`
-  /* width: 100vw;
-  height: 23vw;
-  top: 2.7vw; */
-  cursor: pointer;
-  align-items: center;
-  display: flex;
-  position: absolute;
-  /*   top: 250%; */
-  left: 50%;
-  transform: translate(-49.5%, 26vh);
-  height: 25rem;
-  width: 96.5vw;
-  align-items: center;
-  justify-content: center;
-  /* z-index: 7; */
-  /*  height: 6vh;
-  width: 8.9rem; */
-  /*   transition: transform 0.7s cubic-bezier(0.16, 1.08, 0.38, 0.98); */
-  will-change: transform;
-  /*   transform-origin: left top; */
-`
-
-const FixedLogo = styled(Logo)`
-  /*  height: 30px; */
-  /*   position: fixed; */
-`
 
 interface NavbarProps {
   navbarItems: { _key: string; title: string; link: string }[]
@@ -204,7 +43,6 @@ const Navbar = () => {
   const logoRef = useRef<HTMLDivElement | null>(null)
 
   const { toggleMenu, setToggleMenu } = useContext<CartContextType>(CartContext)
-  const StyledIconsRef = useRef<HTMLDivElement | null>(null)
 
   const items = [
     { _key: '1', title: 'SHOP', link: '/onprogress' },
@@ -224,63 +62,102 @@ const Navbar = () => {
   ////manejadores de eventos
   const handleButtonClick = () => {
     router.push('/')
+
     /*    setOpen(prevOpen => !prevOpen)
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen) */
   }
 
   useIsomorphicLayoutEffect(() => {
+    const isIndex = router.pathname === '/'
     const ctx = gsap.context(() => {
       const heroRef = document.querySelector('#hero-container')
       const heroImg = document.querySelector('.hero-image')
-
-      const tl = gsap.timeline()
-
+      let tl3
       const movX = window.innerWidth * 0.936
-      const movY = window.innerHeight * 0.003
+      const movY = window.innerHeight * 0.006
+      if (isIndex) {
+        setFill('#F36600')
+        const tl = gsap.timeline()
 
-      tl.to(logoRef.current, {
-        scale: 0.069,
-        x: -movX,
-        y: -movY,
-      })
-      ScrollTrigger.create({
-        trigger: document.body,
-        start: 'top top',
-        pin: heroRef,
-        pinType: 'transform',
-        end: () => window.innerHeight,
-        scrub: 1,
-        toggleActions: 'play none reverse none',
-        animation: tl,
-        onLeave: () => {
-          tl3.play()
-          setFill('black')
-        },
-        onEnterBack: () => {
-          tl3.reverse()
-          setFill('#F36600')
-        },
-      })
-      const tl2 = gsap.timeline()
+        tl.to(logoRef.current, {
+          scale: 0.065,
+          x: -movX,
+          y: -movY,
+        })
+        ScrollTrigger.create({
+          trigger: document.body,
+          start: 'top top',
+          pin: heroRef,
+          pinType: 'transform',
+          end: () => window.innerHeight,
+          scrub: 1,
+          toggleActions: 'play none reverse none',
+          animation: tl,
+          onLeave: () => {
+            tl3.play()
+            setFill('black')
+          },
+          onEnterBack: () => {
+            tl3.reverse()
+            setFill('#F36600')
+          },
+          onRefreshInit: () => {
+            tl3.reverse()
+            setFill('#F36600')
+          },
+        })
+        const tl2 = gsap.timeline()
 
-      tl2.to(heroRef, {
-        scale: 0.975,
-      })
-      tl2.to(
-        heroImg,
-        {
-          scale: 1.019,
-          /*         delay: 0.5, */
-        },
-        '<',
-      )
-      const tl3 = gsap.timeline({
-        paused: true,
-        defaults: {
-          duration: 0.2,
-          ease: 'power1.inOut',
-        },
-      })
+        tl2.to(heroRef, {
+          scale: 0.975,
+        })
+        tl2.to(
+          heroImg,
+          {
+            scale: 1.019,
+            /*         delay: 0.5, */
+          },
+          '<',
+        )
+
+        tl3 = gsap.timeline({
+          paused: true,
+          defaults: {
+            duration: 0.2,
+            ease: 'power1.inOut',
+          },
+        })
+
+        ScrollTrigger.create({
+          scrub: 1,
+          start: 'top top',
+          end: 200,
+          trigger: heroRef,
+          toggleActions: 'play none reverse none',
+          animation: tl2,
+        })
+      } else {
+        setFill('black')
+        gsap.set(logoRef.current, {
+          scale: 0.069,
+          x: -movX,
+          y: -movY,
+        })
+
+        tl3 = gsap.timeline({
+          /*    paused: true, */
+          defaults: {
+            duration: 0.2,
+            ease: 'power1.inOut',
+          },
+          /*        scrollTrigger: {
+            trigger: document.body,
+            start: 'top top',
+            scrub: 1,
+          }, */
+        })
+      }
+
       tl3.to(
         '.navbar-container',
         {
@@ -305,19 +182,13 @@ const Navbar = () => {
         },
         '>',
       )
-
-      ScrollTrigger.create({
-        scrub: 1,
-        start: 'top top',
-        end: 200,
-        trigger: heroRef,
-        toggleActions: 'play none reverse none',
-        animation: tl2,
-      })
     })
 
-    return () => ctx.revert()
-  }, [])
+    return () => {
+      ScrollTrigger.refresh()
+      ctx.revert()
+    }
+  }, [router.pathname])
 
   return (
     <>
@@ -351,7 +222,7 @@ const Navbar = () => {
               color: 'black',
             }}
           >
-            <StyledIcons ref={StyledIconsRef}>
+            <StyledIcons>
               <CartIcon
                 className="navbar-icons"
                 onClick={() => setToggleMenu(prev => !prev)}

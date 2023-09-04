@@ -92,17 +92,3 @@ export const ImgContainer = styled.div`
   width: 100%;
   height: 100%;
 `
-
-export const LinkSocial = styled.h2`
-  font-size: 2.4vw;
-  font-family: 'Circular Std Medium';
-  color: #f36600;
-  position: absolute;
-  top: 50%;
-  text-decoration: underline;
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
-
-  /*   left: 50%; */
-`

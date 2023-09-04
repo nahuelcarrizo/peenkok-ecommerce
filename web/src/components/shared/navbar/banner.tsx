@@ -44,9 +44,9 @@ const Banner = () => {
 
   return (
     <StyledList>
-      <span style={{ paddingBottom: '3px' }}>☻☻☻</span>
+      <span style={{ paddingBottom: '3px' }}>☻</span>
       <li>EARTH-FRIENDLY PRODUCTS FOR A HAPPIER & GREENER PLACE</li>
-      <span style={{ paddingBottom: '3px' }}>☻☻☻</span>
+      <span style={{ paddingBottom: '3px' }}>☻</span>
       <li>ENJOY FREE SHIPPING FOR EVERY ORDER ABOVE €100</li>
     </StyledList>
   )

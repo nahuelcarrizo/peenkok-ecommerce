@@ -44,10 +44,11 @@ const RightBorder = styled.div`
   transform-origin: top;
 `
 const Wrapper = styled.div`
-  background-color: white;
+  background-color: #f4a056;
   height: 100vh;
   width: 100vw;
-  position: fixed;
+  position: absolute;
+  /*   transform: translate(-100, 0); */
   z-index: 2000;
   top: 0;
   left: 0;
@@ -117,64 +118,20 @@ const PageTransition = () => {
     const ctx = gsap.context(() => {
       const master = gsap.timeline()
       const tl = gsap.timeline({
-        onComplete: () => {
-          gsap.to('.page-transition-wrapper', {
-            xPercent: 100,
-            duration: 0.6,
-            ease: 'power2.inOut',
-          })
-        },
+        duration: 0.5,
+        ease: 'expo.easeIn',
+        delay: -1,
       })
-      const elements = gsap.utils.toArray('.page-transition-inner__text')
 
-      /*      tl.to('#top-border', {
-        width: '100%',
-        duration: 0.2,
-        ease: 'power2.easeIn',
+      tl.from('.page-transition-wrapper', {
+        xPercent: -100,
       })
-        .to('#right-border', {
-          height: '100%',
-          duration: 0.1,
-
-          ease: 'linear',
+        .to('.page-transition-wrapper', {
+          xPercent: 0,
         })
-        .to('#bottom-border', {
-          width: '100%',
-          duration: 0.1,
-          ease: 'linear',
+        .to('.page-transition-wrapper', {
+          xPercent: 200,
         })
-        .to('#left-border', {
-          height: '100%',
-          duration: 0.23,
-          ease: 'power2.easeOut',
-        }) */
-      tl.to(
-        '#page-transition-inner__for',
-        {
-          autoAlpha: 1,
-          duration: 0.1,
-          ease: 'none',
-        },
-        '<-0.2',
-      )
-      elements.forEach((element: any, index) => {
-        tl.to(element, {
-          autoAlpha: 1,
-          xPercent: 103,
-          duration: 0.8,
-        })
-        tl.to(element, {
-          xPercent: -100,
-          duration: 0.4,
-        })
-
-        /*       gsap.to('.page-transition-wrapper', {
-        xPercent: 100,
-        duration: 2,
-        delay: 8,
-        ease: 'power2.inOut',
-      }) */
-      })
     })
 
     return () => {
@@ -184,30 +141,7 @@ const PageTransition = () => {
 
   return (
     <>
-      <Wrapper className="page-transition-wrapper">
-        <Inner className="page-transition-inner">
-          {/*           <TopBorder id="top-border" />
-          <BottomBorder id="bottom-border" />
-          <LeftBorder id="left-border" />
-          <RightBorder id="right-border" /> */}
-
-          <Content className="page-transition-inner__content">
-            <ForText id="page-transition-inner__for">
-              For&nbsp;
-              <Span />
-            </ForText>
-            <RightPanel>
-              <Text className="page-transition-inner__text"> the planet</Text>
-              <Text className="page-transition-inner__text">the animals</Text>
-              <Text className="page-transition-inner__text">the people</Text>
-              <Text className="page-transition-inner__text">the plants</Text>
-              <Text className="page-transition-inner__text">the funghi</Text>
-              <Text className="page-transition-inner__text">everyone</Text>
-              <Text className="page-transition-inner__text">the future</Text>
-            </RightPanel>
-          </Content>
-        </Inner>
-      </Wrapper>
+      <Wrapper className="page-transition-wrapper"></Wrapper>
     </>
   )
 }

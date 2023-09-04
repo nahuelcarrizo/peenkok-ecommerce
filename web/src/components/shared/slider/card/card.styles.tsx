@@ -15,7 +15,7 @@ export const Container = styled.div`
   border: 1px solid black;
 `
 export const StyledImg = styled(RemoteFixedSizeImage)`
-  width: 32rem;
+  /*   width: 32rem; */
   height: 100%;
 
   will-change: transform;
