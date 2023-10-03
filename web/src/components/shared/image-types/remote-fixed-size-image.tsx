@@ -19,7 +19,7 @@ const remoteFixed = ({
       alt={alt}
       src={getDefaultImage(image)?.height(height).width(width).url()}
       //@ts-ignore
-      /*       placeholderSrc={metadata.lqip || ''} */
+      placeholderSrc={metadata.lqip || ''} 
     />
   )
 }

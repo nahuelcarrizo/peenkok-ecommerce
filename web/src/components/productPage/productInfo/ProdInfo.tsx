@@ -35,6 +35,8 @@ import styled from 'styled-components'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 
 interface ProductItem {
+  price: any
+  customFields: any
   name: string
   // Add other properties as needed
 }
@@ -148,7 +150,7 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
               value={size}
               onChange={handleSizeChange}
             />
-            <Label for={index} key={Math.random()} className="radio-label">
+            <Label htmlFor={index} key={Math.random()} className="radio-label">
               {size.toUpperCase()}
             </Label>
           </>

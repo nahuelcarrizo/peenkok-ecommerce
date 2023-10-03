@@ -79,55 +79,55 @@ const SizeGuide = ({ onClickChange }) => {
         alt="Picture for size guide"
         style={{ objectFit: 'contain', height: '70%' }}
       />
-      <Table class="cb-size-guide-cm">
+      <Table className="cb-size-guide-cm">
         <tbody>
           <tr>
-            <th class="font-s"></th>
-            <th class="font-s">XS</th>
-            <th class="font-s">S</th>
-            <th class="font-s">M</th>
-            <th class="font-s">L</th>
-            <th class="font-s">XL</th>
+            <th className="font-s"></th>
+            <th className="font-s">XS</th>
+            <th className="font-s">S</th>
+            <th className="font-s">M</th>
+            <th className="font-s">L</th>
+            <th className="font-s">XL</th>
           </tr>
           <tr>
-            <td class="font-s">1 → BODY LENGTH</td>
-            <td class="font-s">63</td>
-            <td class="font-s">65</td>
-            <td class="font-s">67</td>
-            <td class="font-s">69</td>
-            <td class="font-s">71</td>
+            <td className="font-s">1 → BODY LENGTH</td>
+            <td className="font-s">63</td>
+            <td className="font-s">65</td>
+            <td className="font-s">67</td>
+            <td className="font-s">69</td>
+            <td className="font-s">71</td>
           </tr>
           <tr>
-            <td class="font-s">2 → SHOULDER WIDTH</td>
-            <td class="font-s">39</td>
-            <td class="font-s">41</td>
-            <td class="font-s">43</td>
-            <td class="font-s">45</td>
-            <td class="font-s">47</td>
+            <td className="font-s">2 → SHOULDER WIDTH</td>
+            <td className="font-s">39</td>
+            <td className="font-s">41</td>
+            <td className="font-s">43</td>
+            <td className="font-s">45</td>
+            <td className="font-s">47</td>
           </tr>
           <tr>
-            <td class="font-s">3 → SLEEVE LENGTH</td>
-            <td class="font-s">25</td>
-            <td class="font-s">26</td>
-            <td class="font-s">27</td>
-            <td class="font-s">28</td>
-            <td class="font-s">29</td>
+            <td className="font-s">3 → SLEEVE LENGTH</td>
+            <td className="font-s">25</td>
+            <td className="font-s">26</td>
+            <td className="font-s">27</td>
+            <td className="font-s">28</td>
+            <td className="font-s">29</td>
           </tr>
           <tr>
-            <td class="font-s">4 → CHEST WIDTH</td>
-            <td class="font-s">48</td>
-            <td class="font-s">50</td>
-            <td class="font-s">52</td>
-            <td class="font-s">54</td>
-            <td class="font-s">56</td>
+            <td className="font-s">4 → CHEST WIDTH</td>
+            <td className="font-s">48</td>
+            <td className="font-s">50</td>
+            <td className="font-s">52</td>
+            <td className="font-s">54</td>
+            <td className="font-s">56</td>
           </tr>
           <tr>
-            <td class="font-s">5 → BOTTOM</td>
-            <td class="font-s"></td>
-            <td class="font-s"></td>
-            <td class="font-s"></td>
-            <td class="font-s"></td>
-            <td class="font-s"></td>
+            <td className="font-s">5 → BOTTOM</td>
+            <td className="font-s"></td>
+            <td className="font-s"></td>
+            <td className="font-s"></td>
+            <td className="font-s"></td>
+            <td className="font-s"></td>
           </tr>
         </tbody>
       </Table>

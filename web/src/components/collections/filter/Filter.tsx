@@ -3,7 +3,14 @@ import { Category, Container, FilterTitle, Filters } from './Filter.styles'
 
 import React from 'react'
 
-const Filter = ({
+interface FilterProps {
+  filters: Record<string, { values: string[] }>;
+  filterSet: (value: any) => void;
+  expandedCategory: any;
+  setExpandedCategory: (category: any) => void;
+}
+
+const Filter: React.FC<FilterProps> = ({
   filters,
   filterSet,
   expandedCategory,
@@ -29,7 +36,6 @@ const Filter = ({
             )}
           </Category>
           {expandedCategory === category &&
-          Array.isArray(values) &&
             values.values
               .filter((value, index, self) => self.indexOf(value) === index)
               .map((value, index) => (
