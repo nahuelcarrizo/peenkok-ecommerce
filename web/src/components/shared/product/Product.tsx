@@ -4,7 +4,7 @@ import Media from './media/Media'
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const Product = ({ images, name, price, id, customFields }) => {
+const Product = ({ images, name, price, id }) => {
   return (
     <Container href={`products/${id}`}>
       <Media images={images} title={id} />
