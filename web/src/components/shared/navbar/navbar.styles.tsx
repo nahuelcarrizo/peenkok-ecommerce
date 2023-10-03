@@ -126,6 +126,7 @@ export const StyledIcons = styled.div`
   height: auto;
   gap: 6px;
   background-color: transparent;
+  color: black;
 `
 
 export const CartCounter = styled.span`
@@ -140,7 +141,6 @@ export const CartCounter = styled.span`
 `
 export const MainLogo = styled.div`
   /* width: 100vw;
-  height: 23vw;
   top: 2.7vw; */
   cursor: pointer;
   align-items: center;
@@ -149,7 +149,7 @@ export const MainLogo = styled.div`
   /*   top: 250%; */
   left: 50%;
   transform: translate(-49.5%, 26vh);
-  height: 25rem;
+  height: 29rem;
   width: 96.5vw;
   align-items: center;
   justify-content: center;

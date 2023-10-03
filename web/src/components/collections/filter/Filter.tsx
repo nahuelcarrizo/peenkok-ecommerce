@@ -29,6 +29,7 @@ const Filter = ({
             )}
           </Category>
           {expandedCategory === category &&
+          Array.isArray(values) &&
             values.values
               .filter((value, index, self) => self.indexOf(value) === index)
               .map((value, index) => (

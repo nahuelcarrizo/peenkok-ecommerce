@@ -29,6 +29,7 @@ const StyledImg = styled(RemoteFixedSizeImage)`
       object-cover
       absolute
   `};
+  height: 100%;
   /*   bottom: -50px;
   height: 110%; */
 `
@@ -55,7 +56,7 @@ const ShopNowMarquee = styled.div`
   overflow-block: hidden !important;
 `
 const ImgContainer = styled.div`
-  height: 100vh !important;
+  height: 100% !important;
   width: 100vw !important;
 `
 const Hero = forwardRef(function Hero(

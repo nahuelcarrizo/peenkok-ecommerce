@@ -12,7 +12,7 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   z-index: -1;
-  background-color: #3b1b5e;
+  // background-color: #3b1b5e;
   overflow-y: hidden !important;
   overflow-x: hidden !important;
   overflow-block: hidden !important;
@@ -20,12 +20,35 @@ const Container = styled.div`
 
 const Banner = forwardRef(function Banner({}, bannerRef) {
   const [fill, setFill] = useState('#fff')
+  const [randomImage, setRandomImage] = useState('');
+
+  // const getRandomImage = () => {
+  //   const randomIndex = Math.floor(Math.random() * 14) + 1; 
+  //   return require(`/bannerImg/image${randomIndex}.jpg`).default;
+  // };
+
+  // useIsomorphicLayoutEffect(() => {
+
+  //   const randomImageSrc = getRandomImage();
+  //   setRandomImage(randomImageSrc);
+  // }, []);
+  const randomIndex = Math.floor(Math.random() * 14) + 1; 
   return (
     <>
       <Container
         className="banner-card"
         ref={bannerRef as React.RefObject<HTMLDivElement>}
       >
+        <img
+            src={`/bannerImg/image${randomIndex}.jpg`}
+            alt="Imagen aleatoria"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover', // Ajusta el comportamiento de la imagen según tus necesidades
+              position: 'absolute'
+            }}
+          />
         <Marquee
           autoFill
           speed={340}
@@ -38,7 +61,7 @@ const Banner = forwardRef(function Banner({}, bannerRef) {
             id="Capa_2"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 805.81 203.12"
-            style={{ width: '100%', height: '20vh', paddingLeft: '1vw' }}
+            style={{ width: '100%', height: '20vh', paddingLeft: '1vw', zIndex: '10' }}
           >
             <g id="Capa_1-2">
               <g id="n5FYb9">
