@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       smoother.current = ScrollSmoother.create({
-        smooth: 0.9,
+        smooth: 2,
         effects: true,
         normalizeScroll: true,
         /*    ignoreMobileResize: true,
