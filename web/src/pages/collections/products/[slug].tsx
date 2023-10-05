@@ -33,12 +33,33 @@ const ProductPage = ({ product, collection }) => {
 
 export default ProductPage
 
-export const getStaticProps  = async (context: NextPageContext) => {
-  const { slug } = context.query
+export const getStaticPaths = async () => {
+  const query = `*[_type == "product"] {
+    slug {
+      current
+    }
+  }
+  `;
+
+  const products = await sanity.fetch(query);
+
+  const paths = products.map((product) => ({
+    params: { 
+      slug: product.slug.current
+    }
+  }));
+
+  return {
+    paths,
+    fallback: 'blocking'
+  }
+}
+
+export const getStaticProps = async ({params: {slug}}) => {
 
   const product = await sanity.fetch(
     `
-    *[_type == "product" && slug == "${slug}"][0]{
+    *[_type == "product" && slug.current == "${slug}"][0]{
       _id,
       name,
       ...,
@@ -90,3 +111,4 @@ export const getStaticProps  = async (context: NextPageContext) => {
     },
   }
 }
+
