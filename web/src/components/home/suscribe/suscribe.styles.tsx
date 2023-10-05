@@ -5,7 +5,7 @@ import tw from 'twin.macro'
 export const Container = styled.div`
   color: white;
   height: 100vh;
-  margin-top: 65vh;
+  
   display: flex;
   justify-content: center;
   position: relative;

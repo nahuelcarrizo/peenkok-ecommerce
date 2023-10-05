@@ -16,7 +16,7 @@ const Message = styled.p`
   ${tw`text-xl font-semibold`}
 `
 
-const Abou = props => {
+const About = props => {
   return (
     <div>
       <PageContainer>
@@ -27,7 +27,7 @@ const Abou = props => {
   )
 }
 
-export default Abou
+export default About
 export async function getServerSideProps(context) {
   await waitload(2)
   return {

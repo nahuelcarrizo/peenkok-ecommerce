@@ -1,6 +1,7 @@
-import Header from '../../components/collections/Header'
+
+import { Header, ProductList } from '../../components/collections/index'
 import { NextPageContext } from 'next'
-import ProductList from '../../components/collections/ProductList'
+
 import React from 'react'
 import { sanity } from '../../../lib/sanity'
 import styled from 'styled-components'

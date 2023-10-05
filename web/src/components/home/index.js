@@ -1,0 +1,5 @@
+export { default as Hashtag } from './hashtag'
+export { default as Hero } from './hero'
+export { default as Stories } from './stories'
+export { default as About } from './about/about'
+export { default as Suscribe } from './suscribe/suscribe'

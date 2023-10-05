@@ -218,8 +218,7 @@ const Navbar = () => {
           </Nav>
           <IconContext.Provider
             value={{
-              size: '0.9vw',
-              color: 'black',
+              size: '1em',
             }}
           >
             <StyledIcons>

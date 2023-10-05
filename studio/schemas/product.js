@@ -33,5 +33,14 @@ export default {
       type: 'array',
       of: [{type: 'customField'}],
     },
+    {
+      title: 'Slug',
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'name',
+        maxLength: 90
+      }
+    }
   ],
 }

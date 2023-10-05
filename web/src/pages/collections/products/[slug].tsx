@@ -21,7 +21,7 @@ const Container = styled.div`
 /*     items-center */
   `};
 `
-const ProductPage = ({ product, productId, collection }) => {
+const ProductPage = ({ product, collection }) => {
   return (
     <Container>
       <ProductView product={product} />
@@ -33,12 +33,12 @@ const ProductPage = ({ product, productId, collection }) => {
 
 export default ProductPage
 
-export const getServerSideProps = async (context: NextPageContext) => {
-  const { productId } = context.query
+export const getStaticProps  = async (context: NextPageContext) => {
+  const { slug } = context.query
 
   const product = await sanity.fetch(
     `
-    *[_type == "product" && _id == "${productId}"][0]{
+    *[_type == "product" && slug == "${slug}"][0]{
       _id,
       name,
       ...,
@@ -86,7 +86,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
   return {
     props: {
       product: productItem,
-      productId: productId,
       collection,
     },
   }

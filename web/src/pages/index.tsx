@@ -1,11 +1,9 @@
-import About from '../components/home/about/about'
-import Hashtag from '../components/home/hashtag'
-import Hero from '../components/home/hero'
+
 import React from 'react'
 import Slider from '../components/shared/slider/slider'
-import Stories from '../components/home/stories'
-import Suscribe from '../components/home/suscribe/suscribe'
+
 import { sanity } from '../../lib/sanity'
+import { Hashtag, Hero, Stories, About, Suscribe } from '../components/home/index'
 
 const Home = ({
   homeSettings: {
@@ -22,11 +20,12 @@ const Home = ({
 }: {
   homeSettings: any
 }) => {
+  
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <Hero image={image} />
       <Slider data={collection1} />
-      <About about={about} />
+      {/* <About about={about} /> */}
       <Suscribe suscribe={suscribe} />
       <Slider data={collection2} />
       <Stories heroVideo={heroVideo} />
@@ -90,6 +89,7 @@ export const getServerSideProps = async () => {
           "products": *[_type == "product" && _id in ^.products[]._ref]{
             _id,
             name,
+            slug,
             images[]{
               "asset": image.asset -> {
                 url,
@@ -112,6 +112,7 @@ export const getServerSideProps = async () => {
           "products": *[_type == "product" && _id in ^.products[]._ref]{
             _id,
             name,
+            slug,
             images[]{
               "asset": image.asset -> {
                 url,
@@ -134,6 +135,7 @@ export const getServerSideProps = async () => {
           "products": *[_type == "product" && _id in ^.products[]._ref]{
             _id,
             name,
+            slug,
             images[]{
               asset -> {
                 url,

@@ -123,13 +123,14 @@ function ScrolleableContent({ items, title }) {
     return () => ctx.revert()
   }, [products])
 
+  // console.log("slug" + JSON.stringify(products[0].name, null, 2))
   return (
     <Container ref={container} className="collection1-horizontal">
       {isTitle && <SectionHeader title={isTitle} />}
       <Content>
         {products &&
-          products.map(({ _id, images, name, price, index }) => (
-            <ProdCard key={index} className="panel" href={`products/${_id}`}>
+          products.map(({ _id, images, name, price, index, slug }) => (
+            <ProdCard key={_id} className="panel" href={`products/${slug.current}`}>
               <Card images={images} title={_id} />
               <ProdCardTitle>
                 <ProductName href="/">{name.toUpperCase()}</ProductName>

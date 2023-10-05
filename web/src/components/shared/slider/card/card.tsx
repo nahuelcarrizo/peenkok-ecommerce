@@ -13,7 +13,6 @@ function Card({ title, images }) {
   const img = gsap.utils.selector(ContainerImgRef)
 
   useIsomorphicLayoutEffect(() => {
-    console.log(images[0].asset)
     const ctx = gsap.context(self => {
       self.add(
         'hover',
@@ -55,7 +54,7 @@ function Card({ title, images }) {
       <ImgContainer>
         <StyledImg
           asset={images[0].asset}
-          image={images[0]}
+          image={images && images[0]}
           alt={title}
           width={760}
           height={878}

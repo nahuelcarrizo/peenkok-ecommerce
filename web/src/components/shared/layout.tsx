@@ -67,8 +67,8 @@ const Layout = ({ children }) => {
 
           {/*    <Cookies /> */}
         </div>
-        {isHome && <HomeTransition />}
-        {!isHome && <PageTransition />}
+        {/* {isHome && <HomeTransition />}
+        {!isHome && <PageTransition />} */}
       </div>
     </>
   )
