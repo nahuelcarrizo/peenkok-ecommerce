@@ -10,7 +10,7 @@ import Slider from '../../components/shared/slider/slider'
 import { sanity } from '../../../lib/sanity'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-
+import { useStateContext } from '../../context/StateContext'
 const Container = styled.div`
   ${tw`
     flex
@@ -23,6 +23,8 @@ const Container = styled.div`
 `
 
 const ProductPage = ({ product, collection }) => {
+  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+  
   return (
     <Container>
       <ProductView product={product} />

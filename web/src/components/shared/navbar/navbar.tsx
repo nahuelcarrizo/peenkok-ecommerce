@@ -12,7 +12,7 @@ import {
   TopRow,
   UserIcon,
 } from './navbar.styles'
-import { CartContext, CartContextType } from '../../../context/index'
+
 import React, { useContext } from 'react'
 import { useRef, useState } from 'react'
 
@@ -30,19 +30,22 @@ import styles from './menuStyles'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/router'
+import { useStateContext } from '../../../context/StateContext'
+import Cart from '../cart/cart'
 
 interface NavbarProps {
   navbarItems: { _key: string; title: string; link: string }[]
 }
 
 const Navbar = () => {
+  const { showCart, setShowCart, totalQuantities} = useStateContext()
   const [fill, setFill] = useState('#F36600')
   const [open, setOpen] = useState(false)
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
   const router = useRouter()
   const logoRef = useRef<HTMLDivElement | null>(null)
 
-  const { toggleMenu, setToggleMenu } = useContext<CartContextType>(CartContext)
+
 
   const items = [
     { _key: '1', title: 'SHOP', link: '/onprogress' },
@@ -224,10 +227,11 @@ const Navbar = () => {
             <StyledIcons>
               <CartIcon
                 className="navbar-icons"
-                onClick={() => setToggleMenu(prev => !prev)}
+                onClick={() => setShowCart(true)}
               >
-                <IoBag />
+                <IoBag /><span>{totalQuantities}</span>
               </CartIcon>
+
               <UserIcon className="navbar-icons">
                 <RiUser3Line />
               </UserIcon>
@@ -248,6 +252,7 @@ const Navbar = () => {
       <Menu noOverlay fallDown isOpen={open} styles={styles}>
         <ul id="list">{renderNavbarItems()}</ul>
       </Menu>
+      {showCart && <Cart/>}
     </>
   )
 }

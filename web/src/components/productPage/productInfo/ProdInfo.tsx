@@ -21,7 +21,7 @@ import {
   Title,
   WishButton,
 } from './ProdInfo.styles'
-import React, { memo, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { IconContext } from 'react-icons'
 import Marquee from 'react-fast-marquee'
@@ -30,9 +30,7 @@ import RadioButton from '../../utils/interactive/input/RadioButton'
 import SizeGuide from './SizeGuide'
 import UseAnimations from 'react-useanimations'
 import { gsap } from 'gsap/dist/gsap'
-import plusToX from 'react-useanimations/lib/plusToX'
-import styled from 'styled-components'
-import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
+import { useStateContext } from '../../../context/StateContext'
 
 interface ProductItem {
   price: any
@@ -47,7 +45,9 @@ interface ProdInfoProps {
 const ProdDescription: React.FC<{
   titles: string[]
 }> = ({ titles }) => {
+ 
   const timeline = useRef(null)
+
   const LoremIpsum = () => {
     return (
       <div style={{ padding: '1.8vh 0' }}>
@@ -128,6 +128,14 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
   const [sizeVisible, setSizeVisible] = useState(false)
   const [playMarquee, setPlayMarquee] = useState(false)
   const [selectedSize, setSelectedSize] = useState(null)
+  const { onAdd, setShowCart, qty } = useStateContext();
+  
+  const addToBag = (e) => {
+    e.preventDefault()
+    onAdd(item, 1);
+    setShowCart(true);
+  }
+
   const availableSizes = item?.customFields
     ?.filter(field => field.fieldName === 'Size')
     .map(field => field.textValue)
@@ -135,7 +143,6 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
   const Variant = () => {
     const handleSizeChange = e => {
       setSelectedSize(e.target.value)
-      console.log(e.target.value)
     }
     return (
       <Fieldset>
@@ -191,6 +198,7 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
           <AddToCartButton
             onMouseEnter={() => toggleMarquee()}
             onMouseLeave={() => toggleMarquee()}
+            onClick={addToBag}
           >
             <Span
               style={{

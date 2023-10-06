@@ -1,73 +1,13 @@
-import { CartContext, CartContextType } from '../../../context'
-import { useContext, useRef } from 'react'
-
-import React from 'react'
+import React ,{  useRef } from 'react'
+import { Container, Content, Title, CloseButton, ItemsContainer, HeaderBag, CartFader, Image } from './cart.styles'
 import { gsap } from 'gsap/dist/gsap'
-import { isNullOrUndefined } from 'util'
-import styled from 'styled-components'
-import tw from 'twin.macro'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
+import { useStateContext } from '../../../context/StateContext'
+import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
+import { TiDeleteOutline } from 'react-icons/ti';
 
-const Container = styled.div`
-  height: 100vh;
-  overflow: hidden;
-  width: 40%;
-  position: absolute;
-  top: 0;
-  background-color: white;
-  overflow: hidden;
-  right: 0;
-  z-index: 200;
-  will-change: transform;
-  border: 1px solid black;
-`
-const Content = styled.div`
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 1vw 2vw;
-`
-const Title = styled.div`
-  font-family: 'Circular Std Black';
-  font-size: 2vw;
-  width: 100%;
-`
-const CloseButton = styled.button`
-  font-family: 'Circular Std Medium';
-  font-size: 1vw;
-  align-self: flex-start;
-`
-
-const ItemsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: left;
-  width: 100%;
-  height: 100%;
-`
-
-const HeaderBag = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 7vh;
-  align-items: flex-start;
-`
-const CartFader = styled.div`
-  position: fixed;
-  visibility: hidden;
-  background-color: #000;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 10;
-`
 const Cart: React.FC = () => {
-  const { toggleMenu, setToggleMenu } = useContext<CartContextType>(CartContext)
+  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove, showCart } = useStateContext();
   const timeline = useRef<gsap.core.Timeline | null>(null)
   const container = useRef<HTMLDivElement | null>(null)
   const fader = useRef<HTMLDivElement | null>(null)
@@ -95,27 +35,65 @@ const Cart: React.FC = () => {
   }, [])
 
   useIsomorphicLayoutEffect(() => {
-    toggleMenu ? timeline.current?.play() : timeline.current?.reverse()
-  }, [toggleMenu])
+    showCart ? timeline.current?.play() : timeline.current?.reverse()
+  }, [showCart])
 
   return (
     <>
       <CartFader
         ref={fader}
-        onClick={() => setToggleMenu((prev: any) => !prev)}
+        onClick={() => setShowCart((prev: any) => !prev)}
       />
       <Container ref={container}>
         <Content>
           <HeaderBag>
             <Title>YOUR BAG</Title>
-            <CloseButton onClick={() => setToggleMenu((prev: any) => !prev)}>
+            <CloseButton onClick={() => setShowCart((prev: any) => !prev)}>
               CLOSE
             </CloseButton>
           </HeaderBag>
           <ItemsContainer>
+            {cartItems.length < 1 && 
             <p style={{ marginTop: '4vh', fontFamily: 'Circular Std Medium' }}>
-              Your bag is empty
+            Your bag is empty
             </p>
+            }
+            {cartItems >= 1 && cartItems.map((item) => (
+              <div className="product" key={item._id}>
+                Hola
+              <Image
+              asset={item?.image.asset[0]}
+              image={item.image}
+              width={760}
+              height={860}
+              alt={'image'}
+              />
+              <div className="item-desc">
+                <div className="flex top">
+                  <h5>{item.name}</h5>
+                  <h4>${item.price}</h4>
+                </div>
+                <div className="flex bottom">
+                  <div>
+                  <p className="quantity-desc">
+                    <span className="minus" onClick={() => toggleCartItemQuanitity(item._id, 'dec') }>
+                    <AiOutlineMinus />
+                    </span>
+                    <span className="num" >{item.quantity}</span>
+                    <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc') }><AiOutlinePlus /></span>
+                  </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="remove-item"
+                    onClick={() => onRemove(item)}
+                  >
+                    <TiDeleteOutline />
+                  </button>
+                </div>
+              </div>
+              </div>
+            ))}   
           </ItemsContainer>
         </Content>
       </Container>

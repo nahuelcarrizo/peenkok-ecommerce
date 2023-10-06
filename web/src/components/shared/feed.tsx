@@ -68,11 +68,11 @@ const LatestSocial = (props: any) => {
         iteration++
         trigger.wrapping = true
         trigger.scroll(trigger.start + 0.2)
-        console.log('wrapp forward')
+
       }
 
       function wrapBackward(trigger) {
-        console.log('wrapp backward')
+
         // when the ScrollTrigger reaches the start again (in reverse), loop back to the end seamlessly
         iteration--
         if (iteration < 0) {
@@ -98,7 +98,7 @@ const LatestSocial = (props: any) => {
         start: 'center center',
         trigger: '.container',
         markers: true,
-        onEnter: () => console.log('start'),
+  
         /*        onUpdate: self => {
           scrub.vars.totalTime = snap(
             (iteration + self.progress) * seamlessLoop.duration(),

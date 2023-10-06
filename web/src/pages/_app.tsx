@@ -4,7 +4,6 @@ import '../../src/components/shared/slider/card/banner.css'
 import React, { useRef, useState } from 'react'
 
 import type { AppProps } from 'next/app'
-import { CartProvider } from '../context'
 import GlobalStyles from '../styles/GlobalStyles'
 import Layout from '../components/shared/layout'
 import { ScrollSmoother } from 'gsap/dist/ScrollSmoother'
@@ -12,7 +11,7 @@ import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import gsap from 'gsap'
 import { useIsomorphicLayoutEffect } from '../hooks/isomorphicEffect'
-
+import {StateContext} from '../context/StateContext'
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin)
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -21,7 +20,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
       smoother.current = ScrollSmoother.create({
-        smooth: 0.1,
+        smooth: 0.8,
+        speed: 0.5,
         effects: true,
         normalizeScroll: true,
         /*    ignoreMobileResize: true,
@@ -42,12 +42,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <CartProvider>
+      <StateContext>
         <GlobalStyles />
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </CartProvider>
+      </StateContext>
     </>
   )
 }

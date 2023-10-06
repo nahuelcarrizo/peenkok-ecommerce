@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import Cart from './cart/cart'
 import Cookies from '../shared/cookies'
 import Footer from './footer/footer'
 import Head from 'next/head'
@@ -59,7 +58,7 @@ const Layout = ({ children }) => {
         style={{ width: '100vw', height: '5000px !important' }}
       >
         <Navbar />
-        <Cart />
+      
 
         <div id="smooth-content" style={{ width: '100vw' }}>
           <Main> {children} </Main>
@@ -67,8 +66,8 @@ const Layout = ({ children }) => {
 
           {/*    <Cookies /> */}
         </div>
-        {isHome && <HomeTransition />}
-        {!isHome && <PageTransition />}
+        {/* {isHome && <HomeTransition />}
+        {!isHome && <PageTransition />} */}
       </div>
     </>
   )
