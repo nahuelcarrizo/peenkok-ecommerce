@@ -5,7 +5,7 @@ import gsap from 'gsap'
 import styled from 'styled-components'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 import { useRouter } from 'next/router'
-
+import { useAnimationContext } from '../../../context/AnimationContext'
 gsap.registerPlugin(TextPlugin)
 const TopBorder = styled.div`
   position: absolute;
@@ -112,15 +112,17 @@ const Span = styled.span`
   border-radius: 25%;
 `
 const PageTransition = () => {
+  const { animationPageStatus} = useAnimationContext()
   const router = useRouter()
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const master = gsap.timeline()
+      // const master = gsap.timeline()
       const tl = gsap.timeline({
         duration: 0.5,
         ease: 'expo.easeIn',
         delay: -1,
+        onComplete: () => animationPageStatus(true)
       })
 
       tl.from('.page-transition-wrapper', {

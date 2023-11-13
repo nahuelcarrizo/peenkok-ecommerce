@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import styled from 'styled-components'
 import { useIsomorphicLayoutEffect } from '../../../hooks/isomorphicEffect'
 import { useRouter } from 'next/router'
+import { useAnimationContext } from '../../../context/AnimationContext'
 
 gsap.registerPlugin(TextPlugin)
 const TopBorder = styled.div`
@@ -120,6 +121,7 @@ const wordsToAnimate = [
 ]
 
 const HomeTransition = () => {
+  const { animationStatus } = useAnimationContext();
   const router = useRouter()
 
   useIsomorphicLayoutEffect(() => {
@@ -131,6 +133,7 @@ const HomeTransition = () => {
             duration: 0.6,
             ease: 'power2.inOut',
           })
+          animationStatus(true)
         },
       })
       const elements = gsap.utils.toArray('.page-transition-inner__text')

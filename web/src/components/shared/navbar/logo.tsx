@@ -39,7 +39,7 @@ const LogoNaranja2 = ({ fill }) => {
     <svg
       viewBox="-165.191 193.700 716 95"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ height: '100%' }}
+      style={{ height: '100%', width: '100%' }}
     >
       <g
         id="Capa_1-2"

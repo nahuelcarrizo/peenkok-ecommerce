@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-
+import { Router, useRouter } from 'next/router'
 import Card from './card/card'
 import Link from 'next/link'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -43,7 +43,7 @@ const ProdCard = styled(Link)`
   border-left: none;
   width: 43.5rem !important;
 `
-const ProductName = styled(Link)`
+const ProductName = styled.div`
   font-family: 'Circular Std Black';
   font-size: 2vw;
   height: 100%;
@@ -82,6 +82,9 @@ function ScrolleableContent({ items, title }) {
   const [isTitle, setTitle] = useState()
   const container = useRef<HTMLDivElement | null>(null)
   const content = useRef<HTMLDivElement | null>(null)
+  const router = useRouter()
+
+
 
   useIsomorphicLayoutEffect(() => {
     if (items) {
@@ -122,18 +125,22 @@ function ScrolleableContent({ items, title }) {
 
     return () => ctx.revert()
   }, [products])
+  
 
-  // console.log("slug" + JSON.stringify(products[0].name, null, 2))
   return (
     <Container ref={container} className="collection1-horizontal">
       {isTitle && <SectionHeader title={isTitle} />}
       <Content>
         {products &&
           products.map(({ _id, images, name, price, index, slug }) => (
-            <ProdCard key={_id} className="panel" href={`products/${slug.current}`}>
+            <ProdCard key={_id} className="panel"
+              href={
+                `/products/${slug.current}`
+              }
+            >
               <Card images={images} title={_id} />
               <ProdCardTitle>
-                <ProductName href="/">{name.toUpperCase()}</ProductName>
+                <ProductName >{name.toUpperCase()}</ProductName>
                 <Price>€ {price}</Price>
               </ProdCardTitle>
             </ProdCard>

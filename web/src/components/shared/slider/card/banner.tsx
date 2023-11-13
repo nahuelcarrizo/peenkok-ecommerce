@@ -41,7 +41,7 @@ const Banner = forwardRef(function Banner({}, bannerRef) {
       >
         <img
             src={`/bannerImg/image${randomIndex}.jpg`}
-            alt="Imagen aleatoria"
+
             style={{
               width: '100%',
               height: '100%',

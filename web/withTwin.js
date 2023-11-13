@@ -11,7 +11,8 @@ module.exports = function withTwin(nextConfig) {
       config.module = config.module || {}
       config.module.rules = config.module.rules || []
       config.module.rules.push({
-        test: /\.(tsx|ts)$/,
+        // test: /\.(tsx|ts)$/,
+        test: /\.[jt]sx?$/,
         include: includedDirs,
         use: [
           options.defaultLoaders.babel,

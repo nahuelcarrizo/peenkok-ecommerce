@@ -16,7 +16,7 @@ import {
 } from './footer.styles'
 
 import Logo from './logo'
-import React from 'react'
+import React, {useEffect} from 'react'
 
 const Suscribe = () => (
   <SuscribeContainer>
@@ -36,6 +36,9 @@ const Suscribe = () => (
 )
 
 const Footer = () => {
+
+  
+  
   const rows = [
     {
       title: 'Menu',
@@ -43,7 +46,7 @@ const Footer = () => {
         { label: 'Contact Us', url: '/' },
         { label: 'Terms & Conditions', url: '/' },
         { label: 'Shipping Policy', url: '/' },
-        { label: 'Privacy Policy', url: '/' },
+        { label: 'Privacy Policy', url:  '/privacy-policy' },
       ],
     },
     {
@@ -55,6 +58,7 @@ const Footer = () => {
       ],
     },
   ]
+
 
   return (
     <FooterContainer>

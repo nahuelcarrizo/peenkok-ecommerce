@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle({
 
   body: {
     /*     ...tw`antialiased`, */
-    backgroundColor: myTheme.colors.soft,
+    backgroundColor: myTheme.colors.white,
     width: '100%',
     height: '3000px',
     margin: '0',

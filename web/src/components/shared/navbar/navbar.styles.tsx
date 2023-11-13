@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Logo from './logoeditado'
+import Logo from './logo'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
@@ -164,4 +164,19 @@ export const MainLogo = styled.div`
 export const FixedLogo = styled(Logo)`
   /*  height: 30px; */
   /*   position: fixed; */
+`
+
+export const Quantity = styled.span`
+font-family: 'Circular Std Book';
+font-size: 0.6em;
+position: absolute;
+top: 10%;
+right: 1%;
+color: white;
+background-color: black;
+border-radius: 50px;
+width: 1.3em;
+height: 1.3em;
+visibility: hidden;
+line-height: 1.4em;
 `

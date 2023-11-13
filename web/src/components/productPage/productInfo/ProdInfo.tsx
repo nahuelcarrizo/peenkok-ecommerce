@@ -20,9 +20,10 @@ import {
   Span,
   Title,
   WishButton,
+  ErrorMessage
 } from './ProdInfo.styles'
-import React, { useRef, useState } from 'react'
-
+import React, { useRef, useState, useMemo } from 'react'
+import { useForm, Controller } from 'react-hook-form';
 import { IconContext } from 'react-icons'
 import Marquee from 'react-fast-marquee'
 import { PiHeartStraightLight } from 'react-icons/pi'
@@ -45,7 +46,7 @@ interface ProdInfoProps {
 const ProdDescription: React.FC<{
   titles: string[]
 }> = ({ titles }) => {
- 
+
   const timeline = useRef(null)
 
   const LoremIpsum = () => {
@@ -129,9 +130,17 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
   const [playMarquee, setPlayMarquee] = useState(false)
   const [selectedSize, setSelectedSize] = useState(null)
   const { onAdd, setShowCart, qty } = useStateContext();
+  const { control, handleSubmit, formState: { errors } } = useForm();
+
+  const validationRules = {
+    size: {
+      required: 'Size is required',
+    },
+    // Agrega reglas de validación adicionales para otros campos si es necesario
+  };
+
+  const addToBag = (data) => {
   
-  const addToBag = (e) => {
-    e.preventDefault()
     onAdd(item, 1);
     setShowCart(true);
   }
@@ -145,28 +154,37 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
       setSelectedSize(e.target.value)
     }
     return (
-      <Fieldset>
-        {availableSizes?.map((size, index) => (
+      <Controller
+        name="size"
+        control={control}
+        rules={validationRules.size}
+        render={({ field }) => (
           <>
-            <Input
-              checked={selectedSize === size}
-              className="hidden"
-              type="radio"
-              id={index}
-              name="index"
-              value={size}
-              onChange={handleSizeChange}
-            />
-            <Label htmlFor={index} key={Math.random()} className="radio-label">
-              {size.toUpperCase()}
-            </Label>
+            {availableSizes?.map((size, index) => (
+              <div key={index}>
+                <Input
+                  checked={field.value === size}
+                  type="radio"
+                  {...field}
+                  id={index}
+                  value={size}
+                  name="index"
+                // onChange={handleSizeChange}
+                />
+                <Label htmlFor={index} className="radio-label">
+                  {size.toUpperCase()}
+                </Label>
+
+              </div>))}
           </>
-        ))}
-      </Fieldset>
+        )
+        }
+      />
     )
   }
 
-  const toggleMarquee = () => {
+  const toggleMarquee = (e) => {
+    e.stopPropagation()
     setPlayMarquee(prev => !prev)
   }
   const toggleSizeGuide = () => {
@@ -177,7 +195,7 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
     <Container>
       <Header1>{item && item.name}</Header1>
       <Price>€ {item.price}</Price>
-      <Form>
+      <Form onSubmit={handleSubmit(addToBag)}>
         <QuantityVariants>
           <Variant />
         </QuantityVariants>
@@ -194,11 +212,14 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
             />
           </PurchaseOptions>
         </PurchaseFrame>
-        <Buttons>
+        
+        <Buttons style={{cursor: 'pointer'}}>
+        <ErrorMessage>{errors.size && <>{errors.size.message}</>}
+          </ErrorMessage>
           <AddToCartButton
-            onMouseEnter={() => toggleMarquee()}
-            onMouseLeave={() => toggleMarquee()}
-            onClick={addToBag}
+            onMouseEnter={(e) => toggleMarquee(e)}
+            onMouseLeave={(e) => toggleMarquee(e)}
+            type='submit'
           >
             <Span
               style={{
@@ -211,14 +232,14 @@ const ProdInfo: React.FC<ProdInfoProps> = ({ product }) => {
             <Marquee
               autoFill
               speed={80}
-              /*        play={playMarquee} */
+              /* play={playMarquee} */
               style={{
                 width: '100%',
                 height: '100%',
                 visibility: playMarquee ? 'visible' : 'hidden',
               }}
             >
-              <Span> ADD TO BAG </Span>
+              <Span > ADD TO BAG </Span>
             </Marquee>
           </AddToCartButton>
 

@@ -2,7 +2,7 @@ import tw, { styled } from 'twin.macro'
 
 import { FaTools } from 'react-icons/fa'
 import Link from 'next/link'
-import Logo from '../components/shared/navbar/logoeditado'
+import Logo from '../components/shared/navbar/logo'
 import React from 'react'
 import gsap from 'gsap'
 import { useIsomorphicLayoutEffect } from '../hooks/isomorphicEffect'

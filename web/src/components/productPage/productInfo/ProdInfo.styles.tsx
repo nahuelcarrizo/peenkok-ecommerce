@@ -54,6 +54,7 @@ export const PurchaseOptions = styled.div`
   padding: 0 0.1vw;
 `
 export const Buttons = styled.div`
+  margin-top: 1vw;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -72,7 +73,7 @@ export const AddToCartButton = styled.button`
   font-size: 1.4vw;
   font-family: 'Oswald';
   padding: 0.8vh 0;
-  background-color: #f36600;
+  background-color: #f36600 !important;
   box-sizing: border-box;
   position: absolute;
   flex: 1;
@@ -190,4 +191,9 @@ export const PurchaseFrame = styled.div`
   font-size: 0.87vw;
   font-weight: 200;
   gap: 0.2vw;
+`
+export const ErrorMessage = styled.p`
+position: absolute;
+top: -2.2vw;
+left: 0;
 `

@@ -11,6 +11,7 @@ import {
   StyledList,
   TopRow,
   UserIcon,
+  Quantity
 } from './navbar.styles'
 
 import React, { useContext } from 'react'
@@ -38,7 +39,7 @@ interface NavbarProps {
 }
 
 const Navbar = () => {
-  const { showCart, setShowCart, totalQuantities} = useStateContext()
+  const { showCart, setShowCart, totalQuantities, cartItems} = useStateContext()
   const [fill, setFill] = useState('#F36600')
   const [open, setOpen] = useState(false)
   const isLargeDevice = useMediaQuery({ query: '(min-width: 1024px' })
@@ -131,15 +132,15 @@ const Navbar = () => {
           },
         })
 
-        ScrollTrigger.create({
+          ScrollTrigger.create({
           scrub: 1,
           start: 'top top',
           end: 200,
           trigger: heroRef,
           toggleActions: 'play none reverse none',
           animation: tl2,
-        })
-      } else {
+          })
+        } else {
         setFill('black')
         gsap.set(logoRef.current, {
           scale: 0.069,
@@ -159,7 +160,7 @@ const Navbar = () => {
             scrub: 1,
           }, */
         })
-      }
+        }
 
       tl3.to(
         '.navbar-container',
@@ -185,6 +186,9 @@ const Navbar = () => {
         },
         '>',
       )
+      tl3.to('.navbar-quantity',{
+        visibility:'visible'
+      },'<')
     })
 
     return () => {
@@ -229,7 +233,8 @@ const Navbar = () => {
                 className="navbar-icons"
                 onClick={() => setShowCart(true)}
               >
-                <IoBag /><span>{totalQuantities}</span>
+                <IoBag />
+                {cartItems.length > 0 && <Quantity className='navbar-quantity'>{totalQuantities}</Quantity>}
               </CartIcon>
 
               <UserIcon className="navbar-icons">

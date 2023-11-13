@@ -158,11 +158,11 @@ const RadioButton = ({ planChoice, text }) => {
         <svg viewBox="0 0 28 28">
           <path d="M24.5 14C24.5 19.799 19.799 24.5 14 24.5C8.20101 24.5 3.5 19.799 3.5 14C3.5 8.20101 8.20101 3.5 14 3.5C19.799 3.5 24.5 8.20101 24.5 14Z" />
         </svg>
-        <svg class="inner" viewBox="0 0 28 28">
+        <svg className="inner" viewBox="0 0 28 28">
           <path d="M24.5 14C24.5 19.799 19.799 24.5 14 24.5C8.20101 24.5 3.5 19.799 3.5 14C3.5 8.20101 8.20101 3.5 14 3.5C19.799 3.5 24.5 8.20101 24.5 14Z" />
         </svg>
       </RadioButtonContent>
-      <label style={{ cursor: 'pointer' }} for={planChoice}>
+      <label style={{ cursor: 'pointer' }} htmlFor={planChoice}>
         {text}
       </label>
     </Label>
